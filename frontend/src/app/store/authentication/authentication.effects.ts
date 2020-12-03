@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, tap, exhaustMap } from 'rxjs/operators';
 
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import * as authenticationActions from './authentication.actions';
 
@@ -16,7 +16,7 @@ export class AuthenticationEffects {
     private authenticationService: AuthenticationService,
     private tokenStorageService: TokenStorageService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) {}
 
   signup$ = createEffect(() =>
@@ -88,11 +88,7 @@ export class AuthenticationEffects {
       this.actions$.pipe(
         ofType(authenticationActions.signupFail, authenticationActions.loginFail),
         tap(({ message }) => {
-          if (message) {
-            this.snackBar.open(message, 'Ok');
-          } else {
-            this.snackBar.open('Something Went Wrong!');
-          }
+          this.snackBarService.showSimpleMessage(message);
         })
       ),
     {
