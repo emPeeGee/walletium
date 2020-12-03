@@ -1,32 +1,38 @@
 <section>
   <mat-grid-list cols="3">
     <mat-grid-tile colspan="3">
-      <mat-card>
-        <mat-card-header color="primary">
-          <mat-card-title>Signup Form</mat-card-title>
+      <mat-card style="margin: 32px">
+        <mat-card-header color="primary" fxLayoutAlign="center">
+          <mat-card-title>Welcome, you will never regret</mat-card-title>
         </mat-card-header>
         <form [formGroup]="signupForm" (ngSubmit)="createUser()">
           <mat-form-field style="width: 400px !important">
-            <mat-label>Name</mat-label>
+            <mat-label>Username</mat-label>
             <input formControlName="name" matInput />
+            <mat-error *ngIf="name?.errors?.required"> Username is required </mat-error>
           </mat-form-field>
           <br />
           <mat-form-field style="width: 400px !important">
             <mat-label>Email</mat-label>
             <input formControlName="email" matInput />
+            <mat-error *ngIf="email?.errors?.required"> Email is required </mat-error>
           </mat-form-field>
           <br />
           <mat-form-field style="width: 400px !important">
             <mat-label>Phone</mat-label>
             <input formControlName="phone_number" matInput />
+            <mat-error *ngIf="phone_number?.errors?.required"> Phone Number is required </mat-error>
           </mat-form-field>
           <br />
           <mat-form-field style="width: 400px !important">
             <mat-label>Password</mat-label>
             <input type="password" formControlName="password" matInput />
+            <mat-error *ngIf="password?.errors?.required"> Password is required </mat-error>
           </mat-form-field>
           <br />
-          <button type="submit" mat-raised-button color="primary">Submit</button>
+          <div fxLayoutAlign="center">
+            <button type="submit" mat-raised-button color="primary">Sign Up</button>
+          </div>
         </form>
       </mat-card>
     </mat-grid-tile>

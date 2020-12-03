@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { Credentials } from 'src/app/shared/models/credentials.model';
@@ -13,8 +13,8 @@ import { login } from 'src/app/store/authentication/authentication.actions';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
 
   constructor(private store: Store<RootState>) {}
@@ -27,5 +27,13 @@ export class LoginComponent implements OnInit {
     };
 
     this.store.dispatch(login({ payload: credentials }));
+  }
+
+  get email(): AbstractControl | null {
+    return this.loginForm.get('email');
+  }
+
+  get password(): AbstractControl | null {
+    return this.loginForm.get('password');
   }
 }

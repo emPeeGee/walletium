@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -15,10 +15,10 @@ import { signup } from 'src/app/store/authentication/authentication.actions';
 })
 export class SignupComponent implements OnInit {
   signupForm = new FormGroup({
-    email: new FormControl(''),
-    phone_number: new FormControl(''),
-    name: new FormControl(''),
-    password: new FormControl('')
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    phone_number: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
 
   constructor(private store: Store<RootState>) {}
@@ -27,5 +27,18 @@ export class SignupComponent implements OnInit {
 
   createUser(): void {
     this.store.dispatch(signup({ payload: this.signupForm.value }));
+  }
+  get name(): AbstractControl | null {
+    return this.signupForm.get('name');
+  }
+
+  get email(): AbstractControl | null {
+    return this.signupForm.get('email');
+  }
+  get phone_number(): AbstractControl | null {
+    return this.signupForm.get('phone_number');
+  }
+  get password(): AbstractControl | null {
+    return this.signupForm.get('password');
   }
 }
