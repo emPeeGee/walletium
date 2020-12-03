@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Token } from 'src/app/shared/models/token.model';
 import { Observable } from 'rxjs';
+import { TokenStorageService } from '../services/token-storage.service';
 @Injectable({
   providedIn: 'root'
 })
 export class TokenInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private tokenStorageService: TokenStorageService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken: Token = JSON.parse(localStorage.getItem('token')!); // Get the auth token from  localstorage.
-    // Clone the request and replace the original headers with cloned headers, updated with the authorization.
-    const authReq = req.clone({
-      headers: req.headers.set('Authorization', authToken.token ?? '')
-    });
+    let authReq = req;
+    const token = this.tokenStorageService.getToken();
 
-    return next.handle(authReq); // send cloned request with header to the next handler.
+    if (token != null) {
+      authReq = req.clone({ headers: req.headers.set('Authorization', token.token) });
+    }
+
+    return next.handle(authReq);
   }
 }
