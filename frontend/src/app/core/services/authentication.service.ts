@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Auth } from 'src/app/shared/models/auth.model';
 import { Credentials } from 'src/app/shared/models/credentials.model';
 import { Signup } from 'src/app/shared/models/signup.model';
@@ -29,7 +30,9 @@ export class AuthenticationService {
   }
 
   userLogin(payload: Credentials): Observable<Auth> {
-    return this.http.post<Auth>(`${environment.baseURL}authentication/login`, payload);
+    return this.http
+      .post<Auth>(`${environment.baseURL}authentication/signin`, payload)
+      .pipe(tap(res => console.log(res)));
   }
 
   getProtectedData(): Observable<any> {

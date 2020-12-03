@@ -23,7 +23,13 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true
-    }
+    },
+    roles: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role'
+      }
+    ]
   },
   {
     timestamps: true
@@ -33,13 +39,17 @@ const userSchema = new Schema(
 userSchema.methods.hashPassword = async password => {
   return await bcrypt.hashSync(password, 10);
 };
+
 userSchema.methods.compareUserPassword = async (inputtedPassword, hashedPassword) => {
   return await bcrypt.compare(inputtedPassword, hashedPassword);
 };
+
 userSchema.methods.generateJwtToken = async (payload, secret, expires) => {
   return jwt.sign(payload, secret, expires);
 };
+
 module.exports = mongoose.model('User', userSchema);
+
 userSchema.plugin(uniqueValidator, {
   message: '{PATH} Already in use'
 });

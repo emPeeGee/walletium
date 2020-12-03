@@ -15,7 +15,7 @@ import { signup } from 'src/app/store/authentication/authentication.actions';
 })
 export class SignupComponent implements OnInit {
   signupForm = new FormGroup({
-    name: new FormControl('', Validators.required),
+    username: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     phone_number: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -28,8 +28,9 @@ export class SignupComponent implements OnInit {
   createUser(): void {
     this.store.dispatch(signup({ payload: this.signupForm.value }));
   }
-  get name(): AbstractControl | null {
-    return this.signupForm.get('name');
+
+  get username(): AbstractControl | null {
+    return this.signupForm.get('username');
   }
 
   get email(): AbstractControl | null {

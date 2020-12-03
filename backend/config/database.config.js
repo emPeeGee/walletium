@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Role = require('../authentication/role.model').Role;
 
 module.exports = function (app) {
   mongoose
@@ -7,7 +8,10 @@ module.exports = function (app) {
       useNewUrlParser: true,
       useFindAndModify: false
     })
-    .then(connection => console.log('Application is connected to db'))
+    .then(connection => {
+      init();
+      console.log('Application is connected to db');
+    })
     .catch(err => console.log(err));
 
   mongoose.Promise = global.Promise;
@@ -19,6 +23,42 @@ module.exports = function (app) {
     app.set('mongoose', mongoose);
   }
 };
+
+function init() {
+  Role.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new Role({
+        name: 'user'
+      }).save(err => {
+        if (err) {
+          console.log('error', err);
+        }
+
+        console.log("added 'user' to roles collection");
+      });
+
+      new Role({
+        name: 'moderator'
+      }).save(err => {
+        if (err) {
+          console.log('error', err);
+        }
+
+        console.log("added 'moderator' to roles collection");
+      });
+
+      new Role({
+        name: 'admin'
+      }).save(err => {
+        if (err) {
+          console.log('error', err);
+        }
+
+        console.log("added 'admin' to roles collection");
+      });
+    }
+  });
+}
 
 function cleanup() {
   mongoose.connection.close(function () {
