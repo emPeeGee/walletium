@@ -12,7 +12,8 @@ export class TokenStorageService {
   constructor() {}
 
   logout(): void {
-    localStorage.clear();
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.USER_KEY);
   }
 
   setToken(token: Token): void {

@@ -4,4 +4,5 @@ export interface User {
   phoneNumber: string;
   created: Date;
   updated: Date;
+  roles: string[];
 }

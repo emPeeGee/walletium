@@ -11,19 +11,9 @@ import { logout } from 'src/app/store/authentication/authentication.actions';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router,
-    private store: Store<RootState>
-  ) {}
+  constructor(private store: Store<RootState>) {}
 
-  ngOnInit(): void {
-    this.getProtectedData();
-  }
-
-  getProtectedData(): void {
-    this.authenticationService.getProtectedData().subscribe((data: any) => console.log(data));
-  }
+  ngOnInit(): void {}
 
   logout(): void {
     this.store.dispatch(logout());
