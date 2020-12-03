@@ -9,6 +9,12 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+
+import { effects, reducers } from './store/index';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +24,9 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
     BrowserAnimationsModule,
     SharedModule,
     CoreModule,
+    StoreModule.forRoot(reducers, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot(effects)
   ],
   exports: [MaterialModule],
   bootstrap: [AppComponent],
@@ -25,8 +34,8 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class AppModule {}

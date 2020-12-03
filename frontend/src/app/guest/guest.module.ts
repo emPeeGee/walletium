@@ -8,6 +8,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent, HomeComponent],
-  imports: [CommonModule, GuestRoutingModule, SharedModule],
+  imports: [CommonModule, GuestRoutingModule, SharedModule]
 })
 export class GuestModule {}
