@@ -1,10 +1,15 @@
 <mat-toolbar color="primary">
+  <span>
+    <a routerLink="/">
+      <img src="assets/icon.png" alt="" class="logo" />
+    </a>
+  </span>
   <span><a routerLink="/">Walletium</a></span>
   <span class="spacer"></span>
 
   <ul *ngIf="isUserAuthenticated$ | async as user; else unauthenticated">
     <li>
-      <a mat-button routerLink="create" routerLinkActive="mat-accent">New post</a>
+      <a mat-button routerLink="profile" routerLinkActive="mat-accent">{{ user.username }}</a>
     </li>
     <li>
       <button mat-button (click)="onLogout()">Log out</button>
@@ -14,12 +19,11 @@
   <ng-template #unauthenticated>
     <ul>
       <li>
-        <a mat-button routerLink="../login'" routerLinkActive="mat-accent">Log in</a>
+        <a mat-button routerLink="/guest/login" routerLinkActive="mat-accent">Log in</a>
       </li>
       <li>
-        <a mat-button routerLink="../signup" routerLinkActive="mat-accent">Sign Up</a>
+        <a mat-button routerLink="/guest/signup" routerLinkActive="mat-accent">Sign Up</a>
       </li>
     </ul>
   </ng-template>
-  
 </mat-toolbar>

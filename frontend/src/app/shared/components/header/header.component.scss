@@ -1,16 +1,21 @@
+.logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+}
+
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
 }
-  
+
 a {
   color: white;
   text-decoration: none;
 }
-  
+
 .spacer {
   flex: 1 1 auto;
 }
-  
