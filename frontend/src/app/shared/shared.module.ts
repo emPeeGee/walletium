@@ -9,6 +9,6 @@ import { HeaderComponent } from './components/header/header.component';
 @NgModule({
   declarations: [NotFoundComponent, HeaderComponent],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule],
-  exports: [MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule]
+  exports: [MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, HeaderComponent]
 })
 export class SharedModule {}

@@ -5,19 +5,24 @@
         <mat-card-header color="primary" fxLayoutAlign="center">
           <mat-card-title>Welcome Again, My friend</mat-card-title>
         </mat-card-header>
+
         <form [formGroup]="loginForm" (submit)="loginUser()">
           <mat-form-field style="width: 400px !important">
             <mat-label>Email</mat-label>
             <input formControlName="email" matInput />
             <mat-error *ngIf="email?.errors?.required"> Email is required </mat-error>
           </mat-form-field>
+
           <br />
+
           <mat-form-field style="width: 400px !important">
             <mat-label>Password</mat-label>
             <input type="password" formControlName="password" matInput />
             <mat-error *ngIf="password?.errors?.required"> Password is required </mat-error>
           </mat-form-field>
+
           <br />
+
           <div fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">
             <div>
               <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Sign In</button>
@@ -26,6 +31,7 @@
               <a mat-stroked-button color="primary" routerLink="../signup">Sign Up</a>
             </div>
           </div>
+          
         </form>
       </mat-card>
     </mat-grid-tile>

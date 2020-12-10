@@ -1,10 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { RootState } from 'src/app/store';
 import { signup } from 'src/app/store/authentication/authentication.actions';
 
@@ -25,7 +21,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  createUser(): void {
+  createUser(): void {    
     this.store.dispatch(signup({ payload: this.signupForm.value }));
   }
 

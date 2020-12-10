@@ -67,6 +67,7 @@ exports.signUp = async (req, res) => {
 };
 
 exports.signIn = async (req, res) => {
+
   const login = {
     email: req.body.email,
     password: req.body.password
@@ -76,6 +77,8 @@ exports.signIn = async (req, res) => {
     let user = await User.findOne({
       email: login.email
     }).populate('roles');
+
+    console.log(user);
 
     //check if user exit
     if (!user) {
