@@ -1,5 +1,11 @@
+section {
+  width: 90%;
+  margin: 0 auto;
+}
+
 section > * {
   margin: 32px 0;
+  text-align: center;
 }
 
 .app-name {
@@ -14,8 +20,33 @@ section > * {
 
 .title {
   font-size: 52px;
+  line-height: 60px;
 }
 
 .info {
   font-size: 24px;
+  line-height: 30px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .app-name {
+    font-size: 40px;
+    margin: 8px 0 16px 0;
+  }
+
+  .logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .title {
+    font-size: 42px;
+    line-height: 60px;
+  }
+
+  .info {
+    font-size: 20px;
+    line-height: 30px;
+  }
 }
