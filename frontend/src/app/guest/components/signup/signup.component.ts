@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { RootState } from 'src/app/store';
 import { signup } from 'src/app/store/authentication/authentication.actions';
+import { selectAuthPending } from 'src/app/store/authentication/authentication.selectors';
 
 @Component({
   selector: 'app-signup',
@@ -17,11 +19,15 @@ export class SignupComponent implements OnInit {
     password: new FormControl('', Validators.required)
   });
 
+  isPending$!: Observable<boolean | null>;
+
   constructor(private store: Store<RootState>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isPending$ = this.store.select(selectAuthPending);
+  }
 
-  createUser(): void {    
+  createUser(): void {
     this.store.dispatch(signup({ payload: this.signupForm.value }));
   }
 

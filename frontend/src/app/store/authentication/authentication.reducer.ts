@@ -33,7 +33,7 @@ const authReducer = createReducer(
     user: payload.user,
     token: payload.token
   })),
-  on(authActions.loginFail, (state, { message }) => ({ ...state, message })),
+  on(authActions.loginFail, (state, { message }) => ({ ...state, message, pending: false })),
 
   on(authActions.logout, state => ({ ...state, user: null, token: null, username: '' }))
 );
