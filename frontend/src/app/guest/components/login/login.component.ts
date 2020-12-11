@@ -9,7 +9,7 @@ import { login } from 'src/app/store/authentication/authentication.actions';
 import { selectAuthPending } from 'src/app/store/authentication/authentication.selectors';
 
 @Component({
-  selector: 'app-login',
+  selector: 'wal-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

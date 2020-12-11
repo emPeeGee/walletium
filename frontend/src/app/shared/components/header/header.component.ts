@@ -7,14 +7,13 @@ import { selectUser } from 'src/app/store/authentication/authentication.selector
 import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'app-header',
+  selector: 'wal-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
   isUserAuthenticated$!: Observable<User | null>;
-  
+
   constructor(private store: Store<RootState>) {}
 
   ngOnInit(): void {

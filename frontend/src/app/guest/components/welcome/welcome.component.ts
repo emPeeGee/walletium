@@ -4,7 +4,7 @@ import { RootState } from 'src/app/store';
 import { logout } from 'src/app/store/authentication/authentication.actions';
 
 @Component({
-  selector: 'app-welcome',
+  selector: 'wal-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
