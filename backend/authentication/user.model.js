@@ -9,11 +9,16 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: true
+      required: true,
+      unique: true,
+      minlength: 3,
+      maxlength: 30
     },
     password: {
       type: String,
-      required: true
+      required: true,
+      minlength: 4,
+      maxlength: 40
     },
     phone_number: {
       type: String,
@@ -24,12 +29,10 @@ const userSchema = new Schema(
       required: true,
       unique: true
     },
-    roles: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Role'
-      }
-    ]
+    role: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Role'
+    }
   },
   {
     timestamps: true

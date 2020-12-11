@@ -42,7 +42,7 @@ export class AuthenticationAdminGuard implements CanActivate, CanActivateChild, 
 
   checkLogin(): boolean {
     const user = this.tokenStorageService.getUser();
-    const isAdmin = user?.roles.some((role: any) => role.name.includes('admin')) || false;
+    const isAdmin = user?.role.name.includes('admin') || false;
 
     if (user === null) {
       this.router.navigate(['/guest', 'login']);

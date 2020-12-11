@@ -25,7 +25,7 @@ export class AuthenticationEffects {
       exhaustMap(action =>
         this.authenticationService.createNewUser(action.payload).pipe(
           map(result => authenticationActions.signupSucces({ payload: result })),
-          catchError(error => of(authenticationActions.signupFail({ error, message: 'An error occured on signup' })))
+          catchError(error => of(authenticationActions.signupFail({ error, message: error.error.message })))
         )
       )
     )
@@ -48,7 +48,7 @@ export class AuthenticationEffects {
           map(result => {
             return authenticationActions.loginSuccess({ payload: result });
           }),
-          catchError(error => of(authenticationActions.loginFail({ message: 'An error occured on login' })))
+          catchError(error => of(authenticationActions.loginFail({ message: error.error.message })))
         )
       )
     )

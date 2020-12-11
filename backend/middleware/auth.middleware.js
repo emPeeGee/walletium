@@ -28,7 +28,7 @@ verifyToken = (req, res, next) => {
 
 isAdmin = (req, res, next) => {
   User.findById(req.userData.user._id)
-    .populate('roles')
+    .populate('role')
     .exec((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
@@ -37,19 +37,17 @@ isAdmin = (req, res, next) => {
       console.log(user);
       Role.find(
         {
-          _id: { $in: user.roles }
+          _id: user.role._id
         },
-        (err, roles) => {
+        (err, role) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
           }
 
-          for (let i = 0; i < roles.length; i++) {
-            if (roles[i].name === 'admin') {
-              next();
-              return;
-            }
+          if (role.name === 'admin') {
+            next();
+            return;
           }
 
           res.status(403).send({ message: 'Require Admin Role!' });
@@ -68,19 +66,17 @@ isModerator = (req, res, next) => {
 
     Role.find(
       {
-        _id: { $in: user.roles }
+        _id: user.role._id
       },
-      (err, roles) => {
+      (err, role) => {
         if (err) {
           res.status(500).send({ message: err });
           return;
         }
 
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === 'moderator') {
-            next();
-            return;
-          }
+        if (role.name === 'moderator') {
+          next();
+          return;
         }
 
         res.status(403).send({ message: 'Require Moderator Role!' });
