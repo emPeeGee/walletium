@@ -17,7 +17,7 @@
         <input formControlName="username" matInput />
         <mat-error *ngIf="username?.errors?.required">Username is required </mat-error>
         <mat-error *ngIf="username?.errors?.minlength">Username must be longer than 3 characters</mat-error>
-        <mat-error *ngIf="username?.errors?.maxlength">Username must be shorter than 30 characters </mat-error>
+        <mat-error *ngIf="username?.errors?.maxlength">Username must be shorter than 30 characters</mat-error>
       </mat-form-field>
 
       <br />
@@ -25,15 +25,16 @@
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input formControlName="email" matInput />
-        <mat-error *ngIf="email?.errors?.required">Email is required </mat-error>
+        <mat-error *ngIf="email?.errors?.required">Email is required</mat-error>
+        <mat-error *ngIf="email?.errors?.email">Enter a valid email</mat-error>
       </mat-form-field>
 
       <br />
 
       <mat-form-field>
         <mat-label>Phone</mat-label>
-        <input formControlName="phone_number" matInput />
-        <mat-error *ngIf="phone_number?.errors?.required">Phone Number is required </mat-error>
+        <input formControlName="phoneNumber" matInput />
+        <mat-error *ngIf="phoneNumber?.errors?.required">Phone Number is required</mat-error>
       </mat-form-field>
 
       <br />
@@ -43,7 +44,7 @@
         <input type="password" formControlName="password" matInput />
         <mat-error *ngIf="password?.errors?.required">Password is required </mat-error>
         <mat-error *ngIf="password?.errors?.minlength">Password must be longer than 4 characters</mat-error>
-        <mat-error *ngIf="password?.errors?.maxlength">Password must be shorter than 40 characters </mat-error>
+        <mat-error *ngIf="password?.errors?.maxlength">Password must be shorter than 40 characters</mat-error>
       </mat-form-field>
 
       <br />
@@ -51,8 +52,8 @@
       <mat-form-field>
         <mat-label>Confirm Password</mat-label>
         <input type="password" formControlName="confirmPassword" matInput />
-        <mat-error *ngIf="confirmPassword?.errors?.required">Confirm Password is required </mat-error>
-        <mat-error *ngIf="confirmPassword?.errors?.isDifferent">Password are different </mat-error>
+        <mat-error *ngIf="confirmPassword?.errors?.required">Confirm Password is required</mat-error>
+        <mat-error *ngIf="signupForm?.errors?.isDifferent">Password are different</mat-error>
       </mat-form-field>
 
       <br />

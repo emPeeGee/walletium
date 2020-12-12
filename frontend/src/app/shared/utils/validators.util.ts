@@ -6,11 +6,8 @@ export const matchPasswords = (param: string, param2: string): ValidatorFn => {
     const confirmPassword = control.get('confirmPassword');
 
     if (password?.value !== confirmPassword?.value) {
-      confirmPassword?.setErrors({ isDifferent: true });
-    } else {
-      confirmPassword?.setErrors(null);
+      return { isDifferent: true };
     }
-
     return null;
   };
 };

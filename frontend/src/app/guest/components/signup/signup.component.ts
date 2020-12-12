@@ -16,10 +16,10 @@ export class SignupComponent implements OnInit {
   signupForm = new FormGroup(
     {
       username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
-      email: new FormControl('', Validators.required),
-      phone_number: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phoneNumber: new FormControl('', Validators.required),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
-      confirmPassword: new FormControl('', [Validators.required])
+      confirmPassword: new FormControl('', Validators.required)
     },
     { validators: matchPasswords('password', 'confirmPassword') }
   );
@@ -44,8 +44,8 @@ export class SignupComponent implements OnInit {
     return this.signupForm.get('email');
   }
 
-  get phone_number(): AbstractControl | null {
-    return this.signupForm.get('phone_number');
+  get phoneNumber(): AbstractControl | null {
+    return this.signupForm.get('phoneNumber');
   }
 
   get password(): AbstractControl | null {
