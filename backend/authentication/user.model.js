@@ -32,7 +32,8 @@ const userSchema = new Schema(
     role: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Role'
-    }
+    },
+    accounts: [{ type: Schema.Types.ObjectId, ref: 'Account' }]
   },
   {
     timestamps: true

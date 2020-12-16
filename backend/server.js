@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const authenticationRoutes = require('./authentication/authentication.route'); //bring in our user routes
+const accountRoutes = require('./accounts/account.route'); //bring in our user routes
 
 const app = express();
 
@@ -18,6 +19,7 @@ require('./config/database.config')(app);
 const PORT = process.env.PORT || 4000;
 
 app.use('/api/authentication', authenticationRoutes);
+app.use('/api/account', accountRoutes);
 
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}`);
