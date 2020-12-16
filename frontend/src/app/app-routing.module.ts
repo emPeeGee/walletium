@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { AuthenticationAdminGuard } from './shared/guards/authentication-admin.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'guest', pathMatch: 'full' },
   {
     path: 'guest',
     loadChildren: () => import('./guest/guest.module').then(m => m.GuestModule)
@@ -14,6 +14,12 @@ const routes: Routes = [
     canActivate: [AuthenticationAdminGuard],
     canLoad: [AuthenticationAdminGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
   },
   {
     path: '**',
