@@ -16,17 +16,6 @@ export class AuthenticationService {
 
   createNewUser(payload: Signup): Observable<Signup> {
     return this.http.post<Signup>(`${environment.baseURL}authentication/signup`, payload);
-    // return new Observable(observer => {
-    //   setTimeout(() => {
-    //     observer.next({
-    //       username: 'string',
-    //       email: 'string',
-    //       password: 'string',
-    //       phoneNumber: 'string'
-    //     });
-    //     observer.complete();
-    //   }, 300);
-    // });
   }
 
   userLogin(payload: Credentials): Observable<Auth> {

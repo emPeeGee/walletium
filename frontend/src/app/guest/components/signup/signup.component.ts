@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { matchPasswords } from 'src/app/shared/utils/validators.util';
+
 import { RootState } from 'src/app/store';
+import { matchPasswords } from 'src/app/shared/utils/validators.util';
 import { signup } from 'src/app/store/authentication/authentication.actions';
 import { selectAuthPending } from 'src/app/store/authentication/authentication.selectors';
 
