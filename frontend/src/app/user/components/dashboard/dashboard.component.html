@@ -4,8 +4,10 @@
     <h1 class="dashboard__title">Dashboard</h1>
   </div>
 
+  <mat-divider></mat-divider>
+
   <div class="dashboard__actions">
-    <button mat-raised-button color="accent">Add Account</button>
+    <button mat-raised-button color="accent" (click)="addAccount()">Add Account</button>
   </div>
 
   <ng-container *ngIf="allAccounts$ | async as accounts">

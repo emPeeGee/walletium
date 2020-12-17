@@ -7,9 +7,10 @@ import { StoreModule } from '@ngrx/store';
 import { effects, reducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { AccountCardComponent } from './components/account-card/account-card.component';
+import { AccountAddModalComponent } from './components/account-add-modal/account-add-modal.component';
 
 @NgModule({
-  declarations: [DashboardComponent, AccountCardComponent],
+  declarations: [DashboardComponent, AccountCardComponent, AccountAddModalComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

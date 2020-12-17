@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/accounts.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import * as accountsActions from './accounts.actions';
@@ -28,10 +28,22 @@ export class AccountsEffects {
     )
   );
 
+  createAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(accountsActions.createAccount),
+      exhaustMap(action => {
+        return this.accountsService.create(action.account).pipe(
+          map(result => accountsActions.createAccountSuccess({ message: result.message, account: result.account })),
+          catchError(error => of(accountsActions.createAccountFail({ error, message: error.error.message })))
+        );
+      })
+    )
+  );
+
   failActions$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(accountsActions.loadAllAccountsFail),
+        ofType(accountsActions.loadAllAccountsFail, accountsActions.createAccountFail),
         tap(({ message }) => this.snackBarService.showSimpleMessage(message))
       ),
     { dispatch: false }

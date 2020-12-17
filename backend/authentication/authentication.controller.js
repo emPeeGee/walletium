@@ -5,7 +5,7 @@ exports.signUp = async (req, res) => {
   try {
     let user = new User({
       username: req.body.username,
-      phone_number: req.body.phone_number,
+      phoneNumber: req.body.phoneNumber,
       email: req.body.email
     });
     user.password = await user.hashPassword(req.body.password);

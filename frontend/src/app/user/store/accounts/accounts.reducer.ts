@@ -7,16 +7,24 @@ export interface AccountsState {
   accounts: Account[];
   pending: boolean;
   error: string;
+  createAccountError: string;
 }
 
 const initialState: AccountsState = {
   accounts: [],
   pending: false,
-  error: ''
+  error: '',
+  createAccountError: ''
 };
 
 const accountsReducer = createReducer(
   initialState,
+
+  on(accountsActions.loadAllAccountsFail, (state, { message }) => ({
+    ...state,
+    error: message,
+    pending: false
+  })),
   on(accountsActions.loadAllAccounts, state => ({
     ...state,
     pending: true
@@ -26,10 +34,19 @@ const accountsReducer = createReducer(
     pending: false,
     accounts
   })),
-  on(accountsActions.loadAllAccountsFail, (state, { message }) => ({
+  on(accountsActions.createAccount, state => ({
     ...state,
-    error: message,
-    pending: false
+    pending: true
+  })),
+  on(accountsActions.createAccountSuccess, (state, { account }) => ({
+    ...state,
+    pending: false,
+    createAccountError: ''
+  })),
+  on(accountsActions.createAccountFail, (state, { message }) => ({
+    ...state,
+    pending: false,
+    createAccountError: message
   }))
 );
 

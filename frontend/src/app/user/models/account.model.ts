@@ -3,6 +3,7 @@ export interface Account {
   color: string;
   amount: number;
   currency: string;
+  userId: string;
 }
 
 export interface AccountsResult {

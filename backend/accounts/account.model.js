@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const accountSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   color: String,
   amount: {
@@ -12,7 +11,8 @@ const accountSchema = new mongoose.Schema({
     required: true
   },
   currency: {
-    type: String
+    type: String,
+    required: true
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

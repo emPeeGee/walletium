@@ -23,12 +23,31 @@ exports.create = async (req, res) => {
       user: userId
     });
 
-    let createdAccount = await account.save();
-
-    res.status(200).json({
-      message: 'New account created',
-      data: createdAccount
+    let acc = await Account.findOne({
+      name: account.name,
+      user: account.user
     });
+
+    if (acc) {
+      return res.status(400).json({
+        type: 'Such account exists',
+        message: 'Such account exists'
+      });
+    }
+
+    try {
+      let createdAccount = await account.save();
+      res.status(200).json({
+        message: 'New account created',
+        data: createdAccount
+      });
+    } catch (errors) {
+      console.log(errors);
+      res.status(400).json({
+        type: 'Bad Request',
+        message: 'Some fields may have errors'
+      });
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json({
@@ -72,7 +91,6 @@ exports.getAllByUser = async (req, res) => {
       user: userId
     });
 
-    console.log(accounts);
     res.status(200).json({
       message: 'All accounts fetched',
       data: accounts
