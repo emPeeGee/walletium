@@ -6,9 +6,10 @@ import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { effects, reducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
+import { AccountCardComponent } from './components/account-card/account-card.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, AccountCardComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
