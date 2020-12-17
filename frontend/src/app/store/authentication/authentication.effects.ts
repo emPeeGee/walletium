@@ -61,7 +61,7 @@ export class AuthenticationEffects {
         tap(({ payload }) => {
           this.tokenStorageService.setToken(payload.token);
           this.tokenStorageService.setUser(payload.user);
-          this.router.navigate(['guest']);
+          this.router.navigate(['']);
         })
       ),
     {
