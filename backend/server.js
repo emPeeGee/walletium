@@ -19,7 +19,7 @@ require('./config/database.config')(app);
 const PORT = process.env.PORT || 4000;
 
 app.use('/api/authentication', authenticationRoutes);
-app.use('/api/account', accountRoutes);
+app.use('/api/accounts', accountRoutes);
 
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}`);

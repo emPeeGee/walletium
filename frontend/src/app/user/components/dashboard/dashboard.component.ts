@@ -1,15 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { User } from 'src/app/shared/models/user.model';
+import { selectUser } from 'src/app/store/authentication/authentication.selectors';
+import { RootState, UserState } from '../../store';
+import * as accountsActions from '../../store/accounts/accounts.actions';
+import { selectAccountsPending } from '../../store/accounts/accounts.selector';
 
 @Component({
   selector: 'wal-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+  isPending$!: Observable<boolean>;
 
-  constructor() { }
+  private currentUser$ = this.store.select(selectUser);
+  private currentUserSubscription: Subscription | null = null;
+
+  constructor(private store: Store<RootState>) {}
 
   ngOnInit(): void {
+    this.isPending$ = this.store.select(selectAccountsPending);
+    this.currentUserSubscription = this.currentUser$.subscribe(userData => {
+      if (userData) {
+        this.store.dispatch(accountsActions.loadAllAccounts({ id: userData._id }));
+      }
+    });
   }
 
+  ngOnDestroy(): void {
+    this.currentUserSubscription?.unsubscribe();
+  }
 }

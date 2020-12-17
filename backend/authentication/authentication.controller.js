@@ -45,7 +45,11 @@ exports.signIn = async (req, res) => {
   try {
     let user = await User.findOne({
       email: login.email
-    }).populate('role');
+    })
+      .populate('role')
+      .populate('accounts');
+
+    console.log(user);
 
     if (!user) {
       res.status(400).json({
