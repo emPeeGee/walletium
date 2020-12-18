@@ -1,6 +1,6 @@
 <section class="account-add">
   <h2 mat-dialog-title>New Account</h2>
-  <form [formGroup]="accountForm" (ngSubmit)="createAccount()">
+  <form [formGroup]="accountForm" (ngSubmit)="saveAccount()">
     <mat-dialog-content fxLayout="column">
       <mat-form-field class="">
         <mat-label>Account name</mat-label>
@@ -33,7 +33,7 @@
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button type="button" (click)="cancelDialog()">Cancel</button>
       <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
       <button class="green-background" type="submit" mat-raised-button [disabled]="accountForm.invalid">Save</button>
     </mat-dialog-actions>

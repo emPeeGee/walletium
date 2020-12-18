@@ -154,20 +154,17 @@ exports.deleteOne = async (req, res) => {
   }
 };
 
-exports.updateAccount = async (req, res) => {
+exports.update = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const { accountId } = req.params;
+    const { userId, accountId } = req.params;
     const account = {
+      _id: accountId,
       name: req.body.name,
       color: req.body.color,
       amount: req.body.amount,
-      currency: req.body.currency
+      currency: req.body.currency,
+      user: userId
     };
-
-    console.log(userId);
-    console.log(accountId);
-    console.log(account);
 
     let user = await User.findById(userId);
     if (!user) {

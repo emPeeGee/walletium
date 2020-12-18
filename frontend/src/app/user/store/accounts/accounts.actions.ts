@@ -20,3 +20,10 @@ export const createAccountFail = createAction(
   '[USER -> ACCOUNT API] Create account fail',
   props<{ message: string; error: Error }>()
 );
+
+export const editAccount = createAction(`[USER -> ACCOUNT API] Edit account`, props<{ account: Account }>());
+export const editAccountSuccess = createAction(
+  `[USER -> ACCOUNT API] Edit account success`,
+  props<{ message: string }>()
+);
+export const editAccountFails = createAction(`[USER -> ACCOUNT API] Edit account fail`, props<{ message: string }>());

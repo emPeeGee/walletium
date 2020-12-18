@@ -43,10 +43,19 @@ const accountsReducer = createReducer(
     pending: false,
     createAccountError: ''
   })),
-  on(accountsActions.createAccountFail, (state, { message }) => ({
+  on(accountsActions.createAccountFail, accountsActions.editAccountFails, (state, { message }) => ({
     ...state,
     pending: false,
     createAccountError: message
+  })),
+  on(accountsActions.editAccount, state => ({
+    ...state,
+    pending: true
+  })),
+  on(accountsActions.editAccountSuccess, state => ({
+    ...state,
+    pending: false,
+    createAccountError: ''
   }))
 );
 

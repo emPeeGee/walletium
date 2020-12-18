@@ -40,10 +40,26 @@ export class AccountsEffects {
     )
   );
 
+  editAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(accountsActions.editAccount),
+      exhaustMap(action =>
+        this.accountsService.update(action.account).pipe(
+          map(result => accountsActions.editAccountSuccess({ message: result.message })),
+          catchError(error => of(accountsActions.editAccountFails({ message: error.error.message })))
+        )
+      )
+    )
+  );
+
   failActions$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(accountsActions.loadAllAccountsFail, accountsActions.createAccountFail),
+        ofType(
+          accountsActions.loadAllAccountsFail,
+          accountsActions.createAccountFail,
+          accountsActions.editAccountFails
+        ),
         tap(({ message }) => this.snackBarService.showSimpleMessage(message))
       ),
     { dispatch: false }

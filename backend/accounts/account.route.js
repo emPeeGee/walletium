@@ -13,6 +13,6 @@ router.get('/getOne/:accountId', verifyToken, accountController.getOne);
 router.delete('/deleteOne/:accountId', verifyToken, accountController.deleteOne);
 router.delete('/deleteAllByUser/:userId', verifyToken, accountController.deleteAllByUser);
 
-router.put('/update/:userId/:accountId', verifyToken, accountController.updateAccount);
+router.put('/update/:userId/:accountId', verifyToken, accountController.update);
 
 module.exports = router;

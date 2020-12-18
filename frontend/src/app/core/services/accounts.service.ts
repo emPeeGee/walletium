@@ -17,4 +17,8 @@ export class AccountsService {
   create(account: Account): Observable<any> {
     return this.http.post(`${environment.baseURL}accounts/create`, account);
   }
+
+  update(account: Account): Observable<any> {
+    return this.http.put(`${environment.baseURL}accounts/update/${account.userId}/${account._id}`, account);
+  }
 }
