@@ -4,12 +4,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { Account } from '../../models/account.model';
 import { RootState } from '../../store';
 import { createAccount, editAccount } from '../../store/accounts/accounts.actions';
 import * as accountsActions from '../../store/accounts/accounts.actions';
 import { tap } from 'rxjs/operators';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
 @Component({
   selector: 'wal-account-save-modal',
