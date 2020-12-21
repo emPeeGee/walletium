@@ -38,7 +38,7 @@ const accountsReducer = createReducer(
     ...state,
     pending: true
   })),
-  on(accountsActions.createAccountSuccess, (state, { account }) => ({
+  on(accountsActions.createAccountSuccess, state => ({
     ...state,
     pending: false,
     createAccountError: ''

@@ -8,9 +8,10 @@ import { effects, reducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { AccountCardComponent } from './components/account-card/account-card.component';
 import { AccountSaveModalComponent } from './components/account-save-modal/account-save-modal.component';
+import { AccountsLayoutComponent } from './components/accounts-layout/accounts-layout.component';
 
 @NgModule({
-  declarations: [DashboardComponent, AccountCardComponent, AccountSaveModalComponent],
+  declarations: [DashboardComponent, AccountCardComponent, AccountSaveModalComponent, AccountsLayoutComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

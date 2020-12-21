@@ -18,7 +18,7 @@ export class AccountsEffects {
     this.actions$.pipe(
       ofType(accountsActions.loadAllAccounts),
       switchMap(action =>
-        this.accountsService.getAllByUser(action.id).pipe(
+        this.accountsService.getAllByUser(action.id ?? '').pipe(
           map(accounts => accountsActions.loadAllAccountsSuccess({ accounts: accounts.data })),
           catchError(error => {
             return of(accountsActions.loadAllAccountsFail({ error, message: 'Loading all accounts fail' }));
@@ -33,7 +33,9 @@ export class AccountsEffects {
       ofType(accountsActions.createAccount),
       exhaustMap(action => {
         return this.accountsService.create(action.account).pipe(
-          map(result => accountsActions.createAccountSuccess({ message: result.message, account: result.account })),
+          map(result =>
+            accountsActions.createAccountSuccess({ message: result.message, userId: action.account.userId })
+          ),
           catchError(error => of(accountsActions.createAccountFail({ error, message: error.error.message })))
         );
       })
@@ -45,10 +47,17 @@ export class AccountsEffects {
       ofType(accountsActions.editAccount),
       exhaustMap(action =>
         this.accountsService.update(action.account).pipe(
-          map(result => accountsActions.editAccountSuccess({ message: result.message })),
+          map(result => accountsActions.editAccountSuccess({ message: result.message, userId: action.account.userId })),
           catchError(error => of(accountsActions.editAccountFails({ message: error.error.message })))
         )
       )
+    )
+  );
+
+  saveAccountSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(accountsActions.createAccountSuccess, accountsActions.editAccountSuccess),
+      map(action => accountsActions.loadAllAccounts({ id: action.userId }))
     )
   );
 

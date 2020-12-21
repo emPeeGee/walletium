@@ -1,11 +1,25 @@
 <mat-toolbar color="primary">
-  <a routerLink="/" fxLayout="column" fxLayoutAlign="center center">
-    <img src="assets/icon.png" alt="" class="logo" />
-  </a>
-  <span><a routerLink="/">Walletium</a></span>
+  <ul class="header__menu header__menu-left">
+    <li class="header__menu-item--doubled">
+      <a mat-button routerLink="/" fxLayout="column" fxLayoutAlign="center center">
+        <img src="assets/icon.png" alt="" class="logo" />
+      </a>
+      <a routerLink="/">Walletium</a>
+    </li>
+    <li>
+      <a mat-button routerLink="/dashboard" routerLinkActive="mat-accent">Dashboard</a>
+    </li>
+    <li>
+      <a mat-button routerLink="/accounts" routerLinkActive="mat-accent">Accounts</a>
+    </li>
+  </ul>
+
   <span class="spacer"></span>
 
-  <ul *ngIf="isUserAuthenticated$ | async as user; else unauthenticated">
+  <ul
+    class="header__menu header__menu-right--authenticated"
+    *ngIf="isUserAuthenticated$ | async as user; else unauthenticated"
+  >
     <li>
       <a mat-button routerLink="profile" routerLinkActive="mat-accent">{{ user.username }}</a>
     </li>
@@ -15,7 +29,7 @@
   </ul>
 
   <ng-template #unauthenticated>
-    <ul>
+    <ul class="header__menu header__menu-left--authenticated">
       <li>
         <a mat-button routerLink="/guest/login" routerLinkActive="mat-accent">Log in</a>
       </li>

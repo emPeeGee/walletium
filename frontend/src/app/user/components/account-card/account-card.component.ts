@@ -16,12 +16,8 @@ export class AccountCardComponent implements OnInit {
   ngOnInit(): void {}
 
   editAccount(type: string): void {
-    const accountDialogRef = this.dialog.open(AccountSaveModalComponent, {
+    this.dialog.open(AccountSaveModalComponent, {
       data: { type, account: this.account }
     });
-    // accountDialogRef.afterClosed().subscribe(() => {
-
-    //   this.fetchAccounts();
-    // });
   }
 }

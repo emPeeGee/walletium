@@ -35,14 +35,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   addAccount(type: string): void {
-    const accountDialogRef = this.dialog.open(AccountSaveModalComponent, {
+    this.dialog.open(AccountSaveModalComponent, {
       data: { type, account: null }
-    });
-
-    accountDialogRef.afterClosed().subscribe(flag => {
-      if (flag === 'success') {
-        this.fetchAccounts();
-      }
     });
   }
 
