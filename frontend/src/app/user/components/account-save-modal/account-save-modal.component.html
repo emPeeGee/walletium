@@ -1,0 +1,41 @@
+<section class="account-add">
+  <h2 mat-dialog-title>New Account</h2>
+  <form [formGroup]="accountForm" (ngSubmit)="saveAccount()">
+    <mat-dialog-content fxLayout="column">
+      <mat-form-field class="">
+        <mat-label>Account name</mat-label>
+        <input matInput formControlName="name" placeholder="Ex. Cash" />
+        <mat-error *ngIf="name?.errors?.required">Email is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <mat-label>Color</mat-label>
+        <input type="color" matInput formControlName="color" placeholder="" />
+        <mat-error *ngIf="color?.errors?.required">Color is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <mat-label>Currency</mat-label>
+        <mat-select formControlName="currency">
+          <mat-option value="MDL">MDL</mat-option>
+          <mat-option value="EUR">EUR</mat-option>
+          <mat-option value="USD">USD</mat-option>
+          <mat-option value="RON">RON</mat-option>
+          <mat-option value="RUB">RUB</mat-option>
+        </mat-select>
+        <mat-error *ngIf="currency?.errors?.required">Currency is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <mat-label>Initial amount</mat-label>
+        <input type="number" matInput formControlName="amount" placeholder="Ex. 100" />
+        <mat-error *ngIf="amount?.errors?.required">Amount is required</mat-error>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" (click)="cancelDialog()">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button type="submit" color="accent" mat-raised-button [disabled]="accountForm.invalid">Save</button>
+    </mat-dialog-actions>
+  </form>
+</section>

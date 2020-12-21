@@ -1,0 +1,19 @@
+.account-card {
+  width: 360px;
+  margin-top: 32px;
+  padding: 26px 0;
+
+  &__content {
+    margin-left: 16px;
+  }
+
+  &__amount {
+    font-size: 26px;
+    margin-right: 8px;
+  }
+
+  &__actions {
+    width: 200px;
+    margin-left: 16px;
+  }
+}
