@@ -6,6 +6,28 @@
     font-size: 32px;
   }
 
+  &__filter {
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  &__content {
+    width: 100%;
+
+    &-table {
+      width: 100%;
+
+      tr {
+        cursor: pointer;
+      }
+
+      tr:hover {
+        background-color: rgb(223, 223, 223);
+        transition: 0.35s ease;
+      }
+    }
+  }
+
   &__actions {
     margin-top: 16px;
   }

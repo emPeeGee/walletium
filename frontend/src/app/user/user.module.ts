@@ -12,7 +12,13 @@ import { AccountsLayoutComponent } from './components/accounts-layout/accounts-l
 import { AccountAddCardComponent } from './components/account-add-card/account-add-card.component';
 
 @NgModule({
-  declarations: [DashboardComponent, AccountCardComponent, AccountSaveModalComponent, AccountsLayoutComponent, AccountAddCardComponent],
+  declarations: [
+    DashboardComponent,
+    AccountCardComponent,
+    AccountSaveModalComponent,
+    AccountsLayoutComponent,
+    AccountAddCardComponent
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,
