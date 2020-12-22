@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
@@ -24,7 +25,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
   ]
 })
 export class MaterialModule {}

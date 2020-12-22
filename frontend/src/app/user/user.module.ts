@@ -9,9 +9,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { AccountCardComponent } from './components/account-card/account-card.component';
 import { AccountSaveModalComponent } from './components/account-save-modal/account-save-modal.component';
 import { AccountsLayoutComponent } from './components/accounts-layout/accounts-layout.component';
+import { AccountAddCardComponent } from './components/account-add-card/account-add-card.component';
 
 @NgModule({
-  declarations: [DashboardComponent, AccountCardComponent, AccountSaveModalComponent, AccountsLayoutComponent],
+  declarations: [DashboardComponent, AccountCardComponent, AccountSaveModalComponent, AccountsLayoutComponent, AccountAddCardComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

@@ -1,0 +1,25 @@
+.account-card {
+  width: 360px;
+  height: 192px;
+  margin-top: 32px;
+  padding: 26px 0;
+  background-color: #f1f1f1;
+
+  &__amount {
+    font-size: 26px;
+  }
+
+  &__actions {
+    width: 200px;
+
+    &-add {
+      background-color: #cdcdcd;
+
+      &-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 30px;
+      }
+    }
+  }
+}
