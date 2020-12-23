@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Account } from '../../models/account.model';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
 
@@ -11,7 +12,7 @@ import { AccountSaveModalComponent } from '../account-save-modal/account-save-mo
 export class AccountCardComponent implements OnInit {
   @Input() account: Account | null = null;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -19,5 +20,9 @@ export class AccountCardComponent implements OnInit {
     this.dialog.open(AccountSaveModalComponent, {
       data: { type, account: this.account }
     });
+  }
+
+  selectAccount(): void {
+    this.router.navigate(['accounts', 'details', this.account?._id, this.account?.userId]);
   }
 }

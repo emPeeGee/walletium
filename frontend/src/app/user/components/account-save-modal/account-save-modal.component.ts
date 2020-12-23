@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Account } from '../../models/account.model';
 import { RootState } from '../../store';
-import { createAccount, editAccount } from '../../store/accounts/accounts.actions';
+import * as accountDetailsActions from '../../store/account-details/account-details.actions';
 import * as accountsActions from '../../store/accounts/accounts.actions';
 import { tap } from 'rxjs/operators';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
@@ -55,9 +55,11 @@ export class AccountSaveModalComponent implements OnInit, OnDestroy {
     };
 
     if (this.type === 'add') {
-      this.store.dispatch(createAccount({ account }));
+      this.store.dispatch(accountsActions.createAccount({ account }));
     } else if (this.type === 'edit') {
-      this.store.dispatch(editAccount({ account }));
+      this.store.dispatch(accountsActions.editAccount({ account }));
+    } else if (this.type === 'edit-details') {
+      this.store.dispatch(accountDetailsActions.editAccount({ account }));
     }
   }
 
@@ -68,7 +70,11 @@ export class AccountSaveModalComponent implements OnInit, OnDestroy {
   private checkForSaveSuccess(): void {
     this.accountCreatedSubscription = this.actions$
       .pipe(
-        ofType(accountsActions.createAccountSuccess, accountsActions.editAccountSuccess),
+        ofType(
+          accountsActions.createAccountSuccess,
+          accountsActions.editAccountSuccess,
+          accountDetailsActions.editAccountSuccess
+        ),
         tap(() => this.dialogRef.close('success'))
       )
       .subscribe();

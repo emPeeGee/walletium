@@ -10,6 +10,7 @@ import { AccountCardComponent } from './components/account-card/account-card.com
 import { AccountSaveModalComponent } from './components/account-save-modal/account-save-modal.component';
 import { AccountsLayoutComponent } from './components/accounts-layout/accounts-layout.component';
 import { AccountAddCardComponent } from './components/account-add-card/account-add-card.component';
+import { AccountDetailComponent } from './components/account-detail/account-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AccountAddCardComponent } from './components/account-add-card/account-a
     AccountCardComponent,
     AccountSaveModalComponent,
     AccountsLayoutComponent,
-    AccountAddCardComponent
+    AccountAddCardComponent,
+    AccountDetailComponent
   ],
   imports: [
     CommonModule,

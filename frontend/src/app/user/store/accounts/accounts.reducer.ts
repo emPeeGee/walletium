@@ -7,24 +7,28 @@ export interface AccountsState {
   accounts: Account[];
   pending: boolean;
   error: string;
-  createAccountError: string;
 }
 
 const initialState: AccountsState = {
   accounts: [],
   pending: false,
-  error: '',
-  createAccountError: ''
+  error: ''
 };
 
 const accountsReducer = createReducer(
   initialState,
 
-  on(accountsActions.loadAllAccountsFail, (state, { message }) => ({
-    ...state,
-    error: message,
-    pending: false
-  })),
+  on(
+    accountsActions.loadAllAccountsFail,
+    accountsActions.createAccountFail,
+    accountsActions.editAccountFail,
+    (state, { message }) => ({
+      ...state,
+      pending: false,
+      error: message
+    })
+  ),
+
   on(accountsActions.loadAllAccounts, state => ({
     ...state,
     pending: true
@@ -34,28 +38,23 @@ const accountsReducer = createReducer(
     pending: false,
     accounts
   })),
+
   on(accountsActions.createAccount, state => ({
     ...state,
     pending: true
   })),
   on(accountsActions.createAccountSuccess, state => ({
     ...state,
-    pending: false,
-    createAccountError: ''
+    pending: false
   })),
-  on(accountsActions.createAccountFail, accountsActions.editAccountFails, (state, { message }) => ({
-    ...state,
-    pending: false,
-    createAccountError: message
-  })),
+
   on(accountsActions.editAccount, state => ({
     ...state,
     pending: true
   })),
   on(accountsActions.editAccountSuccess, state => ({
     ...state,
-    pending: false,
-    createAccountError: ''
+    pending: false
   }))
 );
 

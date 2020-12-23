@@ -1,0 +1,42 @@
+<wal-loader *ngIf="isPending$ | async as loading" [isLoading]="loading"></wal-loader>
+<section class="account-detail" *ngIf="account">
+  <mat-card class="account-detail__card">
+    <div class="account-detail__card-header">
+      <a mat-raised-button (click)="backToPreviousPage()">Back</a>
+      <h2>Account Detail</h2>
+      <div class="account-detail__card-header-actions">
+        <button mat-button color="primary" (click)="editAccount()">Edit</button>
+        <button mat-button color="warn" (click)="deleteAccount()">Delete</button>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="account-detail__card-content">
+      <div class="account-detail__card-content-avatar">
+        <div class="account-detail__card-content-avatar-content" [style.background-color]="account?.color">
+          {{ account?.name[0] }}
+        </div>
+      </div>
+      <div class="account-detail__card-content-info">
+        <div class="account-detail__card-content-info-content">
+          <p class="account-detail__card-content-info-content-title">Name</p>
+          <p class="account-detail__card-content-info-content-subtitle">{{ account.name }}</p>
+        </div>
+        <div class="account-detail__card-content-info-content">
+          <p class="account-detail__card-content-info-content-title">Type</p>
+          <p class="account-detail__card-content-info-content-subtitle">Cash</p>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="account-detail__card-footer">
+      <mat-tab-group>
+        <mat-tab label="Balance"></mat-tab>
+        <mat-tab label="Records"></mat-tab>
+      </mat-tab-group>
+    </div>
+  </mat-card>
+</section>

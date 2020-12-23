@@ -14,6 +14,10 @@ export class AccountsService {
     return this.http.get(`${environment.baseURL}accounts/getAllByUser/${userId}`);
   }
 
+  get(accountId: string, userId: string): Observable<any> {
+    return this.http.get(`${environment.baseURL}accounts/getOne/${accountId}`);
+  }
+
   create(account: Account): Observable<any> {
     return this.http.post(`${environment.baseURL}accounts/create`, account);
   }

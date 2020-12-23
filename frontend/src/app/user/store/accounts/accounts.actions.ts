@@ -29,4 +29,4 @@ export const editAccountSuccess = createAction(
   `[USER -> ACCOUNT API] Edit account success`,
   props<{ message: string; userId?: string }>()
 );
-export const editAccountFails = createAction(`[USER -> ACCOUNT API] Edit account fail`, props<{ message: string }>());
+export const editAccountFail = createAction(`[USER -> ACCOUNT API] Edit account fail`, props<{ message: string }>());

@@ -11,6 +11,7 @@ import * as accountsActions from '../../store/accounts/accounts.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'wal-accounts-layout',
@@ -29,7 +30,7 @@ export class AccountsLayoutComponent implements OnInit, OnDestroy {
   private currentUser: any;
   private currentUserSubscription: Subscription | null = null;
 
-  constructor(private store: Store<RootState>, private dialog: MatDialog) {}
+  constructor(private store: Store<RootState>, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.currentUserSubscription = this.store.select(selectUser).subscribe(userData => {
@@ -68,7 +69,7 @@ export class AccountsLayoutComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectAccount(row: Account): void {
-    console.log(row);
+  selectAccount(account: Account): void {
+    this.router.navigate(['accounts', 'details', account._id, account.userId]);
   }
 }
