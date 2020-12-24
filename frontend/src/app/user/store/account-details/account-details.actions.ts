@@ -27,3 +27,18 @@ export const editAccountFail = createAction(
   `[USER -> ACCOUNT API -> ACCOUNT DETAILS] Edit account fail`,
   props<{ message: string }>()
 );
+
+export const deleteAccount = createAction(
+  '[USER -> ACCOUNT API -> ACCOUNT DETAILS] Delete account',
+  props<{ accountId: string }>()
+);
+
+export const deleteAccountSuccess = createAction(
+  '[USER -> ACCOUNT API -> ACCOUNT DETAILS] Delete account success',
+  props<{ message: string }>()
+);
+
+export const deleteAccountFail = createAction(
+  '[USER -> ACCOUNT API -> ACCOUNT DETAILS] Delete account fail',
+  props<{ message: string }>()
+);

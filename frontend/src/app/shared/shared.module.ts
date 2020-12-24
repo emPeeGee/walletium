@@ -7,9 +7,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
-  declarations: [NotFoundComponent, HeaderComponent, LoaderComponent],
+  declarations: [NotFoundComponent, HeaderComponent, LoaderComponent, ConfirmModalComponent],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, RouterModule],
   exports: [
     MaterialModule,
@@ -18,7 +19,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     FlexLayoutModule,
     RouterModule,
     HeaderComponent,
-    LoaderComponent
+    LoaderComponent,
+    ConfirmModalComponent
   ]
 })
 export class SharedModule {}

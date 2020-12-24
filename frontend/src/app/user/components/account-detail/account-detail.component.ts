@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { Account } from '../../models/account.model';
 import { RootState } from '../../store';
 import * as accountDetailsActions from '../../store/account-details/account-details.actions';
@@ -62,5 +63,12 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteAccount(): void {}
+  deleteAccount(): void {
+    const confirmDialog = this.dialog.open(ConfirmModalComponent);
+    confirmDialog.afterClosed().subscribe(CLOSE_FLAG => {
+      if (CLOSE_FLAG === 'CONFIRM') {
+        this.store.dispatch(accountDetailsActions.deleteAccount({ accountId: this.account?._id ?? '' }));
+      }
+    });
+  }
 }

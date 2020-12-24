@@ -25,4 +25,8 @@ export class AccountsService {
   update(account: Account): Observable<any> {
     return this.http.put(`${environment.baseURL}accounts/update/${account.userId}/${account._id}`, account);
   }
+
+  delete(accountId: string): Observable<any> {
+    return this.http.delete(`${environment.baseURL}accounts/deleteOne/${accountId}`);
+  }
 }

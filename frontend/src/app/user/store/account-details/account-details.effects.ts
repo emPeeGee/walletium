@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { error } from 'protractor';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/accounts.service';
@@ -10,6 +12,7 @@ import * as accountDetailsActions from './account-details.actions';
 export class AccountDetailsEffects {
   constructor(
     private actions$: Actions,
+    private router: Router,
     private snackBarService: SnackBarService,
     private accountsService: AccountsService
   ) {}
@@ -47,16 +50,41 @@ export class AccountDetailsEffects {
   editAccountSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(accountDetailsActions.editAccountSuccess),
-      tap(res => console.log(res)),
       map(action => accountDetailsActions.loadAccount({ userId: action.userId, accountId: action.accountId }))
     )
+  );
+
+  deleteAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(accountDetailsActions.deleteAccount),
+      switchMap(action =>
+        this.accountsService.delete(action.accountId).pipe(
+          map(result => accountDetailsActions.deleteAccountSuccess({ message: result.message })),
+          catchError(error => of(accountDetailsActions.deleteAccountFail({ message: error.message })))
+        )
+      )
+    )
+  );
+
+  deleteAccountSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(accountDetailsActions.deleteAccountSuccess),
+        tap(({ message }) => {
+          this.snackBarService.showSimpleMessage(message);
+          this.router.navigate(['accounts']);
+        })
+      ),
+    { dispatch: false }
   );
 
   failActions$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(accountDetailsActions.loadAccountFail),
-        tap(({ message }) => this.snackBarService.showSimpleMessage(message))
+        tap(({ message }) => {
+          this.snackBarService.showSimpleMessage(message);
+        })
       ),
     { dispatch: false }
   );

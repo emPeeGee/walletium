@@ -16,11 +16,16 @@ const initialState: AccountDetailsState = {
 
 const accountDetailsReducer = createReducer(
   initialState,
-  on(accountDetailsActions.loadAccountFail, accountDetailsActions.editAccountFail, (state, { message }) => ({
-    ...state,
-    pending: false,
-    error: message
-  })),
+  on(
+    accountDetailsActions.loadAccountFail,
+    accountDetailsActions.editAccountFail,
+    accountDetailsActions.deleteAccountFail,
+    (state, { message }) => ({
+      ...state,
+      pending: false,
+      error: message
+    })
+  ),
   on(accountDetailsActions.loadAccount, state => ({
     ...state,
     pending: true
@@ -37,6 +42,15 @@ const accountDetailsReducer = createReducer(
   on(accountDetailsActions.editAccountSuccess, state => ({
     ...state,
     pending: false
+  })),
+  on(accountDetailsActions.deleteAccount, state => ({
+    ...state,
+    pending: true
+  })),
+  on(accountDetailsActions.deleteAccountSuccess, state => ({
+    ...state,
+    pending: false,
+    account: null
   }))
 );
 
