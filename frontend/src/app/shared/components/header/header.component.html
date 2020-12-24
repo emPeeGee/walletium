@@ -6,12 +6,14 @@
       </a>
       <a routerLink="/">Walletium</a>
     </li>
-    <li>
-      <a mat-button routerLink="/dashboard" routerLinkActive="mat-accent">Dashboard</a>
-    </li>
-    <li>
-      <a mat-button routerLink="/accounts" routerLinkActive="mat-accent">Accounts</a>
-    </li>
+    <ng-container *ngIf="isUserAuthenticated$ | async">
+      <li>
+        <a mat-button routerLink="/dashboard" routerLinkActive="mat-accent">Dashboard</a>
+      </li>
+      <li>
+        <a mat-button routerLink="/accounts" routerLinkActive="mat-accent">Accounts</a>
+      </li>
+    </ng-container>
   </ul>
 
   <span class="spacer"></span>
