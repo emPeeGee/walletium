@@ -174,7 +174,7 @@ exports.update = async (req, res) => {
       });
     }
 
-    const updatedAccount = await Account.findOneAndUpdate({ _id: accountId }, account);
+    const updatedAccount = await Account.findOneAndUpdate({ _id: accountId }, account, { runValidators: true });
 
     res.status(200).json({
       message: 'Account was updated with success',

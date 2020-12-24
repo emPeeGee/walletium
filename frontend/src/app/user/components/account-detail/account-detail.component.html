@@ -40,7 +40,7 @@
           class="account-detail__card-content-amount-subtitle"
           [ngClass]="{ red: account.amount < 0, green: account.amount > 0 }"
         >
-          {{ account.amount }}
+          {{ account.amount }} {{ account.currency }}
         </p>
       </div>
     </div>
