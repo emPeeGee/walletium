@@ -33,6 +33,16 @@
           <p class="account-detail__card-content-info-content-subtitle">Cash</p>
         </div>
       </div>
+
+      <div class="account-detail__card-content-amount">
+        <p class="account-detail__card-content-amount-title">Amount</p>
+        <p
+          class="account-detail__card-content-amount-subtitle"
+          [ngClass]="{ red: account.amount < 0, green: account.amount > 0 }"
+        >
+          {{ account.amount }} {{ account.currency }}
+        </p>
+      </div>
     </div>
 
     <mat-divider></mat-divider>
