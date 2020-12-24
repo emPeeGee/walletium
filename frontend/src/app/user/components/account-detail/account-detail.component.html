@@ -2,7 +2,12 @@
 <section class="account-detail" *ngIf="account">
   <mat-card class="account-detail__card">
     <div class="account-detail__card-header">
-      <a mat-raised-button (click)="backToPreviousPage()">Back</a>
+      <button walBackAction mat-raised-button>
+        <div class="account-detail__card-header-back">
+          <mat-icon>keyboard_backspace</mat-icon>
+          <p>Back</p>
+        </div>
+      </button>
       <h2>Account Detail</h2>
       <div class="account-detail__card-header-actions">
         <button mat-button color="primary" (click)="editAccount()">Edit</button>

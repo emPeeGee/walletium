@@ -8,9 +8,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { BackActionDirective } from './directives/back-action.directive';
 
 @NgModule({
-  declarations: [NotFoundComponent, HeaderComponent, LoaderComponent, ConfirmModalComponent],
+  declarations: [NotFoundComponent, HeaderComponent, LoaderComponent, ConfirmModalComponent, BackActionDirective],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, RouterModule],
   exports: [
     MaterialModule,
@@ -20,7 +21,8 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     RouterModule,
     HeaderComponent,
     LoaderComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    BackActionDirective
   ]
 })
 export class SharedModule {}

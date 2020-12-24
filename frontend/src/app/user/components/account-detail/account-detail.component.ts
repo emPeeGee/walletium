@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
@@ -21,12 +21,7 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
 
   accountSubscription: Subscription | null = null;
 
-  constructor(
-    private store: Store<RootState>,
-    private route: ActivatedRoute,
-    private router: Router,
-    private dialog: MatDialog
-  ) {}
+  constructor(private store: Store<RootState>, private route: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.readRoute();
@@ -47,14 +42,6 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
 
       this.store.dispatch(accountDetailsActions.loadAccount({ accountId, userId }));
     });
-  }
-
-  backToPreviousPage(): void {
-    const { redirect } = window.history.state;
-
-    console.log(redirect);
-
-    this.router.navigateByUrl(redirect || '/accounts');
   }
 
   editAccount(): void {

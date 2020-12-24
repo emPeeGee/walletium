@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { error } from 'protractor';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/accounts.service';
+import { NavigationService } from 'src/app/core/services/navigation.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import * as accountDetailsActions from './account-details.actions';
 
@@ -13,6 +13,7 @@ export class AccountDetailsEffects {
   constructor(
     private actions$: Actions,
     private router: Router,
+    private navigation: NavigationService,
     private snackBarService: SnackBarService,
     private accountsService: AccountsService
   ) {}
@@ -84,6 +85,7 @@ export class AccountDetailsEffects {
         ofType(accountDetailsActions.loadAccountFail),
         tap(({ message }) => {
           this.snackBarService.showSimpleMessage(message);
+          this.navigation.back();
         })
       ),
     { dispatch: false }
