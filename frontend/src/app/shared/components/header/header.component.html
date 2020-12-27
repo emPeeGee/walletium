@@ -6,13 +6,18 @@
       </a>
       <a routerLink="/">Walletium</a>
     </li>
-    <ng-container *ngIf="isUserAuthenticated$ | async">
+    <ng-container *ngIf="isUserAuthenticated$ | async as user">
       <li>
         <a mat-button routerLink="/dashboard" routerLinkActive="mat-accent">Dashboard</a>
       </li>
       <li>
         <a mat-button routerLink="/accounts" routerLinkActive="mat-accent">Accounts</a>
       </li>
+      <ng-container *ngIf="user.role.name === 'admin'">
+        <li>
+          <a mat-button routerLink="/admin" routerLinkActive="mat-accent">Admin Panel</a>
+        </li>
+      </ng-container>
     </ng-container>
   </ul>
 

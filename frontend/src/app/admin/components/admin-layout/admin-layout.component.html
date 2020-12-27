@@ -1,0 +1,37 @@
+<!-- <wal-loader *ngIf="isPending$ | async as loading" [isLoading]="loading"></wal-loader> -->
+<mat-drawer-container class="admin-layout" autosize>
+  <mat-drawer #drawer class="admin-layout__sidenav" mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item>
+        <a mat-line routerLink="categories">Categories</a>
+        <button mat-icon-button>
+          <mat-icon>category</mat-icon>
+        </button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <a mat-line routerLink="mock">Mock</a>
+        <button mat-icon-button>
+          <mat-icon>loyalty</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <div class="admin-layout__content">
+    <div class="admin-layout__header">
+      <h1 class="admin-layout__title">Admin Panel</h1>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="admin-layout__actions">
+      <button type="button" mat-raised-button color="primary" (click)="drawer.toggle()">Toggle sidenav</button>
+      <button mat-raised-button color="accent">Button</button>
+    </div>
+
+    <div class="admin-layout__outlet"></div>
+
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
