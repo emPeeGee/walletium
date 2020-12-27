@@ -34,8 +34,7 @@ isAdmin = (req, res, next) => {
         res.status(500).send({ message: err });
         return;
       }
-      console.log(user);
-      Role.find(
+      Role.findOne(
         {
           _id: user.role._id
         },
@@ -64,7 +63,7 @@ isModerator = (req, res, next) => {
       return;
     }
 
-    Role.find(
+    Role.findOne(
       {
         _id: user.role._id
       },

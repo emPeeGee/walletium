@@ -1,40 +1,43 @@
+const fs = require('fs');
+const { promisify } = require('util');
 const Category = require('./category.model');
-const User = require('./../authentication/user.model');
+
+const unlinkAsync = promisify(fs.unlink);
 
 exports.create = async (req, res) => {
   try {
+    const url = `${req.protocol}://${req.get('host')}`;
     let category = new Category({
       name: req.body.name,
-      color: req.body.color
+      imagePath: `${url}/images/${req.file.filename}`
     });
 
-    let acc = await Account.findOne({
-      name: account.name,
-      user: account.user
+    let findSuchCategory = await Category.findOne({
+      name: category.name
     });
 
-    if (acc) {
+    if (findSuchCategory) {
       return res.status(400).json({
-        type: 'Such account exists',
-        message: 'Such account exists'
+        type: 'Such category exists',
+        message: 'Such category exists'
       });
     }
 
     try {
-      let createdAccount = await account.save();
+      let createdCategory = await category.save();
       res.status(200).json({
-        message: 'New account created',
-        data: createdAccount
+        message: 'New category created',
+        data: createdCategory
       });
     } catch (errors) {
       console.log(errors);
       res.status(400).json({
         type: 'Bad Request',
-        message: 'Some fields may have errors'
+        message: 'Some error'
       });
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({
       type: 'Not Found',
       message: 'Internal server error'
@@ -42,134 +45,116 @@ exports.create = async (req, res) => {
   }
 };
 
-// exports.getOne = async (req, res) => {
-//   try {
-//     let { accountId } = req.params;
-//     let account = await Account.findOne({
-//       _id: accountId
-//     });
+exports.getOne = async (req, res) => {
+  try {
+    let { categoryId } = req.params;
+    let category = await Category.findOne({
+      _id: categoryId
+    });
 
-//     if (!account) {
-//       res.status(500).json({
-//         type: 'Not Found',
-//         message: 'Such account does not exist'
-//       });
-//     }
+    if (!category) {
+      res.status(500).json({
+        type: 'Not Found',
+        message: 'Such category does not exist'
+      });
+    }
 
-//     res.status(200).json({
-//       message: 'Account is successfully fetched',
-//       data: account
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({
-//       type: 'Internal error',
-//       message: 'Internal server error'
-//     });
-//   }
-// };
+    res.status(200).json({
+      message: 'Category is successfully fetched',
+      data: category
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      type: 'Internal error',
+      message: 'Internal server error'
+    });
+  }
+};
 
-// exports.getAllByUser = async (req, res) => {
-//   try {
-//     let { userId } = req.params;
-//     let accounts = await Account.find({
-//       user: userId
-//     });
+exports.getAll = async (req, res) => {
+  try {
+    let categories = await Category.find();
+    res.status(200).json({
+      message: 'Categories are successfully fetched',
+      data: categories
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      type: 'Internal error',
+      message: 'Internal server error'
+    });
+  }
+};
 
-//     res.status(200).json({
-//       message: 'All accounts fetched',
-//       data: accounts
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({
-//       type: 'Internal error',
-//       message: 'Internal server error'
-//     });
-//   }
-// };
+exports.deleteOne = async (req, res) => {
+  try {
+    let { categoryId } = req.params;
+    let category = await Category.findOne({
+      _id: categoryId
+    });
 
-// exports.deleteAllByUser = async (req, res) => {
-//   try {
-//     let { userId } = req.params;
+    if (!category) {
+      res.status(500).json({
+        type: 'Not Found',
+        message: 'Such category does not exist'
+      });
+    }
+    const imageName = category.imagePath.split('/').pop();
 
-//     let deletedAccounts = await Account.deleteMany({ user: userId });
+    let deletedCategory = await Category.deleteOne({
+      _id: categoryId
+    });
 
-//     res.status(200).json({
-//       message: 'All accounts of that user was deleted',
-//       data: deletedAccounts
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({
-//       type: 'Internal error',
-//       message: 'Internal server error'
-//     });
-//   }
-// };
+    await unlinkAsync(`images/${imageName}`);
 
-// exports.deleteOne = async (req, res) => {
-//   try {
-//     let { accountId } = req.params;
-//     let account = await Account.findOne({
-//       _id: accountId
-//     });
+    res.status(200).json({
+      message: 'Requested category was deleted',
+      data: deletedCategory
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      type: 'Internal error',
+      message: 'Internal server error'
+    });
+  }
+};
 
-//     if (!account) {
-//       res.status(500).json({
-//         type: 'Not Found',
-//         message: 'Such account does not exist'
-//       });
-//     }
+exports.update = async (req, res) => {
+  try {
+    let oldImagePath = '';
+    let imagePath = req.body.imagePath;
+    if (req.file) {
+      oldImagePath = imagePath.split('/').pop();
 
-//     let deletedAccount = await Account.deleteOne({
-//       _id: accountId
-//     });
+      const url = `${req.protocol}://${req.get('host')}`;
+      imagePath = `${url}/images/${req.file.filename}`;
+    }
 
-//     res.status(200).json({
-//       message: 'Requested account was deleted',
-//       data: deletedAccount
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({
-//       type: 'Internal error',
-//       message: 'Internal server error'
-//     });
-//   }
-// };
+    const { categoryId } = req.params;
+    const category = {
+      _id: categoryId,
+      name: req.body.name,
+      imagePath: imagePath
+    };
 
-// exports.update = async (req, res) => {
-//   try {
-//     const { userId, accountId } = req.params;
-//     const account = {
-//       _id: accountId,
-//       name: req.body.name,
-//       color: req.body.color,
-//       amount: req.body.amount,
-//       currency: req.body.currency,
-//       user: userId
-//     };
+    const updatedCategory = await Category.findOneAndUpdate({ _id: categoryId }, category, { runValidators: true });
 
-//     let user = await User.findById(userId);
-//     if (!user) {
-//       res.status(500).json({
-//         type: 'Not found',
-//         message: 'User not found'
-//       });
-//     }
+    if (oldImagePath) {
+      await unlinkAsync(`images/${oldImagePath}`);
+    }
 
-//     const updatedAccount = await Account.findOneAndUpdate({ _id: accountId }, account, { runValidators: true });
-
-//     res.status(200).json({
-//       message: 'Account was updated with success',
-//       data: updatedAccount
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({
-//       type: 'Internal error',
-//       message: 'Internal server error'
-//     });
-//   }
-// };
+    res.status(200).json({
+      message: 'Account was updated with success',
+      data: updatedCategory
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      type: 'Internal error',
+      message: 'Internal server error'
+    });
+  }
+};
