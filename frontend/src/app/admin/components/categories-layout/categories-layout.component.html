@@ -1,0 +1,17 @@
+<wal-loader *ngIf="isPending$ | async as loading" [isLoading]="loading"></wal-loader>
+
+<section class="categories">
+  <mat-accordion class="example-headers-align" *ngIf="categories$ | async as categories" multi>
+    <mat-expansion-panel *ngFor="let category of categories">
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ category.name }} <img [src]="category.imagePath" alt="image" /> </mat-panel-title>
+
+        <mat-panel-description> Type your name and age </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-action-row>
+        <button mat-button color="primary">Edit</button>
+        <button mat-button color="warn">Delete</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

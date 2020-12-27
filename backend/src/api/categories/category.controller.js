@@ -9,7 +9,7 @@ exports.create = async (req, res) => {
     const url = `${req.protocol}://${req.get('host')}`;
     let category = new Category({
       name: req.body.name,
-      imagePath: `${url}/images/${req.file.filename}`
+      imagePath: `${url}/public/images/${req.file.filename}`
     });
 
     let findSuchCategory = await Category.findOne({
@@ -130,7 +130,7 @@ exports.update = async (req, res) => {
       oldImagePath = imagePath.split('/').pop();
 
       const url = `${req.protocol}://${req.get('host')}`;
-      imagePath = `${url}/images/${req.file.filename}`;
+      imagePath = `${url}/public/images/${req.file.filename}`;
     }
 
     const { categoryId } = req.params;
@@ -143,7 +143,7 @@ exports.update = async (req, res) => {
     const updatedCategory = await Category.findOneAndUpdate({ _id: categoryId }, category, { runValidators: true });
 
     if (oldImagePath) {
-      await unlinkAsync(`images/${oldImagePath}`);
+      await unlinkAsync(`public/images/${oldImagePath}`);
     }
 
     res.status(200).json({
