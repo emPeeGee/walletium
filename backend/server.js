@@ -4,9 +4,9 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const authenticationRoutes = require('./authentication/authentication.route');
-const accountRoutes = require('./accounts/account.route');
-const categoryRoutes = require('./categories/category.route');
+const authenticationRoutes = require('./src/api/authentication/authentication.route');
+const accountRoutes = require('./src/api/accounts/account.route');
+const categoryRoutes = require('./src/api/categories/category.route');
 
 const app = express();
 
@@ -14,11 +14,11 @@ app.use(cors()); // configure cors
 app.use(bodyParser.urlencoded({ extended: true })); //configure body parser
 app.use(bodyParser.json());
 
-app.use('/images/', express.static(path.join('images')));
+app.use('/images/', express.static(path.join('public/')));
 
 app.use(morgan('dev')); // configire morgan
 
-require('./config/database.config')(app);
+require('./src/config/database.config')(app);
 
 const PORT = process.env.PORT || 4000;
 

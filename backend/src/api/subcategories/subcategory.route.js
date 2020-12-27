@@ -3,7 +3,7 @@ const router = express.Router();
 
 const subCategoryController = require('./subcategory.controller');
 
-const { verifyToken, isAdmin } = require('../middleware/auth.middleware').verifyToken;
+const { verifyToken, isAdmin } = require('../../middleware/auth.middleware').verifyToken;
 
 router.post('/create', [verifyToken, isAdmin], subCategoryController.create);
 

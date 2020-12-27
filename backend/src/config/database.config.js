@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Role = require('../authentication/role.model').Role;
+const Role = require('../api/authentication/role.model').Role;
 
 module.exports = function (app) {
   mongoose

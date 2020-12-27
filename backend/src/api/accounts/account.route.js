@@ -3,7 +3,7 @@ const router = express.Router();
 
 const accountController = require('./account.controller');
 
-const verifyToken = require('../middleware/auth.middleware').verifyToken;
+const verifyToken = require('../../middleware/auth.middleware').verifyToken;
 
 router.post('/create', verifyToken, accountController.create);
 

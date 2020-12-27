@@ -1,5 +1,5 @@
 const Account = require('./account.model');
-const User = require('./../authentication/user.model');
+const User = require('../authentication/user.model');
 
 exports.create = async (req, res) => {
   try {

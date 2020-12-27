@@ -4,7 +4,7 @@ const router = express.Router();
 
 const categoryController = require('./category.controller');
 
-const { verifyToken, isAdmin } = require('../middleware/auth.middleware');
+const { verifyToken, isAdmin } = require('../../middleware/auth.middleware');
 
 const MIME_TYPE_MAP = {
   'image/png': 'png',
@@ -20,9 +20,9 @@ const storage = multer.diskStorage({
     console.log(isValid);
 
     if (isValid) {
-      callback(null, 'images');
+      callback(null, 'public/images');
     } else {
-      callback(error, 'images');
+      callback(error, 'public/images');
     }
   },
   filename: (req, file, callback) => {
@@ -32,7 +32,11 @@ const storage = multer.diskStorage({
   }
 });
 
-router.post('/create', [multer({ storage: storage }).single('image'), verifyToken, isAdmin], categoryController.create);
+router.post(
+  '/create',
+  [multer({ storage: storage }).single('categoryImage'), verifyToken, isAdmin],
+  categoryController.create
+);
 
 router.get('/getAll', [verifyToken, isAdmin], categoryController.getAll);
 router.get('/getOne/:categoryId', [verifyToken, isAdmin], categoryController.getOne);
@@ -41,7 +45,7 @@ router.delete('/deleteOne/:categoryId', [verifyToken, isAdmin], categoryControll
 
 router.put(
   '/update/:categoryId',
-  [multer({ storage: storage }).single('image'), verifyToken, isAdmin],
+  [multer({ storage: storage }).single('categoryImage'), verifyToken, isAdmin],
   categoryController.update
 );
 

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const User = require('../authentication/user.model');
-const Role = require('../authentication/role.model').Role;
+const User = require('../api/authentication/user.model');
+const Role = require('../api/authentication/role.model').Role;
 
 verifyToken = (req, res, next) => {
   try {
