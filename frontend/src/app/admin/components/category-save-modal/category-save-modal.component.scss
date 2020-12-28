@@ -1,0 +1,25 @@
+.category-modal {
+  width: 800px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+      margin: 8px 0;
+    }
+  }
+}
+
+input[type='file'] {
+  visibility: hidden;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}

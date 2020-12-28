@@ -1,0 +1,30 @@
+<section class="category-modal">
+  <h2 mat-dialog-title>New Category</h2>
+  <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+    <mat-dialog-content class="category-modal__content">
+      <mat-form-field>
+        <mat-label>Category name</mat-label>
+        <input matInput formControlName="name" placeholder="Ex. Fuel" />
+        <mat-error *ngIf="name?.errors?.required">Email is required</mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-stroked-button color="primary" type="button" (click)="filePicker.click()">
+          Pick Category Image
+        </button>
+        <mat-error *ngIf="image?.errors?.required">Image is required</mat-error>
+
+        <input type="file" #filePicker (change)="onImagePicked($event)" />
+      </div>
+
+      <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && image?.errors === null">
+        <img [src]="imagePreview" alt="image" />
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" (click)="cancelDialog()">Cancel</button>
+      <button type="submit" color="accent" mat-raised-button [disabled]="categoryForm.invalid">Save</button>
+    </mat-dialog-actions>
+  </form>
+</section>

@@ -20,7 +20,19 @@ export class CategoriesEffects {
       switchMap(action =>
         this.categoriesService.getAll().pipe(
           map(result => categoriesActions.loadAllCategoriesSuccess({ categories: result.data })),
-          catchError(error => of(categoriesActions.loadAllCategoriesFail({ error: error })))
+          catchError(error => of(categoriesActions.loadAllCategoriesFail({ message: error.error.message })))
+        )
+      )
+    )
+  );
+
+  createCategory$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(categoriesActions.createCategory),
+      switchMap(action =>
+        this.categoriesService.create(action.category).pipe(
+          map(result => categoriesActions.createCategorySuccess({ message: result.message })),
+          catchError(error => of(categoriesActions.createCategoryFail({ message: error.error.message })))
         )
       )
     )
@@ -29,8 +41,8 @@ export class CategoriesEffects {
   failActions$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(categoriesActions.loadAllCategoriesFail),
-        tap(error => this.snackBarService.showSimpleMessage(error.error.message))
+        ofType(categoriesActions.loadAllCategoriesFail, categoriesActions.createCategoryFail),
+        tap(({ message }) => this.snackBarService.showSimpleMessage(message))
       ),
     { dispatch: false }
   );

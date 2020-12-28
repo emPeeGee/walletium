@@ -2,7 +2,7 @@
 
 <section class="categories">
   <div class="categories__actions">
-    <button mat-raised-button color="accent">Add Category</button>
+    <button mat-raised-button color="accent" (click)="addCategory('add')">Add Category</button>
   </div>
 
   <mat-accordion *ngIf="categories$ | async as categories" multi>

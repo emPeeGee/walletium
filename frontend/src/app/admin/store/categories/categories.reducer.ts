@@ -25,10 +25,19 @@ const categoriesReducer = createReducer(
     pending: false,
     categories
   })),
-  on(categoriesActions.loadAllCategoriesFail, (state, { error }) => ({
+  on(categoriesActions.createCategory, state => ({
+    ...state,
+    pending: true
+  })),
+  on(categoriesActions.createCategory, state => ({
+    ...state,
+    pending: false
+  })),
+
+  on(categoriesActions.loadAllCategoriesFail, categoriesActions.createCategoryFail, (state, { message }) => ({
     ...state,
     pending: false,
-    error: error.message
+    message: message
   }))
 );
 

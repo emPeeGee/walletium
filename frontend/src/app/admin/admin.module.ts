@@ -8,9 +8,10 @@ import { CategoriesLayoutComponent } from './components/categories-layout/catego
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { effects, reducers } from './store';
+import { CategorySaveModalComponent } from './components/category-save-modal/category-save-modal.component';
 
 @NgModule({
-  declarations: [MockComponent, AdminLayoutComponent, CategoriesLayoutComponent],
+  declarations: [MockComponent, AdminLayoutComponent, CategoriesLayoutComponent, CategorySaveModalComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

@@ -12,4 +12,8 @@ export class CategoriesService {
   getAll(): Observable<any> {
     return this.http.get(`${environment.baseURL}categories/getAll`);
   }
+
+  create(formData: FormData): Observable<any> {
+    return this.http.post(`${environment.baseURL}categories/create`, formData);
+  }
 }
