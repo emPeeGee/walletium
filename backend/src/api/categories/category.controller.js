@@ -9,7 +9,7 @@ exports.create = async (req, res) => {
     const url = `${req.protocol}://${req.get('host')}`;
     let category = new Category({
       name: req.body.name,
-      imagePath: `${url}/public/images/${req.file.filename}`
+      imagePath: `${url}/images/categories/${req.file.filename}`
     });
 
     let findSuchCategory = await Category.findOne({
@@ -130,7 +130,7 @@ exports.update = async (req, res) => {
       oldImagePath = imagePath.split('/').pop();
 
       const url = `${req.protocol}://${req.get('host')}`;
-      imagePath = `${url}/public/images/${req.file.filename}`;
+      imagePath = `${url}/images/categories/${req.file.filename}`;
     }
 
     const { categoryId } = req.params;

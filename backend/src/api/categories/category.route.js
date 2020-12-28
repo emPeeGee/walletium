@@ -20,9 +20,9 @@ const storage = multer.diskStorage({
     console.log(isValid);
 
     if (isValid) {
-      callback(null, 'public/images');
+      callback(null, 'public/images/categories');
     } else {
-      callback(error, 'public/images');
+      callback(error, 'public/images/categories');
     }
   },
   filename: (req, file, callback) => {
@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
 
 router.post(
   '/create',
-  [multer({ storage: storage }).single('categoryImage'), verifyToken, isAdmin],
+  [verifyToken, isAdmin, multer({ storage: storage }).single('categoryImage')],
   categoryController.create
 );
 

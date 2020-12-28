@@ -14,7 +14,7 @@ app.use(cors()); // configure cors
 app.use(bodyParser.urlencoded({ extended: true })); //configure body parser
 app.use(bodyParser.json());
 
-app.use('/images/', express.static(path.join('public/')));
+app.use('/images/', express.static(path.join(__dirname, 'public', 'images')));
 
 app.use(morgan('dev')); // configire morgan
 
