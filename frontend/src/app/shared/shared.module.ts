@@ -9,9 +9,17 @@ import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { BackActionDirective } from './directives/back-action.directive';
+import { SidenavTogglerComponent } from './components/sidenav-toggler/sidenav-toggler.component';
 
 @NgModule({
-  declarations: [NotFoundComponent, HeaderComponent, LoaderComponent, ConfirmModalComponent, BackActionDirective],
+  declarations: [
+    NotFoundComponent,
+    HeaderComponent,
+    LoaderComponent,
+    ConfirmModalComponent,
+    BackActionDirective,
+    SidenavTogglerComponent
+  ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, RouterModule],
   exports: [
     MaterialModule,
@@ -22,7 +30,8 @@ import { BackActionDirective } from './directives/back-action.directive';
     HeaderComponent,
     LoaderComponent,
     ConfirmModalComponent,
-    BackActionDirective
+    BackActionDirective,
+    SidenavTogglerComponent
   ]
 })
 export class SharedModule {}

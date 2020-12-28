@@ -1,36 +1,40 @@
 <mat-drawer-container class="admin-layout" autosize>
   <mat-drawer #drawer class="admin-layout__sidenav" mode="side" opened>
     <mat-nav-list>
-      <mat-list-item>
-        <a mat-line routerLink="categories">Categories</a>
-        <button mat-icon-button>
-          <mat-icon>category</mat-icon>
-        </button>
+      <mat-list-item routerLinkActive="active">
+        <a mat-line class="admin-layout__sidenav-link" routerLink="categories">
+          <p>Categories</p>
+          <button mat-icon-button>
+            <mat-icon>category</mat-icon>
+          </button>
+        </a>
       </mat-list-item>
 
-      <mat-list-item>
-        <a mat-line routerLink="mock">Mock</a>
-        <button mat-icon-button>
-          <mat-icon>loyalty</mat-icon>
-        </button>
+      <mat-list-item routerLinkActive="active">
+        <a mat-line class="admin-layout__sidenav-link" routerLink="mock">
+          <p>Mock</p>
+          <button mat-icon-button>
+            <mat-icon>loyalty</mat-icon>
+          </button>
+        </a>
       </mat-list-item>
     </mat-nav-list>
   </mat-drawer>
 
+  <wal-sidenav-toggler
+    [state]="isSidenavOpened"
+    (click)="drawer.toggle(); isSidenavOpened = !isSidenavOpened"
+  ></wal-sidenav-toggler>
+
   <div class="admin-layout__content">
     <div class="admin-layout__header">
-      <h1 class="admin-layout__title">Admin Panel</h1>
+      <h1 class="admin-layout__header-title">Admin Panel</h1>
     </div>
 
     <mat-divider></mat-divider>
 
-    <div class="admin-layout__actions">
-      <button type="button" mat-raised-button color="primary" (click)="drawer.toggle()">Toggle sidenav</button>
-      <button mat-raised-button color="accent">Button</button>
+    <div class="admin-layout__outlet">
+      <router-outlet></router-outlet>
     </div>
-
-    <div class="admin-layout__outlet"></div>
-
-    <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

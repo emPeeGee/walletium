@@ -3,33 +3,42 @@
   height: 100%;
   background-color: #ffffff;
 
-  &__content {
-    width: 95%;
-    margin: 32px auto;
-  }
-
   &__sidenav {
     width: 260px;
     padding: 20px;
+
+    &-link {
+      display: flex !important;
+      align-items: center;
+      justify-content: space-between;
+
+      p {
+        margin: 0;
+      }
+    }
 
     mat-icon {
       color: #9b9b9b;
     }
   }
 
-  &__title {
-    font-size: 32px;
+  &__content {
+    width: 90%;
+    margin: 32px auto;
   }
 
-  &__actions {
-    margin-top: 16px;
-
-    & > button {
-      margin-right: 8px;
+  &__header {
+    &-title {
+      font-size: 32px;
+      margin: 16px 0;
     }
   }
 
   &__outlet {
-    margin: 32px 0;
+    margin: 16px 0;
   }
+}
+
+.active {
+  background-color: #d8d8d8;
 }

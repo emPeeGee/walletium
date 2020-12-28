@@ -1,0 +1,15 @@
+.categories {
+  &__actions {
+    margin: 16px 0;
+  }
+
+  &__category-image {
+    width: 25px;
+    height: 25px;
+    margin-left: 16px;
+  }
+}
+
+mat-panel-title {
+  flex: 1;
+}
