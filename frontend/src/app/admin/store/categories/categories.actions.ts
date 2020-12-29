@@ -32,6 +32,15 @@ export const editCategory = createAction('[ADMIN PANEL -> Categories] Edit categ
 export const editCategorySuccess = createAction('[ADMIN PANEL -> Categories] Edit category success');
 export const editCategoryFail = createAction('[ADMIN PANEL -> Categories] Edit category fail');
 
-export const deleteCategory = createAction('[ADMIN PANEL -> Categories] Delete category');
-export const deleteCategorySuccess = createAction('[ADMIN PANEL -> Categories] Delete category success');
-export const deleteCategoryFail = createAction('[ADMIN PANEL -> Categories] Delete category fail');
+export const deleteCategory = createAction(
+  '[ADMIN PANEL -> Categories] Delete category',
+  props<{ categoryId: string }>()
+);
+export const deleteCategorySuccess = createAction(
+  '[ADMIN PANEL -> Categories] Delete category success',
+  props<{ message: string }>()
+);
+export const deleteCategoryFail = createAction(
+  '[ADMIN PANEL -> Categories] Delete category fail',
+  props<{ message: string }>()
+);

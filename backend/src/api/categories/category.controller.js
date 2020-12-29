@@ -91,6 +91,7 @@ exports.getAll = async (req, res) => {
 exports.deleteOne = async (req, res) => {
   try {
     let { categoryId } = req.params;
+    console.log(categoryId);
     let category = await Category.findOne({
       _id: categoryId
     });
@@ -107,7 +108,7 @@ exports.deleteOne = async (req, res) => {
       _id: categoryId
     });
 
-    await unlinkAsync(`images/${imageName}`);
+    await unlinkAsync(`public/images/categories/${imageName}`);
 
     res.status(200).json({
       message: 'Requested category was deleted',
@@ -143,7 +144,7 @@ exports.update = async (req, res) => {
     const updatedCategory = await Category.findOneAndUpdate({ _id: categoryId }, category, { runValidators: true });
 
     if (oldImagePath) {
-      await unlinkAsync(`public/images/${oldImagePath}`);
+      await unlinkAsync(`public/images/categories/${oldImagePath}`);
     }
 
     res.status(200).json({

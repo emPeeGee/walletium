@@ -16,4 +16,8 @@ export class CategoriesService {
   create(formData: FormData): Observable<any> {
     return this.http.post(`${environment.baseURL}categories/create`, formData);
   }
+
+  delete(categoryId: string): Observable<any> {
+    return this.http.delete(`${environment.baseURL}categories/deleteOne/${categoryId}`);
+  }
 }

@@ -25,20 +25,35 @@ const categoriesReducer = createReducer(
     pending: false,
     categories
   })),
+
   on(categoriesActions.createCategory, state => ({
     ...state,
     pending: true
   })),
-  on(categoriesActions.createCategory, state => ({
+  on(categoriesActions.createCategorySuccess, state => ({
     ...state,
     pending: false
   })),
 
-  on(categoriesActions.loadAllCategoriesFail, categoriesActions.createCategoryFail, (state, { message }) => ({
+  on(categoriesActions.deleteCategory, state => ({
     ...state,
-    pending: false,
-    message: message
-  }))
+    pending: true
+  })),
+  on(categoriesActions.deleteCategorySuccess, state => ({
+    ...state,
+    pending: false
+  })),
+
+  on(
+    categoriesActions.loadAllCategoriesFail,
+    categoriesActions.createCategoryFail,
+    categoriesActions.deleteCategoryFail,
+    (state, { message }) => ({
+      ...state,
+      pending: false,
+      message
+    })
+  )
 );
 
 export function reducer(state: CategoriesState | undefined, action: Action) {
