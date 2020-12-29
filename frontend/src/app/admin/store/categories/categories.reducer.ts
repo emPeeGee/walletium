@@ -44,10 +44,20 @@ const categoriesReducer = createReducer(
     pending: false
   })),
 
+  on(categoriesActions.editCategory, state => ({
+    ...state,
+    pending: true
+  })),
+  on(categoriesActions.editCategorySuccess, state => ({
+    ...state,
+    pending: false
+  })),
+
   on(
     categoriesActions.loadAllCategoriesFail,
     categoriesActions.createCategoryFail,
     categoriesActions.deleteCategoryFail,
+    categoriesActions.editCategoryFail,
     (state, { message }) => ({
       ...state,
       pending: false,

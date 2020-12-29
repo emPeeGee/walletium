@@ -28,9 +28,18 @@ export const createCategoryFail = createAction(
   props<{ message: string }>()
 );
 
-export const editCategory = createAction('[ADMIN PANEL -> Categories] Edit category');
-export const editCategorySuccess = createAction('[ADMIN PANEL -> Categories] Edit category success');
-export const editCategoryFail = createAction('[ADMIN PANEL -> Categories] Edit category fail');
+export const editCategory = createAction(
+  '[ADMIN PANEL -> Categories] Edit category',
+  props<{ categoryId: string; category: FormData }>()
+);
+export const editCategorySuccess = createAction(
+  '[ADMIN PANEL -> Categories] Edit category success',
+  props<{ message: string }>()
+);
+export const editCategoryFail = createAction(
+  '[ADMIN PANEL -> Categories] Edit category fail',
+  props<{ message: string }>()
+);
 
 export const deleteCategory = createAction(
   '[ADMIN PANEL -> Categories] Delete category',

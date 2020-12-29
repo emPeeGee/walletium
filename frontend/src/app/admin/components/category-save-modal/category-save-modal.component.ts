@@ -17,6 +17,8 @@ import * as categoriesActions from '../../store/categories/categories.actions';
 export class CategorySaveModalComponent implements OnInit {
   isImageInputTouched = false;
   imagePreview: string | undefined;
+  type: string | null = null;
+  category: Category | null = null;
 
   categoryForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -33,16 +35,33 @@ export class CategorySaveModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.type = this.data.type;
     this.checkForSaveSuccess();
+
+    this.category = this.data.category;
+    if (this.category) {
+      this.categoryForm.patchValue({
+        name: this.category.name,
+        image: this.category.imagePath
+      });
+
+      this.imagePreview = this.category.imagePath;
+    }
   }
 
   saveCategory(): void {
     const formData = new FormData();
-
     formData.append('name', this.categoryForm.value.name);
-    formData.append('categoryImage', this.categoryForm.value.image);
 
-    this.store.dispatch(categoriesActions.createCategory({ category: formData }));
+    if (this.type === 'add') {
+      formData.append('categoryImage', this.categoryForm.value.image);
+      this.store.dispatch(categoriesActions.createCategory({ category: formData }));
+    } else if (this.type === 'edit') {
+      formData.append('categoryImage', this.categoryForm.value.image || null);
+      formData.append('imagePath', this.category.imagePath);
+
+      this.store.dispatch(categoriesActions.editCategory({ categoryId: this.category._id, category: formData }));
+    }
   }
 
   cancelDialog(): void {
@@ -72,7 +91,7 @@ export class CategorySaveModalComponent implements OnInit {
   private checkForSaveSuccess(): void {
     this.categoryCreatedSubscription = this.actions$
       .pipe(
-        ofType(categoriesActions.createCategorySuccess),
+        ofType(categoriesActions.createCategorySuccess, categoriesActions.editCategorySuccess),
         tap(() => this.dialogRef.close('success'))
       )
       .subscribe();

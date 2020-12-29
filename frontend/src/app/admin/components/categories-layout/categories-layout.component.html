@@ -2,7 +2,7 @@
 
 <section class="categories">
   <div class="categories__actions">
-    <button mat-raised-button color="accent" (click)="addCategory('add')">Add Category</button>
+    <button mat-raised-button color="accent" (click)="addCategory()">Add Category</button>
   </div>
 
   <mat-accordion *ngIf="categories$ | async as categories" multi>
@@ -16,7 +16,7 @@
         <mat-panel-description>Expand for subcategories </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-action-row>
-        <button mat-button color="primary" (click)="onEdit()">Edit</button>
+        <button mat-button color="primary" (click)="editCategory(category)">Edit</button>
         <button mat-button color="warn" (click)="onDelete(category._id)">Delete</button>
       </mat-action-row>
     </mat-expansion-panel>

@@ -12,17 +12,6 @@ exports.create = async (req, res) => {
       imagePath: `${url}/images/categories/${req.file.filename}`
     });
 
-    let findSuchCategory = await Category.findOne({
-      name: category.name
-    });
-
-    if (findSuchCategory) {
-      return res.status(400).json({
-        type: 'Such category exists',
-        message: 'Such category exists'
-      });
-    }
-
     try {
       let createdCategory = await category.save();
       res.status(200).json({
@@ -33,7 +22,7 @@ exports.create = async (req, res) => {
       console.log(errors);
       res.status(400).json({
         type: 'Bad Request',
-        message: 'Some error'
+        message: 'Some error | Maybe such category already exists'
       });
     }
   } catch (error) {

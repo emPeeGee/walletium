@@ -50,9 +50,25 @@ export class CategoriesEffects {
     )
   );
 
-  updateCategoriesWhenSuccess$ = createEffect(() =>
+  editCategory$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(categoriesActions.createCategorySuccess, categoriesActions.deleteCategorySuccess),
+      ofType(categoriesActions.editCategory),
+      switchMap(action =>
+        this.categoriesService.update(action.categoryId, action.category).pipe(
+          map(result => categoriesActions.editCategorySuccess({ message: result.message })),
+          catchError(error => of(categoriesActions.editCategoryFail({ message: error.error.message })))
+        )
+      )
+    )
+  );
+
+  loadCategoriesWhenSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        categoriesActions.createCategorySuccess,
+        categoriesActions.deleteCategorySuccess,
+        categoriesActions.editCategorySuccess
+      ),
       map(action => categoriesActions.loadAllCategories())
     )
   );
@@ -63,7 +79,8 @@ export class CategoriesEffects {
         ofType(
           categoriesActions.loadAllCategoriesFail,
           categoriesActions.createCategoryFail,
-          categoriesActions.deleteCategoryFail
+          categoriesActions.deleteCategoryFail,
+          categoriesActions.editCategoryFail
         ),
         tap(({ message }) => this.snackBarService.showSimpleMessage(message))
       ),

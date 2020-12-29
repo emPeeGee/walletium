@@ -27,16 +27,19 @@ export class CategoriesLayoutComponent implements OnInit {
     this.categories$ = this.store.select(selectAllCategories);
   }
 
-  addCategory(type: string): void {
+  addCategory(): void {
     this.dialog.open(CategorySaveModalComponent, {
-      data: {}
+      data: { type: 'add' }
     });
   }
 
-  onEdit(): void {}
-  onDelete(categoryId: string): void {
-    console.log(categoryId);
+  editCategory(category: Category): void {
+    this.dialog.open(CategorySaveModalComponent, {
+      data: { type: 'edit', category }
+    });
+  }
 
+  onDelete(categoryId: string): void {
     const confirmDialog = this.dialog.open(ConfirmModalComponent);
     confirmDialog.afterClosed().subscribe(CLOSE_FLAG => {
       if (CLOSE_FLAG === 'CONFIRM') {
