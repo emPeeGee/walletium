@@ -38,6 +38,13 @@ export class CategoriesEffects {
     )
   );
 
+  saveCategorySuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(categoriesActions.createCategorySuccess),
+      map(action => categoriesActions.loadAllCategories())
+    )
+  );
+
   failActions$ = createEffect(
     () =>
       this.actions$.pipe(

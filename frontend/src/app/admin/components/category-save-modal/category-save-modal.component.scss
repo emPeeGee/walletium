@@ -9,17 +9,28 @@
       margin: 8px 0;
     }
   }
+
+  &__image {
+    &-errors {
+      font-size: 75%;
+    }
+
+    &-preview {
+      height: 5rem;
+      margin: 1rem 0;
+
+      & img {
+        height: 100%;
+      }
+    }
+  }
 }
 
 input[type='file'] {
   visibility: hidden;
 }
 
-.image-preview {
-  height: 5rem;
-  margin: 1rem 0;
-}
-
-.image-preview img {
-  height: 100%;
+.invalid {
+  border-color: #eb1f1f;
+  color: #eb1f1f;
 }
