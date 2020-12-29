@@ -10,6 +10,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { BackActionDirective } from './directives/back-action.directive';
 import { SidenavTogglerComponent } from './components/sidenav-toggler/sidenav-toggler.component';
+import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SidenavTogglerComponent } from './components/sidenav-toggler/sidenav-to
     LoaderComponent,
     ConfirmModalComponent,
     BackActionDirective,
-    SidenavTogglerComponent
+    SidenavTogglerComponent,
+    ImageViewerComponent
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, RouterModule],
   exports: [

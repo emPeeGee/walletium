@@ -1,0 +1,39 @@
+:host {
+  width: 100%;
+  height: 100%;
+  background-color: #8d8d8d87;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.viewer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &-exit {
+      width: 100px;
+      height: 100px;
+      background-color: #35353594;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      mat-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 70px;
+      }
+    }
+  }
+}

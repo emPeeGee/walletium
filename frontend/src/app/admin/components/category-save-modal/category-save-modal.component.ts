@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { mimeTypeValidator } from 'src/app/core/validators/mime-type.validator';
+import { Category } from '../../models/category.model';
 import { RootState } from '../../store';
 import * as categoriesActions from '../../store/categories/categories.actions';
 
@@ -58,9 +59,9 @@ export class CategorySaveModalComponent implements OnInit {
       this.store.dispatch(categoriesActions.createCategory({ category: formData }));
     } else if (this.type === 'edit') {
       formData.append('categoryImage', this.categoryForm.value.image || null);
-      formData.append('imagePath', this.category.imagePath);
+      formData.append('imagePath', this.category!.imagePath);
 
-      this.store.dispatch(categoriesActions.editCategory({ categoryId: this.category._id, category: formData }));
+      this.store.dispatch(categoriesActions.editCategory({ categoryId: this.category!._id, category: formData }));
     }
   }
 

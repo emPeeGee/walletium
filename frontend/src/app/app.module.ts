@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 
 import { effects, reducers } from './store/index';
+import { ImageViewerComponent } from './shared/components/image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [AppComponent],

@@ -9,6 +9,8 @@ import { loadAllCategories } from '../../store/categories/categories.actions';
 import { selectAllCategories, selectCategoriesPending } from '../../store/categories/categories.selectors';
 import { CategorySaveModalComponent } from '../category-save-modal/category-save-modal.component';
 import * as categoriesActions from '../../store/categories/categories.actions';
+import { ComponentLoaderService } from 'src/app/core/services/component-loader.service';
+import { ImageViewerComponent } from 'src/app/shared/components/image-viewer/image-viewer.component';
 @Component({
   selector: 'wal-categories-layout',
   templateUrl: './categories-layout.component.html',
@@ -18,7 +20,11 @@ export class CategoriesLayoutComponent implements OnInit {
   isPending$: Observable<boolean> | null = null;
   categories$: Observable<Category[]> | null = null;
 
-  constructor(private store: Store<RootState>, private dialog: MatDialog) {}
+  constructor(
+    private store: Store<RootState>,
+    private dialog: MatDialog,
+    private componentLoader: ComponentLoaderService
+  ) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadAllCategories());
@@ -46,5 +52,9 @@ export class CategoriesLayoutComponent implements OnInit {
         this.store.dispatch(categoriesActions.deleteCategory({ categoryId }));
       }
     });
+  }
+
+  loadImageViewer(imagePath: string): void {
+    this.componentLoader.showImageViewerComponent(ImageViewerComponent, imagePath);
   }
 }

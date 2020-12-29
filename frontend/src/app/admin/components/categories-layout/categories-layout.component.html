@@ -10,10 +10,15 @@
       <mat-expansion-panel-header class="categories__category-header">
         <mat-panel-title>
           {{ category.name }}
-          <img class="categories__category-image" [src]="category.imagePath" alt="image" />
+          <img
+            class="categories__category-image"
+            alt="image"
+            [src]="category.imagePath"
+            (click)="loadImageViewer(category.imagePath)"
+          />
         </mat-panel-title>
 
-        <mat-panel-description>Expand for subcategories </mat-panel-description>
+        <mat-panel-description>Expand for subcategories</mat-panel-description>
       </mat-expansion-panel-header>
       <mat-action-row>
         <button mat-button color="primary" (click)="editCategory(category)">Edit</button>
