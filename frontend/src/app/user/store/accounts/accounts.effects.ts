@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, delay, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
-import { AccountsService } from 'src/app/core/services/accounts.service';
-import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { AccountsService } from 'src/app/core/services/api/accounts.service';
+import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
 import { Account } from '../../models/account.model';
 import * as accountsActions from './accounts.actions';
 

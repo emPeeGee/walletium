@@ -9,7 +9,7 @@ import { loadAllCategories } from '../../store/categories/categories.actions';
 import { selectAllCategories, selectCategoriesPending } from '../../store/categories/categories.selectors';
 import { CategorySaveModalComponent } from '../category-save-modal/category-save-modal.component';
 import * as categoriesActions from '../../store/categories/categories.actions';
-import { ComponentLoaderService } from 'src/app/core/services/component-loader.service';
+import { ComponentLoaderService } from 'src/app/core/services/others/component-loader.service';
 import { ImageViewerComponent } from 'src/app/shared/components/image-viewer/image-viewer.component';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { CloseType } from 'src/app/core/enums/close-type.enum';

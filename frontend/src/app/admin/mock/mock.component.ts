@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { ComponentLoaderService } from 'src/app/core/services/component-loader.service';
+import { ComponentLoaderService } from 'src/app/core/services/others/component-loader.service';
 import { ImageViewerComponent } from 'src/app/shared/components/image-viewer/image-viewer.component';
 
 @Component({

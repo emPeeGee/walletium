@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
-import { AccountsService } from 'src/app/core/services/accounts.service';
-import { NavigationService } from 'src/app/core/services/navigation.service';
-import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { AccountsService } from 'src/app/core/services/api/accounts.service';
+import { NavigationService } from 'src/app/core/services/others/navigation.service';
+import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
 import * as accountDetailsActions from './account-details.actions';
 
 @Injectable()

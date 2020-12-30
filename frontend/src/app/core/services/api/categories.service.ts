@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/admin/models/category.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,6 +20,7 @@ export class CategoriesService {
   update(categoryId: string, formData: FormData): Observable<any> {
     return this.http.put(`${environment.baseURL}categories/update/${categoryId}`, formData);
   }
+
   delete(categoryId: string): Observable<any> {
     return this.http.delete(`${environment.baseURL}categories/deleteOne/${categoryId}`);
   }

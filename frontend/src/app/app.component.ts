@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { ComponentLoaderService } from './core/services/component-loader.service';
-import { NavigationService } from './core/services/navigation.service';
+import { ComponentLoaderService } from './core/services/others/component-loader.service';
+import { NavigationService } from './core/services/others/navigation.service';
 
 @Component({
   selector: 'app-root',

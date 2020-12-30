@@ -4,9 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, tap, exhaustMap } from 'rxjs/operators';
 
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { SnackBarService } from 'src/app/core/services/snack-bar.service';
-import { TokenStorageService } from 'src/app/core/services/token-storage.service';
+import { AuthenticationService } from 'src/app/core/services/api/authentication.service';
+import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
+import { TokenStorageService } from 'src/app/core/services/others/token-storage.service';
 import * as authenticationActions from './authentication.actions';
 
 @Injectable()

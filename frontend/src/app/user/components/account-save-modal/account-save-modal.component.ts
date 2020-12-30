@@ -9,7 +9,7 @@ import { RootState } from '../../store';
 import * as accountDetailsActions from '../../store/account-details/account-details.actions';
 import * as accountsActions from '../../store/accounts/accounts.actions';
 import { tap } from 'rxjs/operators';
-import { TokenStorageService } from 'src/app/core/services/token-storage.service';
+import { TokenStorageService } from 'src/app/core/services/others/token-storage.service';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 
 @Component({

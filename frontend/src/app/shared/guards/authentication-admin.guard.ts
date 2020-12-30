@@ -11,7 +11,7 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { TokenStorageService } from '../../core/services/token-storage.service';
+import { TokenStorageService } from '../../core/services/others/token-storage.service';
 
 @Injectable({
   providedIn: 'root'

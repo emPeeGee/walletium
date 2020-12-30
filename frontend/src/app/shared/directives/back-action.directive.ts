@@ -1,5 +1,5 @@
 import { Directive, HostListener } from '@angular/core';
-import { NavigationService } from 'src/app/core/services/navigation.service';
+import { NavigationService } from 'src/app/core/services/others/navigation.service';
 
 @Directive({
   selector: '[walBackAction]'

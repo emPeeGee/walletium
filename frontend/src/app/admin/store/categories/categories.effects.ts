@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { CategoriesService } from 'src/app/core/services/categories.service';
-import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { CategoriesService } from 'src/app/core/services/api/categories.service';
+import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
 import * as categoriesActions from './categories.actions';
 
 @Injectable()
