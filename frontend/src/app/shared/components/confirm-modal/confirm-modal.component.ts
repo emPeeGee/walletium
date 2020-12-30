@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { CloseType } from 'src/app/core/enums/close-type.enum';
 
 @Component({
   selector: 'wal-confirm-modal',
@@ -14,10 +15,10 @@ export class ConfirmModalComponent implements OnInit {
   ngOnInit(): void {}
 
   onConfirm(): void {
-    this.dialogRef.close('CONFIRM');
+    this.dialogRef.close(CloseType.CONFIRM);
   }
 
   onDeny(): void {
-    this.dialogRef.close('DENY');
+    this.dialogRef.close(CloseType.DENY);
   }
 }

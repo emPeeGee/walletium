@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { CloseType } from 'src/app/core/enums/close-type.enum';
+import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { Account } from '../../models/account.model';
 import { RootState } from '../../store';
@@ -46,14 +48,14 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
 
   editAccount(): void {
     this.dialog.open(AccountSaveModalComponent, {
-      data: { type: 'edit-details', account: this.account }
+      data: { type: OpenType.EDIT_DETAILS, account: this.account }
     });
   }
 
   deleteAccount(): void {
     const confirmDialog = this.dialog.open(ConfirmModalComponent);
     confirmDialog.afterClosed().subscribe(CLOSE_FLAG => {
-      if (CLOSE_FLAG === 'CONFIRM') {
+      if (CLOSE_FLAG === CloseType.CONFIRM) {
         this.store.dispatch(accountDetailsActions.deleteAccount({ accountId: this.account?._id ?? '' }));
       }
     });

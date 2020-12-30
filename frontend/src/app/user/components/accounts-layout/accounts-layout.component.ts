@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
+import { OpenType } from 'src/app/core/enums/open-type.enum';
 
 @Component({
   selector: 'wal-accounts-layout',
@@ -51,9 +52,9 @@ export class AccountsLayoutComponent implements OnInit, OnDestroy {
     this.currentUserSubscription?.unsubscribe();
   }
 
-  addAccount(type: string): void {
+  addAccount(): void {
     this.dialog.open(AccountSaveModalComponent, {
-      data: { type, account: null }
+      data: { type: OpenType.ADD, account: null }
     });
   }
 

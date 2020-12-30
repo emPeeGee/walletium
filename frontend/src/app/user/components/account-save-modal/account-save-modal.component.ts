@@ -10,6 +10,7 @@ import * as accountDetailsActions from '../../store/account-details/account-deta
 import * as accountsActions from '../../store/accounts/accounts.actions';
 import { tap } from 'rxjs/operators';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
+import { OpenType } from 'src/app/core/enums/open-type.enum';
 
 @Component({
   selector: 'wal-account-save-modal',
@@ -24,7 +25,7 @@ export class AccountSaveModalComponent implements OnInit, OnDestroy {
     amount: new FormControl('', Validators.required)
   });
   accountCreatedSubscription: Subscription | null = null;
-  type: string | null = null;
+  type: OpenType | null = null;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -54,17 +55,17 @@ export class AccountSaveModalComponent implements OnInit, OnDestroy {
       userId: this.tokenStorageService.getUser()?._id
     };
 
-    if (this.type === 'add') {
+    if (this.type === OpenType.ADD) {
       this.store.dispatch(accountsActions.createAccount({ account }));
-    } else if (this.type === 'edit') {
+    } else if (this.type === OpenType.EDIT) {
       this.store.dispatch(accountsActions.editAccount({ account }));
-    } else if (this.type === 'edit-details') {
+    } else if (this.type === OpenType.EDIT_DETAILS) {
       this.store.dispatch(accountDetailsActions.editAccount({ account }));
     }
   }
 
   cancelDialog(): void {
-    this.dialogRef.close('cancel');
+    this.dialogRef.close();
   }
 
   private checkForSaveSuccess(): void {
@@ -75,7 +76,7 @@ export class AccountSaveModalComponent implements OnInit, OnDestroy {
           accountsActions.editAccountSuccess,
           accountDetailsActions.editAccountSuccess
         ),
-        tap(() => this.dialogRef.close('success'))
+        tap(() => this.dialogRef.close())
       )
       .subscribe();
   }

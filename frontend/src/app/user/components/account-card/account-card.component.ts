@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { Account } from '../../models/account.model';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
 
@@ -16,9 +17,9 @@ export class AccountCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  editAccount(type: string): void {
+  editAccount(): void {
     this.dialog.open(AccountSaveModalComponent, {
-      data: { type, account: this.account }
+      data: { type: OpenType.EDIT, account: this.account }
     });
   }
 

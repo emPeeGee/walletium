@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { mimeTypeValidator } from 'src/app/core/validators/mime-type.validator';
 import { Category } from '../../models/category.model';
 import { RootState } from '../../store';
@@ -18,7 +19,7 @@ import * as categoriesActions from '../../store/categories/categories.actions';
 export class CategorySaveModalComponent implements OnInit {
   isImageInputTouched = false;
   imagePreview: string | undefined;
-  type: string | null = null;
+  type: OpenType | null = null;
   category: Category | null = null;
 
   categoryForm = new FormGroup({
@@ -54,10 +55,10 @@ export class CategorySaveModalComponent implements OnInit {
     const formData = new FormData();
     formData.append('name', this.categoryForm.value.name);
 
-    if (this.type === 'add') {
+    if (this.type === OpenType.ADD) {
       formData.append('categoryImage', this.categoryForm.value.image);
       this.store.dispatch(categoriesActions.createCategory({ category: formData }));
-    } else if (this.type === 'edit') {
+    } else if (this.type === OpenType.EDIT) {
       formData.append('categoryImage', this.categoryForm.value.image || null);
       formData.append('imagePath', this.category!.imagePath);
 
@@ -93,7 +94,7 @@ export class CategorySaveModalComponent implements OnInit {
     this.categoryCreatedSubscription = this.actions$
       .pipe(
         ofType(categoriesActions.createCategorySuccess, categoriesActions.editCategorySuccess),
-        tap(() => this.dialogRef.close('success'))
+        tap(() => this.dialogRef.close())
       )
       .subscribe();
   }

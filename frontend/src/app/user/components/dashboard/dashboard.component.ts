@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { selectUser } from 'src/app/store/authentication/authentication.selectors';
 import { Account } from '../../models/account.model';
 import { RootState } from '../../store';
@@ -34,9 +35,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.fetchAccounts();
   }
 
-  addAccount(type: string): void {
+  addAccount(): void {
     this.dialog.open(AccountSaveModalComponent, {
-      data: { type, account: null }
+      data: { type: OpenType.ADD, account: null }
     });
   }
 
