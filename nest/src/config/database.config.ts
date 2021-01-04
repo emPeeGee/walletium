@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Label } from 'src/modules/labels/labels.entity';
+import { User } from 'src/modules/users/user.entity';
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -8,6 +9,6 @@ export const databaseConfig: TypeOrmModuleOptions = {
   username: 'root',
   password: 'password',
   database: 'WALLETIUM',
-  entities: [Label],
+  entities: [Label, User],
   synchronize: true,
 };

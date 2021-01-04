@@ -6,7 +6,9 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateLabelDto } from './dto/create-label.dto';
 import { UpdateLabelDto } from './dto/update-label.dto';
 import { Label } from './labels.entity';
@@ -16,6 +18,7 @@ import { LabelsService } from './labels.service';
 export class LabelsController {
   constructor(private labelsService: LabelsService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async getAll(): Promise<Label[]> {
     return this.labelsService.findAll();
