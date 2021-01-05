@@ -32,6 +32,7 @@ export class AuthenticationService {
   }
 
   async createToken(user: User) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...cuttedUser } = user;
     console.log(user);
 

@@ -1,8 +1,8 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { AuthGuard } from '@nestjs/passport';
 import { AuthenticationService } from './authentication.service';
+import { LocalAuthGuard } from './passport/local-auth.guard';
 
 @Controller('authentication')
 export class AuthenticationController {
@@ -18,7 +18,7 @@ export class AuthenticationController {
   }
 
   @Post('login')
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(LocalAuthGuard)
   async login(@Request() request: any) {
     return this.authenticationService.createToken(request.user);
   }
