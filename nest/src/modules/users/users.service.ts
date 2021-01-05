@@ -15,8 +15,12 @@ export class UsersService {
     private encryptionService: EncryptionService,
   ) {}
 
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string): Promise<User> {
     return await this.repository.findOne({ email });
+  }
+
+  async findById(id: string): Promise<User> {
+    return await this.repository.findOne({ id });
   }
 
   async create(createUser: CreateUserDto): Promise<User | any> {

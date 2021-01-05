@@ -30,9 +30,6 @@ export class LabelsService {
   async delete(id: string): Promise<Label> {
     const label = await this.repository.findOne(id);
     const deletedLabel = await this.repository.remove(label);
-    console.log(label);
-    console.log(deletedLabel);
-
     return deletedLabel;
   }
 }

@@ -2,9 +2,11 @@ import {
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Account } from '../accounts/account.entity';
 import { Role } from '../roles/role.entity';
 
 @Entity()
@@ -32,7 +34,10 @@ export class User {
   @Column()
   phoneNumber: string;
 
-  @OneToOne((type) => Role, (role) => role.name, { eager: true })
+  @OneToOne(() => Role, { eager: true })
   @JoinColumn()
   role: Role;
+
+  @OneToMany(() => Account, (account: Account) => account.user)
+  accounts: Account[];
 }

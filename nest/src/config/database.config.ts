@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Account } from 'src/modules/accounts/account.entity';
 import { Label } from 'src/modules/labels/labels.entity';
 import { Role } from 'src/modules/roles/role.entity';
 import { User } from 'src/modules/users/user.entity';
@@ -10,6 +11,6 @@ export const databaseConfig: TypeOrmModuleOptions = {
   username: 'root',
   password: 'password',
   database: 'WALLETIUM',
-  entities: [Label, User, Role],
+  entities: [Label, User, Role, Account],
   synchronize: true,
 };

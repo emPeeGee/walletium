@@ -8,6 +8,7 @@ import { LabelsModule } from './modules/labels/labels.module';
 import { UsersModule } from './modules/users/users.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { SeedersModule } from './seeders/seeders.module';
+import { AccountsModule } from './modules/accounts/accounts.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { SeedersModule } from './seeders/seeders.module';
     UsersModule,
     SeedersModule,
     RolesModule,
+    AccountsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
