@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MulterConfigService } from 'src/config/multer.config';
 import { Repository } from 'typeorm';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -12,21 +13,24 @@ export class CategoriesService {
     @InjectRepository(Category) private repository: Repository<Category>,
   ) {}
 
-  findAll(): Promise<Category[]> {
-    throw new Error('Method not implemented.');
+  async findAll(): Promise<Category[]> {
+    return await this.repository.find();
   }
 
-  findOne(id: string): Promise<Category> {
-    throw new Error('Method not implemented.');
+  async findOne(id: string): Promise<Category> {
+    return await this.repository.findOne({ id });
   }
 
-  create(createCategory: CreateCategoryDto): Promise<Category> {
+  async create(
+    createCategory: CreateCategoryDto,
+    imagePath: string,
+  ): Promise<Category> {
     let category: ICategory = {
       name: createCategory.name,
-      imagePath: '',
+      imagePath: imagePath,
     };
 
-    return null;
+    return await this.repository.save(category);
   }
 
   update(updateCategory: UpdateCategoryDto): Promise<Category> {

@@ -16,11 +16,9 @@ import { MulterConfigService } from './config/multer.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(databaseConfig),
     ConfigModule,
-    MulterModule.registerAsync({
-      useClass: MulterConfigService,
-    }),
+    TypeOrmModule.forRoot(databaseConfig),
+    MulterModule,
     AuthenticationModule,
     LabelsModule,
     UsersModule,

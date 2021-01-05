@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -10,6 +11,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { MulterConfigService } from 'src/config/multer.config';
 import { CategoriesService } from './categories.service';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -30,14 +32,14 @@ export class CategoriesController {
   }
 
   @Post('create')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(
+    FileInterceptor('categoryImage', MulterConfigService.createMulterOptions()),
+  )
   create(
     @Body() createCategory: CreateCategoryDto,
     @UploadedFile() file,
   ): Promise<Category> {
-    console.log(file);
-
-    return this.categoriesService.create(createCategory);
+    return this.categoriesService.create(createCategory, file.path);
   }
 
   @Put('update/:id')
