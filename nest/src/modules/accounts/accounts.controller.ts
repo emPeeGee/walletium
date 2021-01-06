@@ -3,7 +3,7 @@ import { Account } from './account.entity';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
-@Controller('accounts')
+@Controller('api/accounts')
 export class AccountsController {
   constructor(private accountsService: AccountsService) {}
 

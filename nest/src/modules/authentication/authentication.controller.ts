@@ -4,7 +4,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { AuthenticationService } from './authentication.service';
 import { LocalAuthGuard } from './passport/local-auth.guard';
 
-@Controller('authentication')
+@Controller('api/authentication')
 export class AuthenticationController {
   constructor(private usersService: UsersService, private authenticationService: AuthenticationService) {}
 

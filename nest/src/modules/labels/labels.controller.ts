@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from '../roles/roles.data';
 import { Roles } from '../roles/roles.decorator';
@@ -17,7 +8,7 @@ import { UpdateLabelDto } from './dto/update-label.dto';
 import { Label } from './labels.entity';
 import { LabelsService } from './labels.service';
 
-@Controller('labels')
+@Controller('api/labels')
 export class LabelsController {
   constructor(private labelsService: LabelsService) {}
 
@@ -41,10 +32,7 @@ export class LabelsController {
   }
 
   @Put('update/:id')
-  update(
-    @Param('id') id: string,
-    @Body() updateLabel: UpdateLabelDto,
-  ): Promise<Label> {
+  update(@Param('id') id: string, @Body() updateLabel: UpdateLabelDto): Promise<Label> {
     return this.labelsService.update(id, updateLabel);
   }
 

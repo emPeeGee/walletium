@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -10,7 +9,6 @@ import {
   UploadedFile,
   UseInterceptors,
   Request,
-  Req,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterConfigService } from 'src/config/multer.config';
@@ -19,7 +17,7 @@ import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
-@Controller('categories')
+@Controller('api/categories')
 export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
 
