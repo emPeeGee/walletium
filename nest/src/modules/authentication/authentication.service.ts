@@ -19,10 +19,7 @@ export class AuthenticationService {
       throw new Error('Invalid credentials');
     }
 
-    const matchPasswords = await this.encryptionService.compare(
-      password,
-      user.password,
-    );
+    const matchPasswords = await this.encryptionService.compare(password, user.password);
 
     if (user && matchPasswords) {
       return user;

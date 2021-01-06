@@ -34,28 +34,16 @@ export class CategoriesController {
   }
 
   @Post('create')
-  @UseInterceptors(
-    FileInterceptor('categoryImage', MulterConfigService.createMulterOptions()),
-  )
-  create(
-    @Body() createCategory: CreateCategoryDto,
-    @UploadedFile() file,
-    @Request() request: any,
-  ): Promise<Category> {
+  @UseInterceptors(FileInterceptor('categoryImage', MulterConfigService.createMulterOptions()))
+  create(@Body() createCategory: CreateCategoryDto, @UploadedFile() file, @Request() request: any): Promise<Category> {
     const host = request.headers.host;
 
     return this.categoriesService.create(createCategory, file, host);
   }
 
   @Put('update/')
-  @UseInterceptors(
-    FileInterceptor('categoryImage', MulterConfigService.createMulterOptions()),
-  )
-  update(
-    @Body() updateCategory: UpdateCategoryDto,
-    @UploadedFile() file,
-    @Request() request: any,
-  ): Promise<Category> {
+  @UseInterceptors(FileInterceptor('categoryImage', MulterConfigService.createMulterOptions()))
+  update(@Body() updateCategory: UpdateCategoryDto, @UploadedFile() file, @Request() request: any): Promise<Category> {
     const host = request.headers.host;
 
     return this.categoriesService.update(updateCategory, file, host);

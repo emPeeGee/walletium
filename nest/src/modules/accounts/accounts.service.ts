@@ -9,10 +9,7 @@ import { IAccount } from './interfaces/account.interface';
 
 @Injectable()
 export class AccountsService {
-  constructor(
-    @InjectRepository(Account) private repository: Repository<Account>,
-    private usersService: UsersService,
-  ) {}
+  constructor(@InjectRepository(Account) private repository: Repository<Account>, private usersService: UsersService) {}
 
   async findAllByUserId(userId: string): Promise<Account[]> {
     const user = await this.usersService.findById(userId);

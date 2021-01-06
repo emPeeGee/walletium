@@ -11,9 +11,7 @@ import { promisify } from 'util';
 const unlinkAsync = promisify(unlink);
 @Injectable()
 export class CategoriesService {
-  constructor(
-    @InjectRepository(Category) private repository: Repository<Category>,
-  ) {}
+  constructor(@InjectRepository(Category) private repository: Repository<Category>) {}
 
   async findAll(): Promise<Category[]> {
     return await this.repository.find();
@@ -23,11 +21,7 @@ export class CategoriesService {
     return await this.repository.findOne({ id });
   }
 
-  async create(
-    createCategory: CreateCategoryDto,
-    file: any,
-    host: string,
-  ): Promise<Category> {
+  async create(createCategory: CreateCategoryDto, file: any, host: string): Promise<Category> {
     const category: ICategory = {
       name: createCategory.name,
       imagePath: `${host}/images/categories/${file.filename}`,
@@ -42,11 +36,7 @@ export class CategoriesService {
     return await this.repository.save(category);
   }
 
-  async update(
-    updateCategory: UpdateCategoryDto,
-    file: any,
-    host: string,
-  ): Promise<Category> {
+  async update(updateCategory: UpdateCategoryDto, file: any, host: string): Promise<Category> {
     let oldImagePath = '';
     let imagePath = updateCategory.imagePath;
     if (file) {

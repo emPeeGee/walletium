@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { Account } from './account.entity';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto } from './dto/create-account.dto';
@@ -40,12 +32,3 @@ export class AccountsController {
     return await this.accountsService.delete(accountId);
   }
 }
-// router.post('/create', verifyToken, accountController.create);
-
-// router.get('/getAllByUser/:userId', verifyToken, accountController.getAllByUser);
-// router.get('/getOne/:accountId', verifyToken, accountController.getOne);
-
-// router.delete('/deleteOne/:accountId', verifyToken, accountController.deleteOne);
-// router.delete('/deleteAllByUser/:userId', verifyToken, accountController.deleteAllByUser);
-
-// router.put('/update/:userId/:accountId', verifyToken, accountController.update);

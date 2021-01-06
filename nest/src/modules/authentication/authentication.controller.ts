@@ -6,10 +6,7 @@ import { LocalAuthGuard } from './passport/local-auth.guard';
 
 @Controller('authentication')
 export class AuthenticationController {
-  constructor(
-    private usersService: UsersService,
-    private authenticationService: AuthenticationService,
-  ) {}
+  constructor(private usersService: UsersService, private authenticationService: AuthenticationService) {}
 
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {

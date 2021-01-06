@@ -21,12 +21,7 @@ import { LocalStrategy } from './passport/local.strategy';
     UsersModule,
     CommonModule,
   ],
-  providers: [
-    AuthenticationService,
-    EncryptionService,
-    LocalStrategy,
-    JwtStrategy,
-  ],
+  providers: [AuthenticationService, EncryptionService, LocalStrategy, JwtStrategy],
   controllers: [AuthenticationController],
   exports: [JwtModule],
 })
