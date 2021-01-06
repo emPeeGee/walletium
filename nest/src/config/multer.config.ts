@@ -15,9 +15,12 @@ export class MulterConfigService {
           const isValid = MIME_TYPE_MAP[file.mimetype];
 
           if (isValid) {
-            callback(null, './images/categories');
+            callback(null, './public/images/categories');
           } else {
-            callback(new Error('Invalid MIME TYPE'), './images/categories');
+            callback(
+              new Error('Invalid MIME TYPE'),
+              './public/images/categories',
+            );
           }
         },
         filename: (req, file, callback) => {

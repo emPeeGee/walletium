@@ -7,6 +7,6 @@ export class UpdateCategoryDto {
   @IsString()
   name: string;
 
-  @IsHexColor()
-  color: string;
+  @IsString()
+  imagePath: string;
 }

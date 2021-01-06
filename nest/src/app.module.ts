@@ -12,12 +12,17 @@ import { AccountsModule } from './modules/accounts/accounts.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { ConfigModule } from './config/config.module';
-import { MulterConfigService } from './config/multer.config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
     ConfigModule,
     TypeOrmModule.forRoot(databaseConfig),
+    ServeStaticModule.forRoot({
+      serveRoot: '/images/',
+      rootPath: join(__dirname, '..', 'public', 'images'),
+    }),
     MulterModule,
     AuthenticationModule,
     LabelsModule,

@@ -9,6 +9,8 @@ import {
   Put,
   UploadedFile,
   UseInterceptors,
+  Request,
+  Req,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterConfigService } from 'src/config/multer.config';
@@ -38,16 +40,25 @@ export class CategoriesController {
   create(
     @Body() createCategory: CreateCategoryDto,
     @UploadedFile() file,
+    @Request() request: any,
   ): Promise<Category> {
-    return this.categoriesService.create(createCategory, file.path);
+    const host = request.headers.host;
+
+    return this.categoriesService.create(createCategory, file, host);
   }
 
-  @Put('update/:id')
+  @Put('update/')
+  @UseInterceptors(
+    FileInterceptor('categoryImage', MulterConfigService.createMulterOptions()),
+  )
   update(
-    @Param('id') id: string,
     @Body() updateCategory: UpdateCategoryDto,
+    @UploadedFile() file,
+    @Request() request: any,
   ): Promise<Category> {
-    return this.categoriesService.update(updateCategory);
+    const host = request.headers.host;
+
+    return this.categoriesService.update(updateCategory, file, host);
   }
 
   @Delete('delete/:id')
