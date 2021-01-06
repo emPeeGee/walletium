@@ -23,7 +23,9 @@ export class AccountDetailsEffects {
       ofType(accountDetailsActions.loadAccount),
       switchMap(action =>
         this.accountsService.get(action.accountId, action.userId).pipe(
-          map(result => accountDetailsActions.loadAccountSuccess({ message: result.message, account: result.data })),
+          map(result =>
+            accountDetailsActions.loadAccountSuccess({ message: 'Account is fetched with success', account: result })
+          ),
           catchError(error => of(accountDetailsActions.loadAccountFail({ message: error.message })))
         )
       )
@@ -39,7 +41,7 @@ export class AccountDetailsEffects {
             accountDetailsActions.editAccountSuccess({
               message: result.message,
               userId: action.account.userId,
-              accountId: action.account._id
+              accountId: action.account.id
             })
           ),
           catchError(error => of(accountDetailsActions.editAccountFail({ message: error.error.message })))

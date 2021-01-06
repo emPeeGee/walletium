@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EncryptionService } from 'src/common/encryption.service';
 import { Repository } from 'typeorm';
@@ -24,34 +24,29 @@ export class UsersService {
   }
 
   async create(createUser: CreateUserDto): Promise<User | any> {
-    console.log(createUser);
-
-    const user = await this.repository.find({ email: createUser.email });
-    if (!user) {
-      return {
-        message: 'Such user already exists!',
-      };
+    const user = await this.repository.findOne({ email: createUser.email });
+    if (user) {
+      throw new BadRequestException('Such user already exists');
     }
 
-    createUser.password = await this.encryptionService.hash(
-      createUser.password,
-    );
+    createUser.password = await this.encryptionService.hash(createUser.password);
 
     const roleName = createUser.role;
 
-    const role = roleName
-      ? await this.rolesService.findByName(roleName)
-      : await this.rolesService.getUserRole();
+    const role = roleName ? await this.rolesService.findByName(roleName) : await this.rolesService.getUserRole();
 
     const userToSave: IUser = {
       ...createUser,
       role: role,
     };
 
-    const createdUser = await this.repository.save(userToSave);
-    return {
-      message: 'User was registered with success',
-      data: createdUser,
-    };
+    try {
+      const createdUser = await this.repository.save(userToSave);
+      return createdUser;
+    } catch (error) {
+      console.log(error);
+
+      throw new BadRequestException('Unknown error');
+    }
   }
 }

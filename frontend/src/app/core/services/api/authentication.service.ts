@@ -18,9 +18,7 @@ export class AuthenticationService {
   }
 
   userLogin(payload: Credentials): Observable<Auth> {
-    return this.http
-      .post<Auth>(`${environment.baseURL}authentication/signin`, payload)
-      .pipe(tap(res => console.log(res)));
+    return this.http.post<Auth>(`${environment.baseURL}authentication/signin`, payload);
   }
 
   getProtectedData(): Observable<any> {

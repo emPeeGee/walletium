@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   fetchAccounts(): void {
-    this.store.dispatch(accountsActions.loadAllAccounts({ id: this.currentUser._id }));
+    this.store.dispatch(accountsActions.loadAllAccounts({ id: this.currentUser.id }));
   }
 
   ngOnDestroy(): void {

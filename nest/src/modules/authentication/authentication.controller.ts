@@ -8,15 +8,15 @@ import { LocalAuthGuard } from './passport/local-auth.guard';
 export class AuthenticationController {
   constructor(private usersService: UsersService, private authenticationService: AuthenticationService) {}
 
-  @Post('register')
-  async register(@Body() createUserDto: CreateUserDto) {
+  @Post('signup')
+  async signup(@Body() createUserDto: CreateUserDto) {
     const user = await this.usersService.create(createUserDto);
     return user;
   }
 
-  @Post('login')
+  @Post('signin')
   @UseGuards(LocalAuthGuard)
-  async login(@Request() request: any) {
+  async signin(@Request() request: any) {
     return this.authenticationService.createToken(request.user);
   }
 }

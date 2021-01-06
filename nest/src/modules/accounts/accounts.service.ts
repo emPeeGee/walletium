@@ -18,7 +18,15 @@ export class AccountsService {
       throw new BadRequestException('Such user does not exists!');
     }
 
-    return await this.repository.find({ user });
+    try {
+      const userAccounts = await this.repository.find({ user });
+      console.log(userAccounts);
+
+      return userAccounts;
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Unknown error');
+    }
   }
 
   async findOne(accountId: string): Promise<Account> {

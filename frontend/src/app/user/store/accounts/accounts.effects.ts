@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, delay, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/api/accounts.service';
 import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
-import { Account } from '../../models/account.model';
 import * as accountsActions from './accounts.actions';
 
 @Injectable()
@@ -19,20 +18,22 @@ export class AccountsEffects {
     this.actions$.pipe(
       ofType(accountsActions.loadAllAccounts),
       switchMap(action =>
-        this.accountsService.getAllByUser(action.id ?? '').pipe(
+        this.accountsService.getAllByUser(action.id!).pipe(
           map(accounts => {
-            accounts.data = accounts.data.map((account: any) => {
-              const { user, ...acc } = account;
+            accounts = accounts.map((account: any) => {
+              const { user, ...accountWithoutUser } = account;
 
               return {
-                ...acc,
-                userId: account.user
+                ...accountWithoutUser,
+                userId: account.user.id
               };
             });
 
-            return accountsActions.loadAllAccountsSuccess({ accounts: accounts.data });
+            return accountsActions.loadAllAccountsSuccess({ accounts });
           }),
           catchError(error => {
+            console.log(error);
+
             return of(accountsActions.loadAllAccountsFail({ error, message: 'Loading all accounts fail' }));
           })
         )

@@ -36,12 +36,14 @@ export class AuthenticationService {
     return {
       success: true,
       user: cuttedUser,
-      expiresIn: 3600,
-      access_token:
-        'Bearer ' +
-        this.jwtService.sign({
-          user,
-        }),
+      token: {
+        expiresIn: 3600,
+        access_token:
+          'Bearer ' +
+          this.jwtService.sign({
+            user,
+          }),
+      },
     };
   }
 }

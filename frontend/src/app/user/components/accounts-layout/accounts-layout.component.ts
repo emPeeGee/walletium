@@ -59,7 +59,7 @@ export class AccountsLayoutComponent implements OnInit, OnDestroy {
   }
 
   fetchAccounts(): void {
-    this.store.dispatch(accountsActions.loadAllAccounts({ id: this.currentUser._id }));
+    this.store.dispatch(accountsActions.loadAllAccounts({ id: this.currentUser.id }));
   }
 
   applyFilter(value: string): void {
@@ -71,6 +71,6 @@ export class AccountsLayoutComponent implements OnInit, OnDestroy {
   }
 
   selectAccount(account: Account): void {
-    this.router.navigate(['accounts', 'details', account._id, account.userId]);
+    this.router.navigate(['accounts', 'details', account.id, account.userId]);
   }
 }

@@ -24,6 +24,8 @@ export class AccountCardComponent implements OnInit {
   }
 
   selectAccount(): void {
-    this.router.navigate(['accounts', 'details', this.account?._id, this.account?.userId]);
+    console.log(this.account);
+
+    this.router.navigate(['accounts', 'details', this.account?.id, this.account?.userId]);
   }
 }

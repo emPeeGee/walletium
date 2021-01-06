@@ -62,7 +62,7 @@ export class CategorySaveModalComponent implements OnInit {
       formData.append('categoryImage', this.categoryForm.value.image || null);
       formData.append('imagePath', this.category!.imagePath);
 
-      this.store.dispatch(categoriesActions.editCategory({ categoryId: this.category!._id, category: formData }));
+      this.store.dispatch(categoriesActions.editCategory({ categoryId: this.category!.id, category: formData }));
     }
   }
 

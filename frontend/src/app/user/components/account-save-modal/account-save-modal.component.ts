@@ -50,9 +50,9 @@ export class AccountSaveModalComponent implements OnInit, OnDestroy {
 
   saveAccount(): void {
     const account: Account = {
-      _id: this.data?.account?._id,
+      id: this.data?.account?.id,
       ...this.accountForm.value,
-      userId: this.tokenStorageService.getUser()?._id
+      userId: this.tokenStorageService.getUser()?.id
     };
 
     if (this.type === OpenType.ADD) {

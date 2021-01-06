@@ -56,7 +56,7 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
     const confirmDialog = this.dialog.open(ConfirmModalComponent);
     confirmDialog.afterClosed().subscribe(CLOSE_FLAG => {
       if (CLOSE_FLAG === CloseType.CONFIRM) {
-        this.store.dispatch(accountDetailsActions.deleteAccount({ accountId: this.account?._id ?? '' }));
+        this.store.dispatch(accountDetailsActions.deleteAccount({ accountId: this.account?.id ?? '' }));
       }
     });
   }

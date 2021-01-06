@@ -11,7 +11,7 @@ export class AccountsService {
   constructor(private http: HttpClient) {}
 
   getAllByUser(userId: string): Observable<any> {
-    return this.http.get(`${environment.baseURL}accounts/getAllByUser/${userId}`);
+    return this.http.get(`${environment.baseURL}accounts/getByUser/${userId}`);
   }
 
   get(accountId: string, userId: string): Observable<any> {
@@ -23,7 +23,7 @@ export class AccountsService {
   }
 
   update(account: Account): Observable<any> {
-    return this.http.put(`${environment.baseURL}accounts/update/${account.userId}/${account._id}`, account);
+    return this.http.put(`${environment.baseURL}accounts/update`, account);
   }
 
   delete(accountId: string): Observable<any> {

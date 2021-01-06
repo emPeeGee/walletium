@@ -23,6 +23,8 @@ export class Account {
   })
   currency: CurrencyType;
 
-  @ManyToOne(() => User, (user: User) => user.accounts)
+  @ManyToOne(() => User, (user: User) => user.accounts, {
+    eager: true,
+  })
   user: User;
 }
