@@ -13,7 +13,7 @@
       <li>
         <a mat-button routerLink="/accounts" routerLinkActive="mat-accent">Accounts</a>
       </li>
-      <ng-container *ngIf="user.role.name === 'admin'">
+      <ng-container *ngIf="user.role.name === roles.ADMIN">
         <li>
           <a mat-button routerLink="/admin/categories" routerLinkActive="mat-accent">Admin Panel</a>
         </li>

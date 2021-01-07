@@ -27,6 +27,6 @@ export class AccountsService {
   }
 
   delete(accountId: string): Observable<any> {
-    return this.http.delete(`${environment.baseURL}accounts/deleteOne/${accountId}`);
+    return this.http.delete(`${environment.baseURL}accounts/delete/${accountId}`);
   }
 }

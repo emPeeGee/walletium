@@ -9,6 +9,7 @@ import {
   UploadedFile,
   UseInterceptors,
   Request,
+  BadRequestException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterConfigService } from 'src/config/multer.config';
@@ -42,9 +43,12 @@ export class CategoriesController {
   @Put('update/')
   @UseInterceptors(FileInterceptor('categoryImage', MulterConfigService.createMulterOptions()))
   update(@Body() updateCategory: UpdateCategoryDto, @UploadedFile() file, @Request() request: any): Promise<Category> {
-    const host = request.headers.host;
-
-    return this.categoriesService.update(updateCategory, file, host);
+    try {
+      const host = request.headers.host;
+      return this.categoriesService.update(updateCategory, file, host);
+    } catch (error) {
+      throw new BadRequestException('Some error appeared on edit category');
+    }
   }
 
   @Delete('delete/:id')

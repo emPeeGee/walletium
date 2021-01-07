@@ -24,7 +24,7 @@ export class CategoriesService {
   async create(createCategory: CreateCategoryDto, file: any, host: string): Promise<Category> {
     const category: ICategory = {
       name: createCategory.name,
-      imagePath: `${host}/images/categories/${file.filename}`,
+      imagePath: `http://${host}/images/categories/${file.filename}`,
     };
 
     const suchCategory = await this.repository.findOne({ name: category.name });
@@ -41,7 +41,7 @@ export class CategoriesService {
     let imagePath = updateCategory.imagePath;
     if (file) {
       oldImagePath = imagePath.split('/').pop();
-      imagePath = `${host}/images/categories/${file.filename}`;
+      imagePath = `http://${host}/images/categories/${file.filename}`;
     }
 
     const category: Category = {

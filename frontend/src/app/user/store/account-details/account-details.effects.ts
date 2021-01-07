@@ -62,7 +62,7 @@ export class AccountDetailsEffects {
       ofType(accountDetailsActions.deleteAccount),
       switchMap(action =>
         this.accountsService.delete(action.accountId).pipe(
-          map(result => accountDetailsActions.deleteAccountSuccess({ message: result.message })),
+          map(result => accountDetailsActions.deleteAccountSuccess({ message: 'Account was successful deleted' })),
           catchError(error => of(accountDetailsActions.deleteAccountFail({ message: error.message })))
         )
       )
@@ -74,8 +74,8 @@ export class AccountDetailsEffects {
       this.actions$.pipe(
         ofType(accountDetailsActions.deleteAccountSuccess),
         tap(({ message }) => {
-          this.snackBarService.showSimpleMessage(message);
-          this.router.navigate(['accounts']);
+          this.snackBarService.showSnackBarNotification(message);
+          this.navigation.back();
         })
       ),
     { dispatch: false }
@@ -84,10 +84,9 @@ export class AccountDetailsEffects {
   failActions$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(accountDetailsActions.loadAccountFail),
+        ofType(accountDetailsActions.loadAccountFail, accountDetailsActions.deleteAccountFail),
         tap(({ message }) => {
-          this.snackBarService.showSimpleMessage(message);
-          this.navigation.back();
+          this.snackBarService.showSnackBarNotification(message);
         })
       ),
     { dispatch: false }

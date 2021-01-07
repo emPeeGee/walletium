@@ -88,7 +88,7 @@ export class AuthenticationEffects {
       this.actions$.pipe(
         ofType(authenticationActions.signupFail, authenticationActions.loginFail),
         tap(({ message }) => {
-          this.snackBarService.showSimpleMessage(message);
+          this.snackBarService.showSnackBarNotification(message);
         })
       ),
     {

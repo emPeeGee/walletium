@@ -7,11 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SnackBarService {
   constructor(private snackBar: MatSnackBar) {}
 
-  showSimpleMessage(message: string): void {
-    if (message) {
-      this.snackBar.open(message, 'Ok');
-    } else {
-      this.snackBar.open('Something Went Wrong!');
-    }
+  showSnackBarNotification(message: string): void {
+    this.snackBar.open(message ?? 'Something Went Wrong!', 'Ok');
   }
 }

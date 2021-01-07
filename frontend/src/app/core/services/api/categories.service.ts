@@ -10,18 +10,18 @@ export class CategoriesService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get(`${environment.baseURL}categories/getAll`);
+    return this.http.get(`${environment.baseURL}categories/`);
   }
 
   create(formData: FormData): Observable<any> {
     return this.http.post(`${environment.baseURL}categories/create`, formData);
   }
 
-  update(categoryId: string, formData: FormData): Observable<any> {
-    return this.http.put(`${environment.baseURL}categories/update/${categoryId}`, formData);
+  update(formData: FormData): Observable<any> {
+    return this.http.put(`${environment.baseURL}categories/update`, formData);
   }
 
   delete(categoryId: string): Observable<any> {
-    return this.http.delete(`${environment.baseURL}categories/deleteOne/${categoryId}`);
+    return this.http.delete(`${environment.baseURL}categories/delete/${categoryId}`);
   }
 }

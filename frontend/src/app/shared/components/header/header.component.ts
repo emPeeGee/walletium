@@ -5,6 +5,7 @@ import { RootState } from 'src/app/store';
 import { logout } from 'src/app/store/authentication/authentication.actions';
 import { selectUser } from 'src/app/store/authentication/authentication.selectors';
 import { User } from '../../models/user.model';
+import { Roles } from '../../../core/enums/roles.enum';
 
 @Component({
   selector: 'wal-header',
@@ -13,6 +14,7 @@ import { User } from '../../models/user.model';
 })
 export class HeaderComponent implements OnInit {
   isUserAuthenticated$!: Observable<User | null>;
+  roles = Roles;
 
   constructor(private store: Store<RootState>) {}
 

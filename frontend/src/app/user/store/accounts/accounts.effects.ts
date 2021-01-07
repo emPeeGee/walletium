@@ -78,7 +78,7 @@ export class AccountsEffects {
     () =>
       this.actions$.pipe(
         ofType(accountsActions.loadAllAccountsFail, accountsActions.createAccountFail, accountsActions.editAccountFail),
-        tap(({ message }) => this.snackBarService.showSimpleMessage(message))
+        tap(({ message }) => this.snackBarService.showSnackBarNotification(message))
       ),
     { dispatch: false }
   );

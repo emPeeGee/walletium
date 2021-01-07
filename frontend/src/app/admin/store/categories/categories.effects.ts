@@ -19,7 +19,7 @@ export class CategoriesEffects {
       ofType(categoriesActions.loadAllCategories),
       switchMap(action =>
         this.categoriesService.getAll().pipe(
-          map(result => categoriesActions.loadAllCategoriesSuccess({ categories: result.data })),
+          map(result => categoriesActions.loadAllCategoriesSuccess({ categories: result })),
           catchError(error => of(categoriesActions.loadAllCategoriesFail({ message: error.error.message })))
         )
       )
@@ -44,7 +44,7 @@ export class CategoriesEffects {
       switchMap(action =>
         this.categoriesService.delete(action.categoryId).pipe(
           map(result => categoriesActions.deleteCategorySuccess({ message: result.message })),
-          catchError(error => of(categoriesActions.deleteCategoryFail({ message: error.error.message })))
+          catchError(error => of(categoriesActions.deleteCategoryFail({ message: error.message })))
         )
       )
     )
@@ -54,9 +54,12 @@ export class CategoriesEffects {
     this.actions$.pipe(
       ofType(categoriesActions.editCategory),
       switchMap(action =>
-        this.categoriesService.update(action.categoryId, action.category).pipe(
+        this.categoriesService.update(action.category).pipe(
           map(result => categoriesActions.editCategorySuccess({ message: result.message })),
-          catchError(error => of(categoriesActions.editCategoryFail({ message: error.error.message })))
+          catchError(error => {
+            console.log(error);
+            return of(categoriesActions.editCategoryFail({ message: error.error.message }));
+          })
         )
       )
     )
@@ -82,7 +85,7 @@ export class CategoriesEffects {
           categoriesActions.deleteCategoryFail,
           categoriesActions.editCategoryFail
         ),
-        tap(({ message }) => this.snackBarService.showSimpleMessage(message))
+        tap(({ message }) => this.snackBarService.showSnackBarNotification(message))
       ),
     { dispatch: false }
   );

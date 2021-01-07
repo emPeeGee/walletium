@@ -11,6 +11,7 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Roles } from 'src/app/core/enums/roles.enum';
 import { TokenStorageService } from '../../core/services/others/token-storage.service';
 
 @Injectable({
@@ -42,7 +43,7 @@ export class AuthenticationAdminGuard implements CanActivate, CanActivateChild, 
 
   checkLogin(): boolean {
     const user = this.tokenStorageService.getUser();
-    const isAdmin = user?.role.name.includes('admin') || false;
+    const isAdmin = user?.role.name.includes(Roles.ADMIN) || false;
 
     if (user === null) {
       this.router.navigate(['/guest', 'login']);
