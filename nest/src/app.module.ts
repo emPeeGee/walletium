@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -14,6 +14,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { ConfigModule } from './config/config.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { HttpLoggerMiddleware } from './common/middleware/http-logger.middleware';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -31,8 +33,13 @@ import { join } from 'path';
     RolesModule,
     AccountsModule,
     CategoriesModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(HttpLoggerMiddleware).forRoutes('*');
+  }
+}

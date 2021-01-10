@@ -20,7 +20,6 @@ export class AccountsService {
 
     try {
       const userAccounts = await this.repository.find({ user });
-      console.log(userAccounts);
 
       return userAccounts;
     } catch (error) {
