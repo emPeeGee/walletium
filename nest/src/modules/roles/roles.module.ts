@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Role } from './role.entity';
-import { RolesGuard } from './roles.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { RolesService } from './roles.service';
 
 @Module({

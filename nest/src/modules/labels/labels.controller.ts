@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from '../roles/roles.data';
-import { Roles } from '../roles/roles.decorator';
-import { RolesGuard } from '../roles/roles.guard';
+import { Roles } from '../../common/decorators/metadata/roles.decorator';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { CreateLabelDto } from './dto/create-label.dto';
 import { UpdateLabelDto } from './dto/update-label.dto';
 import { Label } from './labels.entity';
