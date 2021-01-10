@@ -10,9 +10,14 @@ import {
   UseInterceptors,
   Request,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterConfigService } from 'src/config/multer.config';
+import { Role } from '../roles/roles.data';
+import { Roles } from '../roles/roles.decorator';
+import { RolesGuard } from '../roles/roles.guard';
 import { CategoriesService } from './categories.service';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -33,6 +38,8 @@ export class CategoriesController {
   }
 
   @Post('create')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   @UseInterceptors(FileInterceptor('categoryImage', MulterConfigService.createMulterOptions()))
   create(@Body() createCategory: CreateCategoryDto, @UploadedFile() file, @Request() request: any): Promise<Category> {
     const host = request.headers.host;
@@ -40,18 +47,18 @@ export class CategoriesController {
     return this.categoriesService.create(createCategory, file, host);
   }
 
-  @Put('update/')
+  @Put('update')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   @UseInterceptors(FileInterceptor('categoryImage', MulterConfigService.createMulterOptions()))
   update(@Body() updateCategory: UpdateCategoryDto, @UploadedFile() file, @Request() request: any): Promise<Category> {
-    try {
-      const host = request.headers.host;
-      return this.categoriesService.update(updateCategory, file, host);
-    } catch (error) {
-      throw new BadRequestException('Some error appeared on edit category');
-    }
+    const host = request.headers.host;
+    return this.categoriesService.update(updateCategory, file, host);
   }
 
   @Delete('delete/:id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   delete(@Param('id') id: string): Promise<Category> {
     return this.categoriesService.delete(id);
   }

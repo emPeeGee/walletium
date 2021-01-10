@@ -44,7 +44,11 @@ export class CategoriesEffects {
       switchMap(action =>
         this.categoriesService.delete(action.categoryId).pipe(
           map(result => categoriesActions.deleteCategorySuccess({ message: result.message })),
-          catchError(error => of(categoriesActions.deleteCategoryFail({ message: error.message })))
+          catchError(error => {
+            console.log(error);
+
+            return of(categoriesActions.deleteCategoryFail({ message: error.error.message }));
+          })
         )
       )
     )
