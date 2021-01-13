@@ -7,19 +7,19 @@ import { AuthenticationAdminGuard } from './shared/guards/authentication-admin.g
 const routes: Routes = [
   {
     path: 'guest',
-    loadChildren: () => import('./guest/guest.module').then(m => m.GuestModule)
+    loadChildren: () => import('./modules/guest/guest.module').then(m => m.GuestModule)
   },
   {
     path: 'admin',
     canActivate: [AuthenticationAdminGuard],
     canLoad: [AuthenticationAdminGuard],
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
   },
   {
     path: '',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
   },
   {
     path: '**',

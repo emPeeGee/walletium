@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DeleteResponse } from 'src/app/shared/models/delete-response.model';
-import { Account, AccountWithUser } from 'src/app/user/models/account.model';
+import { Account, AccountWithUser } from 'src/app/modules/user/models/account.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/admin/models/category.model';
+import { Category } from 'src/app/modules/admin/models/category.model';
 import { DeleteResponse } from 'src/app/shared/models/delete-response.model';
 import { environment } from 'src/environments/environment';
 
