@@ -24,6 +24,6 @@ export class AccountCardComponent {
   }
 
   selectAccount(): void {
-    void this.router.navigate(['accounts', 'details', this.account?.id, this.account?.userId]);
+    void this.router.navigate(['accounts', 'details', this.account?.id]);
   }
 }

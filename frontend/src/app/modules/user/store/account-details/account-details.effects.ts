@@ -58,7 +58,7 @@ export class AccountDetailsEffects {
   editAccountSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(accountDetailsActions.editAccountSuccess),
-      map(action => accountDetailsActions.loadAccount({ userId: action.userId, accountId: action.accountId }))
+      map(action => accountDetailsActions.loadAccount({ accountId: action.accountId }))
     )
   );
 

@@ -41,9 +41,7 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
   readRoute(): void {
     this.route.paramMap.subscribe(params => {
       const accountId = params.get('accountId') ?? '';
-      const userId = params.get('userId') ?? '';
-
-      this.store.dispatch(accountDetailsActions.loadAccount({ accountId, userId }));
+      this.store.dispatch(accountDetailsActions.loadAccount({ accountId }));
     });
   }
 

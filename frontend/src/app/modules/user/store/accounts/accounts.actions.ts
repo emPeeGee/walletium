@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AccountsResult, Account } from '../../models/account.model';
+import { Account } from '../../models/account.model';
 
 export const loadAllAccounts = createAction(
   '[USER -> ACCOUNT API] Load all accounts',
@@ -7,7 +7,7 @@ export const loadAllAccounts = createAction(
 );
 export const loadAllAccountsSuccess = createAction(
   '[USER -> ACCOUNT API] Load all accounts success',
-  props<AccountsResult>()
+  props<{ accounts: Account[] }>()
 );
 export const loadAllAccountsFail = createAction(
   '[USER -> ACCOUNT API] Load all accounts fail',

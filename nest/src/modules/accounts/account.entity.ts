@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { User } from '../users/user.entity';
 
 export type CurrencyType = 'MDL' | 'EUR' | 'USD' | 'RUB' | 'RON';
@@ -22,6 +22,12 @@ export class Account {
     enum: ['MDL', 'EUR', 'USD', 'RUB', 'RON'],
   })
   currency: CurrencyType;
+
+  @CreateDateColumn()
+  createdDate: Date;
+
+  @UpdateDateColumn()
+  updatedDate: Date;
 
   @ManyToOne(() => User, (user: User) => user.accounts, {
     eager: true,

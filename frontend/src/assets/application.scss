@@ -2,12 +2,12 @@
 @import './themes/default.scss';
 
 // 2. Configuration and helpers
-@import './abstracts/variables';
+@import './abstracts/variables', './abstracts/colors';
 
 // 3. Vendors
 
 // 4. Base stuff
-@import './base/base';
+@import './base/base', './base/helpers';
 
 // 5. Layout-related sections
 

@@ -29,8 +29,12 @@
           <p class="account-detail__card-content-info-content-subtitle">{{ account.name }}</p>
         </div>
         <div class="account-detail__card-content-info-content">
-          <p class="account-detail__card-content-info-content-title">Type</p>
-          <p class="account-detail__card-content-info-content-subtitle">Cash</p>
+          <p class="account-detail__card-content-info-content-title">
+            <span class="black">Creation date:</span> {{ account.createdDate | date: 'medium' }}
+          </p>
+          <p class="account-detail__card-content-info-content-title">
+            <span class="black">Last update date:</span> {{ account.updatedDate | date: 'medium' }}
+          </p>
         </div>
       </div>
 

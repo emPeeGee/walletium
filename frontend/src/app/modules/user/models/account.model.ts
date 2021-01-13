@@ -6,6 +6,8 @@ export interface Account {
   color: string;
   amount: number;
   currency: string;
+  createdDate: string;
+  updatedDate: string;
   userId: string;
 }
 
@@ -15,9 +17,7 @@ export interface AccountWithUser {
   color: string;
   amount: number;
   currency: string;
+  createdDate: string;
+  updatedDate: string;
   user: User;
-}
-
-export interface AccountsResult {
-  accounts: Account[];
 }

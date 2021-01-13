@@ -12,7 +12,7 @@ const routes: Routes = [
     component: AccountsLayoutComponent
   },
   {
-    path: 'accounts/details/:accountId/:userId',
+    path: 'accounts/details/:accountId',
     component: AccountDetailComponent
   }
 ];

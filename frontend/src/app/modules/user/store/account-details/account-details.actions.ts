@@ -1,10 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Account } from '../../models/account.model';
 
-export const loadAccount = createAction(
-  '[USER -> ACCOUNT API] Load one account',
-  props<{ accountId: string; userId: string }>()
-);
+export const loadAccount = createAction('[USER -> ACCOUNT API] Load one account', props<{ accountId: string }>());
 export const loadAccountSuccess = createAction(
   '[USER -> ACCOUNT API] Load one account success',
   props<{ message: string; account: Account }>()

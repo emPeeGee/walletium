@@ -1,7 +1,7 @@
 <mat-card class="account-card" [style.background-color]="account?.color">
   <mat-card-header>
     <mat-card-title>{{ account?.name }}</mat-card-title>
-    <mat-card-subtitle>Some info</mat-card-subtitle>
+    <mat-card-subtitle>Last update: {{ account?.updatedDate | date: 'medium' }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div class="account-card__content">

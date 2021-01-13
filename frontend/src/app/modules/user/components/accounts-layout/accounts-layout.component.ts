@@ -24,7 +24,7 @@ import { AccountDialog } from '../../models/account-dialog.model';
 export class AccountsLayoutComponent implements OnInit, OnDestroy {
   isPending$!: Observable<boolean>;
 
-  displayedColumns: string[] = ['name', 'currency', 'amount', 'color'];
+  displayedColumns: string[] = ['name', 'currency', 'amount', 'createdDate', 'updatedDate', 'color'];
   dataSource: MatTableDataSource<Account> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -75,6 +75,6 @@ export class AccountsLayoutComponent implements OnInit, OnDestroy {
   }
 
   selectAccount(account: Account): void {
-    void this.router.navigate(['accounts', 'details', account.id, account.userId]);
+    void this.router.navigate(['accounts', 'details', account.id]);
   }
 }
