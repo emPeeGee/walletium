@@ -11,7 +11,7 @@ export const loadAllAccountsSuccess = createAction(
 );
 export const loadAllAccountsFail = createAction(
   '[USER -> ACCOUNT API] Load all accounts fail',
-  props<{ message: string; error: Error }>()
+  props<{ message: string }>()
 );
 
 export const createAccount = createAction('[USER -> ACCOUNT API] Create account', props<{ account: Account }>());
@@ -21,7 +21,7 @@ export const createAccountSuccess = createAction(
 );
 export const createAccountFail = createAction(
   '[USER -> ACCOUNT API] Create account fail',
-  props<{ message: string; error: Error }>()
+  props<{ message: string }>()
 );
 
 export const editAccount = createAction(`[USER -> ACCOUNT API] Edit account`, props<{ account: Account }>());

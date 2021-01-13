@@ -9,8 +9,6 @@ export class TokenStorageService {
   private readonly TOKEN_KEY = 'token';
   private readonly USER_KEY = 'user';
 
-  constructor() {}
-
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
@@ -24,7 +22,7 @@ export class TokenStorageService {
     const unparsedToken = localStorage.getItem(this.TOKEN_KEY);
 
     if (unparsedToken) {
-      return JSON.parse(unparsedToken);
+      return JSON.parse(unparsedToken) as Token;
     }
 
     return null;
@@ -38,7 +36,7 @@ export class TokenStorageService {
     const unparsedUser = localStorage.getItem(this.USER_KEY);
 
     if (unparsedUser) {
-      return JSON.parse(unparsedUser);
+      return JSON.parse(unparsedUser) as User;
     }
 
     return null;

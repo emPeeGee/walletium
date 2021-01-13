@@ -1,4 +1,4 @@
-import { ComponentFactoryResolver, Inject, Injectable, ViewContainerRef, Injector } from '@angular/core';
+import { ComponentFactoryResolver, Injectable, Type, ViewContainerRef } from '@angular/core';
 import { ImageViewerComponent } from 'src/app/shared/components/image-viewer/image-viewer.component';
 
 @Injectable({
@@ -15,14 +15,10 @@ export class ComponentLoaderService {
     this.rootViewContainer = viewContainerRef;
   }
 
-  showImageViewerComponent(component: any, imagePath: string): void {
-    const factory = this.factoryResolver.resolveComponentFactory<ImageViewerComponent>(component);
-    const componentRef = this.rootViewContainer?.createComponent<ImageViewerComponent>(factory);
-    componentRef!.instance.imagePath = imagePath;
-
-    // const createdComponent = factory.create(this.rootViewContainer!.injector);
-
-    // this.rootViewContainer?.insert(createdComponent.hostView);
+  showImageViewerComponent(component: Type<ImageViewerComponent>, imagePath: string): void {
+    const factory = this.factoryResolver.resolveComponentFactory(component);
+    const componentRef = this.rootViewContainer!.createComponent(factory);
+    componentRef.instance.imagePath = imagePath;
   }
 
   clearDynamicComponent(): void {

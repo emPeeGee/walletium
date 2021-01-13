@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RootState } from 'src/app/store';
 import { logout } from 'src/app/store/authentication/authentication.actions';
@@ -8,10 +8,8 @@ import { logout } from 'src/app/store/authentication/authentication.actions';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent {
   constructor(private store: Store<RootState>) {}
-
-  ngOnInit(): void {}
 
   logout(): void {
     this.store.dispatch(logout());

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
@@ -46,7 +48,7 @@ export class AuthenticationAdminGuard implements CanActivate, CanActivateChild, 
     const isAdmin = user?.role.name.includes(Roles.ADMIN) || false;
 
     if (user === null) {
-      this.router.navigate(['/guest', 'login']);
+      void this.router.navigate(['/guest', 'login']);
     }
 
     return isAdmin;

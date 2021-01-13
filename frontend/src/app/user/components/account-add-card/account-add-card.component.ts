@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
+import { AccountDialog } from '../../models/account-dialog.model';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
 
 @Component({
@@ -8,14 +9,13 @@ import { AccountSaveModalComponent } from '../account-save-modal/account-save-mo
   templateUrl: './account-add-card.component.html',
   styleUrls: ['./account-add-card.component.scss']
 })
-export class AccountAddCardComponent implements OnInit {
+export class AccountAddCardComponent {
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {}
-
   addAccount(): void {
+    const accountDialog: AccountDialog = { type: OpenType.ADD, account: null };
     this.dialog.open(AccountSaveModalComponent, {
-      data: { type: OpenType.ADD, account: null }
+      data: accountDialog
     });
   }
 }

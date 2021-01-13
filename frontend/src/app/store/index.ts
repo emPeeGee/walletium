@@ -6,7 +6,7 @@ export interface RootState {
   authentication: fromAuthentication.AuthenticationState;
 }
 
-export const effects: any[] = [AuthenticationEffects];
+export const effects = [AuthenticationEffects];
 
 export const reducers: ActionReducerMap<RootState> = {
   authentication: fromAuthentication.reducer

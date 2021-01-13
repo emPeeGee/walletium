@@ -1,3 +1,5 @@
+import { Role } from './role.model';
+
 export interface User {
   id: string;
   username: string;
@@ -5,5 +7,5 @@ export interface User {
   phoneNumber: string;
   created: Date;
   updated: Date;
-  role: any;
+  role: Role;
 }

@@ -4,7 +4,9 @@ import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/api/accounts.service';
 import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
+import { NestError } from 'src/app/shared/models/nest-error.model';
 import * as accountsActions from './accounts.actions';
+import { Account, AccountWithUser } from '../../models/account.model';
 
 @Injectable()
 export class AccountsEffects {
@@ -19,8 +21,9 @@ export class AccountsEffects {
       ofType(accountsActions.loadAllAccounts),
       switchMap(action =>
         this.accountsService.getAllByUser(action.id!).pipe(
-          map(accounts => {
-            accounts = accounts.map((account: any) => {
+          map(accountWithUser => {
+            const accounts: Account[] = accountWithUser.map((account: AccountWithUser) => {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               const { user, ...accountWithoutUser } = account;
 
               return {
@@ -31,10 +34,8 @@ export class AccountsEffects {
 
             return accountsActions.loadAllAccountsSuccess({ accounts });
           }),
-          catchError(error => {
-            console.log(error);
-
-            return of(accountsActions.loadAllAccountsFail({ error, message: 'Loading all accounts fail' }));
+          catchError(({ error }: { error: NestError }) => {
+            return of(accountsActions.loadAllAccountsFail({ message: error.message }));
           })
         )
       )
@@ -46,10 +47,15 @@ export class AccountsEffects {
       ofType(accountsActions.createAccount),
       exhaustMap(action => {
         return this.accountsService.create(action.account).pipe(
-          map(result =>
-            accountsActions.createAccountSuccess({ message: result.message, userId: action.account.userId })
+          map(() =>
+            accountsActions.createAccountSuccess({
+              message: 'Account was created with success',
+              userId: action.account.userId
+            })
           ),
-          catchError(error => of(accountsActions.createAccountFail({ error, message: error.error.message })))
+          catchError(({ error }: { error: NestError }) =>
+            of(accountsActions.createAccountFail({ message: error.message }))
+          )
         );
       })
     )
@@ -60,8 +66,15 @@ export class AccountsEffects {
       ofType(accountsActions.editAccount),
       exhaustMap(action =>
         this.accountsService.update(action.account).pipe(
-          map(result => accountsActions.editAccountSuccess({ message: result.message, userId: action.account.userId })),
-          catchError(error => of(accountsActions.editAccountFail({ message: error.error.message })))
+          map(() =>
+            accountsActions.editAccountSuccess({
+              message: 'Account was updated with success',
+              userId: action.account.userId
+            })
+          ),
+          catchError(({ error }: { error: NestError }) =>
+            of(accountsActions.editAccountFail({ message: error.message }))
+          )
         )
       )
     )

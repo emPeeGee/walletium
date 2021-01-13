@@ -11,6 +11,7 @@ import * as accountsActions from '../../store/accounts/accounts.actions';
 import { tap } from 'rxjs/operators';
 import { TokenStorageService } from 'src/app/core/services/others/token-storage.service';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
+import { AccountDialog } from '../../models/account-dialog.model';
 
 @Component({
   selector: 'wal-account-save-modal',
@@ -28,7 +29,7 @@ export class AccountSaveModalComponent implements OnInit, OnDestroy {
   type: OpenType | null = null;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
+    @Inject(MAT_DIALOG_DATA) private data: AccountDialog,
     private dialogRef: MatDialogRef<AccountSaveModalComponent>,
     private store: Store<RootState>,
     private tokenStorageService: TokenStorageService,
@@ -49,6 +50,7 @@ export class AccountSaveModalComponent implements OnInit, OnDestroy {
   }
 
   saveAccount(): void {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const account: Account = {
       id: this.data?.account?.id,
       ...this.accountForm.value,

@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { CloseType } from 'src/app/core/enums/close-type.enum';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
+import { AccountDialog } from '../../models/account-dialog.model';
 import { Account } from '../../models/account.model';
 import { RootState } from '../../store';
 import * as accountDetailsActions from '../../store/account-details/account-details.actions';
@@ -47,8 +48,9 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
   }
 
   editAccount(): void {
+    const accountDialog: AccountDialog = { type: OpenType.EDIT_DETAILS, account: this.account };
     this.dialog.open(AccountSaveModalComponent, {
-      data: { type: OpenType.EDIT_DETAILS, account: this.account }
+      data: accountDialog
     });
   }
 

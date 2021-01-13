@@ -7,9 +7,15 @@ import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { mimeTypeValidator } from 'src/app/core/validators/mime-type.validator';
+import { CategoryDialog } from '../../models/category-dialog.model';
 import { Category } from '../../models/category.model';
 import { RootState } from '../../store';
 import * as categoriesActions from '../../store/categories/categories.actions';
+
+interface SaveModal {
+  name: string;
+  image: File | string;
+}
 
 @Component({
   selector: 'wal-category-save-modal',
@@ -30,7 +36,7 @@ export class CategorySaveModalComponent implements OnInit {
   categoryCreatedSubscription: Subscription | undefined;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
+    @Inject(MAT_DIALOG_DATA) private data: CategoryDialog,
     private dialogRef: MatDialogRef<CategorySaveModalComponent>,
     private store: Store<RootState>,
     private actions$: Actions
@@ -53,14 +59,16 @@ export class CategorySaveModalComponent implements OnInit {
 
   saveCategory(): void {
     const formData = new FormData();
-    formData.append('name', this.categoryForm.value.name);
+    const saveModal = this.categoryForm.value as SaveModal;
+
+    formData.append('name', saveModal.name);
 
     if (this.type === OpenType.ADD) {
-      formData.append('categoryImage', this.categoryForm.value.image);
+      formData.append('categoryImage', saveModal.image);
       this.store.dispatch(categoriesActions.createCategory({ category: formData }));
     } else if (this.type === OpenType.EDIT) {
       formData.append('id', this.category!.id);
-      formData.append('categoryImage', this.categoryForm.value.image || null);
+      formData.append('categoryImage', saveModal.image);
       formData.append('imagePath', this.category!.imagePath);
 
       this.store.dispatch(categoriesActions.editCategory({ categoryId: this.category!.id, category: formData }));
@@ -72,8 +80,7 @@ export class CategorySaveModalComponent implements OnInit {
   }
 
   onImagePicked(event: Event): void {
-    const file: any = (event.target as HTMLInputElement).files?.item(0);
-    console.log(this.image);
+    const file = (event.target as HTMLInputElement).files?.item(0) as File;
 
     this.categoryForm?.patchValue({ image: file });
     this.categoryForm?.get('image')?.updateValueAndValidity();
@@ -86,7 +93,7 @@ export class CategorySaveModalComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  onFilePickerClick(filePicker: any): void {
+  onFilePickerClick(filePicker: HTMLInputElement): void {
     this.isImageInputTouched = true;
     filePicker.click();
   }

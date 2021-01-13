@@ -13,6 +13,7 @@ import { ComponentLoaderService } from 'src/app/core/services/others/component-l
 import { ImageViewerComponent } from 'src/app/shared/components/image-viewer/image-viewer.component';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { CloseType } from 'src/app/core/enums/close-type.enum';
+import { CategoryDialog } from '../../models/category-dialog.model';
 @Component({
   selector: 'wal-categories-layout',
   templateUrl: './categories-layout.component.html',
@@ -36,14 +37,16 @@ export class CategoriesLayoutComponent implements OnInit {
   }
 
   addCategory(): void {
+    const categoryDialog: CategoryDialog = { type: OpenType.ADD, category: null };
     this.dialog.open(CategorySaveModalComponent, {
-      data: { type: OpenType.ADD }
+      data: categoryDialog
     });
   }
 
   editCategory(category: Category): void {
+    const categoryDialog: CategoryDialog = { type: OpenType.EDIT, category };
     this.dialog.open(CategorySaveModalComponent, {
-      data: { type: OpenType.EDIT, category }
+      data: categoryDialog
     });
   }
 

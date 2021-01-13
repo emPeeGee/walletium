@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Account } from 'src/app/user/models/account.model';
+import { DeleteResponse } from 'src/app/shared/models/delete-response.model';
+import { Account, AccountWithUser } from 'src/app/user/models/account.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,23 +11,23 @@ import { environment } from 'src/environments/environment';
 export class AccountsService {
   constructor(private http: HttpClient) {}
 
-  getAllByUser(userId: string): Observable<any> {
-    return this.http.get(`${environment.baseURL}accounts/getByUser/${userId}`);
+  getAllByUser(userId: string): Observable<AccountWithUser[]> {
+    return this.http.get<AccountWithUser[]>(`${environment.baseURL}accounts/getByUser/${userId}`);
   }
 
-  get(accountId: string, userId: string): Observable<any> {
-    return this.http.get(`${environment.baseURL}accounts/getOne/${accountId}`);
+  get(accountId: string): Observable<Account> {
+    return this.http.get<Account>(`${environment.baseURL}accounts/getOne/${accountId}`);
   }
 
-  create(account: Account): Observable<any> {
-    return this.http.post(`${environment.baseURL}accounts/create`, account);
+  create(account: Account): Observable<Account> {
+    return this.http.post<Account>(`${environment.baseURL}accounts/create`, account);
   }
 
-  update(account: Account): Observable<any> {
-    return this.http.put(`${environment.baseURL}accounts/update`, account);
+  update(account: Account): Observable<Account> {
+    return this.http.put<Account>(`${environment.baseURL}accounts/update`, account);
   }
 
-  delete(accountId: string): Observable<any> {
-    return this.http.delete(`${environment.baseURL}accounts/delete/${accountId}`);
+  delete(accountId: string): Observable<DeleteResponse> {
+    return this.http.delete<DeleteResponse>(`${environment.baseURL}accounts/delete/${accountId}`);
   }
 }

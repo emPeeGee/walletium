@@ -12,8 +12,8 @@ export interface AuthenticationState {
 }
 
 export const initialState: AuthenticationState = {
-  user: JSON.parse(localStorage.getItem('user') || 'null'),
-  token: JSON.parse(localStorage.getItem('token') || 'null'),
+  user: JSON.parse(localStorage.getItem('user') || 'null') as User,
+  token: JSON.parse(localStorage.getItem('token') || 'null') as Token,
   error: '',
   pending: false,
   username: ''

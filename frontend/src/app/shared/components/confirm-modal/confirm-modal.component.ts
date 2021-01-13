@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CloseType } from 'src/app/core/enums/close-type.enum';
 
@@ -7,12 +7,10 @@ import { CloseType } from 'src/app/core/enums/close-type.enum';
   templateUrl: './confirm-modal.component.html',
   styleUrls: ['./confirm-modal.component.scss']
 })
-export class ConfirmModalComponent implements OnInit {
+export class ConfirmModalComponent {
   @Input() title = 'Are you sure you want to do this?';
 
   constructor(private dialogRef: MatDialogRef<ConfirmModalComponent>) {}
-
-  ngOnInit(): void {}
 
   onConfirm(): void {
     this.dialogRef.close(CloseType.CONFIRM);

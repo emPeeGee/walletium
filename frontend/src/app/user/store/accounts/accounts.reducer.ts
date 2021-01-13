@@ -58,6 +58,6 @@ const accountsReducer = createReducer(
   }))
 );
 
-export function reducer(state: AccountsState | undefined, action: Action) {
+export function reducer(state: AccountsState | undefined, action: Action): AccountsState {
   return accountsReducer(state, action);
 }

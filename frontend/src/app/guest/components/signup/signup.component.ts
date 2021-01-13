@@ -7,6 +7,7 @@ import { RootState } from 'src/app/store';
 import { matchPasswords } from 'src/app/shared/utils/validators.util';
 import { signup } from 'src/app/store/authentication/authentication.actions';
 import { selectAuthPending } from 'src/app/store/authentication/authentication.selectors';
+import { Signup } from 'src/app/shared/models/signup.model';
 
 @Component({
   selector: 'wal-signup',
@@ -34,7 +35,7 @@ export class SignupComponent implements OnInit {
   }
 
   createUser(): void {
-    this.store.dispatch(signup({ payload: this.signupForm.value }));
+    this.store.dispatch(signup({ payload: this.signupForm.value as Signup }));
   }
 
   get username(): AbstractControl | null {

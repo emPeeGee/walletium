@@ -39,7 +39,9 @@ module.exports = {
         'import/no-unresolved': 'off',
         'import/prefer-default-export': 'off',
         'class-methods-use-this': 'off',
-        'lines-between-class-members': 'off'
+        'lines-between-class-members': 'off',
+        '@typescript-eslint/unbound-method': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off'
       }
     },
     {

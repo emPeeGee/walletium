@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { CategoriesService } from 'src/app/core/services/api/categories.service';
 import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
+import { NestError } from 'src/app/shared/models/nest-error.model';
 import * as categoriesActions from './categories.actions';
 
 @Injectable()
@@ -17,10 +18,12 @@ export class CategoriesEffects {
   loadAllCategories$ = createEffect(() =>
     this.actions$.pipe(
       ofType(categoriesActions.loadAllCategories),
-      switchMap(action =>
+      switchMap(() =>
         this.categoriesService.getAll().pipe(
-          map(result => categoriesActions.loadAllCategoriesSuccess({ categories: result })),
-          catchError(error => of(categoriesActions.loadAllCategoriesFail({ message: error.error.message })))
+          map(categories => categoriesActions.loadAllCategoriesSuccess({ categories })),
+          catchError(({ error }: { error: NestError }) =>
+            of(categoriesActions.loadAllCategoriesFail({ message: error.message }))
+          )
         )
       )
     )
@@ -31,8 +34,10 @@ export class CategoriesEffects {
       ofType(categoriesActions.createCategory),
       switchMap(action =>
         this.categoriesService.create(action.category).pipe(
-          map(result => categoriesActions.createCategorySuccess({ message: result.message })),
-          catchError(error => of(categoriesActions.createCategoryFail({ message: error.error.message })))
+          map(() => categoriesActions.createCategorySuccess({ message: 'Category created with success' })),
+          catchError(({ error }: { error: NestError }) => {
+            return of(categoriesActions.createCategoryFail({ message: error.message }));
+          })
         )
       )
     )
@@ -43,11 +48,9 @@ export class CategoriesEffects {
       ofType(categoriesActions.deleteCategory),
       switchMap(action =>
         this.categoriesService.delete(action.categoryId).pipe(
-          map(result => categoriesActions.deleteCategorySuccess({ message: result.message })),
-          catchError(error => {
-            console.log(error);
-
-            return of(categoriesActions.deleteCategoryFail({ message: error.error.message }));
+          map(() => categoriesActions.deleteCategorySuccess({ message: 'Category deleted with success' })),
+          catchError(({ error }: { error: NestError }) => {
+            return of(categoriesActions.deleteCategoryFail({ message: error.message }));
           })
         )
       )
@@ -59,10 +62,9 @@ export class CategoriesEffects {
       ofType(categoriesActions.editCategory),
       switchMap(action =>
         this.categoriesService.update(action.category).pipe(
-          map(result => categoriesActions.editCategorySuccess({ message: result.message })),
-          catchError(error => {
-            console.log(error);
-            return of(categoriesActions.editCategoryFail({ message: error.error.message }));
+          map(() => categoriesActions.editCategorySuccess({ message: 'Category edited with success' })),
+          catchError(({ error }: { error: NestError }) => {
+            return of(categoriesActions.editCategoryFail({ message: error.message }));
           })
         )
       )
@@ -76,7 +78,7 @@ export class CategoriesEffects {
         categoriesActions.deleteCategorySuccess,
         categoriesActions.editCategorySuccess
       ),
-      map(action => categoriesActions.loadAllCategories())
+      map(() => categoriesActions.loadAllCategories())
     )
   );
 

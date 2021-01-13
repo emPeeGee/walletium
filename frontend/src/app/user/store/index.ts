@@ -20,4 +20,4 @@ export const reducers: ActionReducerMap<UserState> = {
   accountDetails: fromAccountDetails.reducer
 };
 
-export const effects: any[] = [AccountsEffects, AccountDetailsEffects];
+export const effects = [AccountsEffects, AccountDetailsEffects];

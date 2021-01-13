@@ -3,7 +3,7 @@ import { ComponentLoaderService } from './core/services/others/component-loader.
 import { NavigationService } from './core/services/others/navigation.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'wal-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

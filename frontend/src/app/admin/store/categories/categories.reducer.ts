@@ -66,6 +66,6 @@ const categoriesReducer = createReducer(
   )
 );
 
-export function reducer(state: CategoriesState | undefined, action: Action) {
+export function reducer(state: CategoriesState | undefined, action: Action): CategoriesState {
   return categoriesReducer(state, action);
 }

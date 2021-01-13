@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 import { AbstractControl } from '@angular/forms';
 import { Observable, Observer, of } from 'rxjs';
 
@@ -29,7 +32,7 @@ export const mimeTypeValidator = (control: AbstractControl): Observable<{ [key: 
           isValid = true;
           break;
         default:
-          isValid = false; // Or you can use the blob.type as fallback
+          isValid = false;
           break;
       }
 

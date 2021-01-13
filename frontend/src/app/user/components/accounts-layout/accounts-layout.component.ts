@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -13,6 +13,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
+import { User } from 'src/app/shared/models/user.model';
+import { AccountDialog } from '../../models/account-dialog.model';
 
 @Component({
   selector: 'wal-accounts-layout',
@@ -28,14 +30,14 @@ export class AccountsLayoutComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
-  private currentUser: any;
+  private currentUser: User | null = null;
   private currentUserSubscription: Subscription | null = null;
 
   constructor(private store: Store<RootState>, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
-    this.currentUserSubscription = this.store.select(selectUser).subscribe(userData => {
-      this.currentUser = userData;
+    this.currentUserSubscription = this.store.select(selectUser).subscribe(user => {
+      this.currentUser = user;
     });
 
     this.isPending$ = this.store.select(accountsSelectors.selectAccountsPending);
@@ -48,18 +50,20 @@ export class AccountsLayoutComponent implements OnInit, OnDestroy {
 
     this.fetchAccounts();
   }
+
   ngOnDestroy(): void {
     this.currentUserSubscription?.unsubscribe();
   }
 
   addAccount(): void {
+    const accountDialog: AccountDialog = { type: OpenType.ADD, account: null };
     this.dialog.open(AccountSaveModalComponent, {
-      data: { type: OpenType.ADD, account: null }
+      data: accountDialog
     });
   }
 
   fetchAccounts(): void {
-    this.store.dispatch(accountsActions.loadAllAccounts({ id: this.currentUser.id }));
+    this.store.dispatch(accountsActions.loadAllAccounts({ id: this.currentUser?.id }));
   }
 
   applyFilter(value: string): void {
@@ -71,6 +75,6 @@ export class AccountsLayoutComponent implements OnInit, OnDestroy {
   }
 
   selectAccount(account: Account): void {
-    this.router.navigate(['accounts', 'details', account.id, account.userId]);
+    void this.router.navigate(['accounts', 'details', account.id, account.userId]);
   }
 }

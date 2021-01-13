@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentLoaderService } from 'src/app/core/services/others/component-loader.service';
 
 @Component({
@@ -6,12 +6,10 @@ import { ComponentLoaderService } from 'src/app/core/services/others/component-l
   templateUrl: './image-viewer.component.html',
   styleUrls: ['./image-viewer.component.scss']
 })
-export class ImageViewerComponent implements OnInit {
-  imagePath: any;
+export class ImageViewerComponent {
+  public imagePath = '';
 
   constructor(private componentLoader: ComponentLoaderService) {}
-
-  ngOnInit(): void {}
 
   onClose(): void {
     this.componentLoader.clearDynamicComponent();

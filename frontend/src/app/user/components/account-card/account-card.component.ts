@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
+import { AccountDialog } from '../../models/account-dialog.model';
 import { Account } from '../../models/account.model';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
 
@@ -10,22 +11,19 @@ import { AccountSaveModalComponent } from '../account-save-modal/account-save-mo
   templateUrl: './account-card.component.html',
   styleUrls: ['./account-card.component.scss']
 })
-export class AccountCardComponent implements OnInit {
+export class AccountCardComponent {
   @Input() account: Account | null = null;
 
   constructor(private dialog: MatDialog, private router: Router) {}
 
-  ngOnInit(): void {}
-
   editAccount(): void {
+    const accountDialog: AccountDialog = { type: OpenType.EDIT, account: this.account };
     this.dialog.open(AccountSaveModalComponent, {
-      data: { type: OpenType.EDIT, account: this.account }
+      data: accountDialog
     });
   }
 
   selectAccount(): void {
-    console.log(this.account);
-
-    this.router.navigate(['accounts', 'details', this.account?.id, this.account?.userId]);
+    void this.router.navigate(['accounts', 'details', this.account?.id, this.account?.userId]);
   }
 }

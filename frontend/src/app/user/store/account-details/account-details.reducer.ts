@@ -54,6 +54,6 @@ const accountDetailsReducer = createReducer(
   }))
 );
 
-export function reducer(state: AccountDetailsState | undefined, action: Action) {
+export function reducer(state: AccountDetailsState | undefined, action: Action): AccountDetailsState {
   return accountDetailsReducer(state, action);
 }

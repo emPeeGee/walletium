@@ -6,6 +6,7 @@ import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/api/accounts.service';
 import { NavigationService } from 'src/app/core/services/others/navigation.service';
 import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
+import { NestError } from 'src/app/shared/models/nest-error.model';
 import * as accountDetailsActions from './account-details.actions';
 
 @Injectable()
@@ -22,11 +23,13 @@ export class AccountDetailsEffects {
     this.actions$.pipe(
       ofType(accountDetailsActions.loadAccount),
       switchMap(action =>
-        this.accountsService.get(action.accountId, action.userId).pipe(
+        this.accountsService.get(action.accountId).pipe(
           map(result =>
             accountDetailsActions.loadAccountSuccess({ message: 'Account is fetched with success', account: result })
           ),
-          catchError(error => of(accountDetailsActions.loadAccountFail({ message: error.message })))
+          catchError(({ error }: { error: NestError }) =>
+            of(accountDetailsActions.loadAccountFail({ message: error.message }))
+          )
         )
       )
     )
@@ -37,14 +40,16 @@ export class AccountDetailsEffects {
       ofType(accountDetailsActions.editAccount),
       exhaustMap(action =>
         this.accountsService.update(action.account).pipe(
-          map(result =>
+          map(() =>
             accountDetailsActions.editAccountSuccess({
-              message: result.message,
+              message: 'Account was edited with success',
               userId: action.account.userId,
               accountId: action.account.id
             })
           ),
-          catchError(error => of(accountDetailsActions.editAccountFail({ message: error.error.message })))
+          catchError(({ error }: { error: NestError }) =>
+            of(accountDetailsActions.editAccountFail({ message: error.message }))
+          )
         )
       )
     )
@@ -62,8 +67,12 @@ export class AccountDetailsEffects {
       ofType(accountDetailsActions.deleteAccount),
       switchMap(action =>
         this.accountsService.delete(action.accountId).pipe(
-          map(result => accountDetailsActions.deleteAccountSuccess({ message: 'Account was successful deleted' })),
-          catchError(error => of(accountDetailsActions.deleteAccountFail({ message: error.message })))
+          tap(res => console.log(res)),
+
+          map(() => accountDetailsActions.deleteAccountSuccess({ message: 'Account was successful deleted' })),
+          catchError(({ error }: { error: NestError }) =>
+            of(accountDetailsActions.deleteAccountFail({ message: error.message }))
+          )
         )
       )
     )

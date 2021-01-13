@@ -14,12 +14,12 @@ import { selectAuthPending } from 'src/app/store/authentication/authentication.s
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm = new FormGroup({
+  public loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
 
-  isPending$!: Observable<boolean | null>;
+  public isPending$!: Observable<boolean | null>;
 
   constructor(private store: Store<RootState>) {}
 
@@ -27,19 +27,19 @@ export class LoginComponent implements OnInit {
     this.isPending$ = this.store.select(selectAuthPending);
   }
 
-  loginUser(): void {
+  public loginUser(): void {
     const credentials: Credentials = {
-      ...this.loginForm.value
+      ...(this.loginForm.value as Credentials)
     };
 
     this.store.dispatch(login({ payload: credentials }));
   }
 
-  get email(): AbstractControl | null {
+  public get email(): AbstractControl | null {
     return this.loginForm.get('email');
   }
 
-  get password(): AbstractControl | null {
+  public get password(): AbstractControl | null {
     return this.loginForm.get('password');
   }
 }

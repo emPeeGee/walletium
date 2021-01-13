@@ -15,4 +15,4 @@ export const reducers: ActionReducerMap<AdminState> = {
   categoriesState: fromCategories.reducer
 };
 
-export const effects: any[] = [CategoriesEffects];
+export const effects = [CategoriesEffects];

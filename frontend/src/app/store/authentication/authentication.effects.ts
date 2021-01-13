@@ -7,6 +7,7 @@ import { map, catchError, tap, exhaustMap } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/core/services/api/authentication.service';
 import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
 import { TokenStorageService } from 'src/app/core/services/others/token-storage.service';
+import { NestError } from 'src/app/shared/models/nest-error.model';
 import * as authenticationActions from './authentication.actions';
 
 @Injectable()
@@ -25,7 +26,9 @@ export class AuthenticationEffects {
       exhaustMap(action =>
         this.authenticationService.createNewUser(action.payload).pipe(
           map(result => authenticationActions.signupSucces({ payload: result })),
-          catchError(error => of(authenticationActions.signupFail({ error, message: error.error.message })))
+          catchError(({ error }: { error: NestError }) =>
+            of(authenticationActions.signupFail({ message: error.message }))
+          )
         )
       )
     )
@@ -35,7 +38,7 @@ export class AuthenticationEffects {
     () =>
       this.actions$.pipe(
         ofType(authenticationActions.signupSucces),
-        tap(action => this.router.navigate(['guest', 'login']))
+        tap(() => void this.router.navigate(['guest', 'login']))
       ),
     { dispatch: false }
   );
@@ -48,7 +51,9 @@ export class AuthenticationEffects {
           map(result => {
             return authenticationActions.loginSuccess({ payload: result });
           }),
-          catchError(error => of(authenticationActions.loginFail({ message: error.error.message })))
+          catchError(({ error }: { error: NestError }) =>
+            of(authenticationActions.loginFail({ message: error.message }))
+          )
         )
       )
     )
@@ -61,7 +66,7 @@ export class AuthenticationEffects {
         tap(({ payload }) => {
           this.tokenStorageService.setToken(payload.token);
           this.tokenStorageService.setUser(payload.user);
-          this.router.navigate(['']);
+          void this.router.navigate(['']);
         })
       ),
     {
@@ -75,7 +80,7 @@ export class AuthenticationEffects {
         ofType(authenticationActions.logout),
         tap(() => {
           this.tokenStorageService.logout();
-          this.router.navigate(['guest', 'login']);
+          void this.router.navigate(['guest', 'login']);
         })
       ),
     {
