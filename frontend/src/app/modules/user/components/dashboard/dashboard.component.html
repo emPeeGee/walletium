@@ -11,7 +11,7 @@
   </div>
 
   <ng-container *ngIf="allAccounts$ | async as accounts">
-    <div class="dashboard__accounts" fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayoutGap="32px">
+    <div class="dashboard__accounts">
       <wal-account-card *ngFor="let account of accounts" [account]="account"></wal-account-card>
       <wal-account-add-card></wal-account-add-card>
     </div>

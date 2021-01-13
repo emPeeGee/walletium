@@ -1,0 +1,17 @@
+// 1. Themes
+@import './themes/default.scss';
+
+// 2. Configuration and helpers
+@import './abstracts/variables';
+
+// 3. Vendors
+
+// 4. Base stuff
+@import './base/base';
+
+// 5. Layout-related sections
+
+// 6. Components
+
+// 7. Page-specific styles
+@import './pages/authentication';

@@ -9,4 +9,13 @@
   &__actions {
     margin-top: 16px;
   }
+
+  &__accounts {
+    display: flex;
+    justify-content: flex-start;
+
+    & > * {
+      margin-right: 32px;
+    }
+  }
 }

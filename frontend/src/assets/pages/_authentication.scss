@@ -1,0 +1,45 @@
+.authentication {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  mat-card {
+    width: 500px;
+    margin: 32px;
+  }
+
+  mat-form-field {
+    width: 400px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > * {
+      width: 100% !important;
+      margin-top: 8px;
+
+      button {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .authentication {
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}

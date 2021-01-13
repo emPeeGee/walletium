@@ -1,7 +1,7 @@
 <section class="account-add">
   <h2 mat-dialog-title>New Account</h2>
   <form [formGroup]="accountForm" (ngSubmit)="saveAccount()">
-    <mat-dialog-content fxLayout="column">
+    <mat-dialog-content class="account-add__content">
       <mat-form-field class="">
         <mat-label>Account name</mat-label>
         <input matInput formControlName="name" placeholder="Ex. Cash" />

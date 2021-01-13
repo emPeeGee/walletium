@@ -1,24 +1,16 @@
 <wal-loader *ngIf="isPending$ | async as loading" [isLoading]="loading"></wal-loader>
-<section fxLayoutAlign="center">
-  <mat-card style="margin: 32px">
-    <mat-card-header color="primary" fxLayoutAlign="center">
+<section class="login authentication">
+  <mat-card class="">
+    <mat-card-header color="primary">
       <mat-card-title>Welcome Again, My friend</mat-card-title>
     </mat-card-header>
 
-    <form
-      [formGroup]="loginForm"
-      (submit)="loginUser()"
-      fxLayout="column"
-      fxLayoutAlign="center center"
-      fxLayoutGap="-20px"
-    >
+    <form [formGroup]="loginForm" (submit)="loginUser()">
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input formControlName="email" matInput />
         <mat-error *ngIf="email?.errors?.required"> Email is required </mat-error>
       </mat-form-field>
-
-      <br />
 
       <mat-form-field>
         <mat-label>Password</mat-label>
@@ -26,9 +18,7 @@
         <mat-error *ngIf="password?.errors?.required"> Password is required </mat-error>
       </mat-form-field>
 
-      <br />
-
-      <div fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">
+      <div class="authentication__actions">
         <div>
           <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Sign In</button>
         </div>
