@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '../users/user.entity';
 
 @Entity()
 export class Label {
@@ -10,4 +11,7 @@ export class Label {
 
   @Column()
   color: string;
+
+  @ManyToOne(() => User, (user: User) => user.labels)
+  user: User;
 }

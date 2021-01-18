@@ -1,5 +1,6 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Account } from '../accounts/account.entity';
+import { Label } from '../labels/labels.entity';
 import { Role } from '../roles/role.entity';
 
 @Entity()
@@ -33,4 +34,7 @@ export class User {
 
   @OneToMany(() => Account, (account: Account) => account.user)
   accounts: Account[];
+
+  @OneToMany(() => Label, (label: Label) => label.user)
+  labels: Label[];
 }

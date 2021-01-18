@@ -7,4 +7,7 @@ export class CreateLabelDto {
 
   @IsHexColor()
   color: string;
+
+  @IsNotEmpty()
+  userId: string;
 }
