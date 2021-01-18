@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
@@ -13,7 +12,6 @@ import * as accountDetailsActions from './account-details.actions';
 export class AccountDetailsEffects {
   constructor(
     private actions$: Actions,
-    private router: Router,
     private navigation: NavigationService,
     private snackBarService: SnackBarService,
     private accountsService: AccountsService
@@ -67,8 +65,6 @@ export class AccountDetailsEffects {
       ofType(accountDetailsActions.deleteAccount),
       switchMap(action =>
         this.accountsService.delete(action.accountId).pipe(
-          tap(res => console.log(res)),
-
           map(() => accountDetailsActions.deleteAccountSuccess({ message: 'Account was successful deleted' })),
           catchError(({ error }: { error: NestError }) =>
             of(accountDetailsActions.deleteAccountFail({ message: error.message }))

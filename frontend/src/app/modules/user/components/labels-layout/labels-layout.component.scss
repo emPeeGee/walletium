@@ -1,0 +1,23 @@
+.labels {
+  width: 95%;
+  margin: 32px auto;
+
+  &__title {
+    font-size: 32px;
+  }
+
+  &__actions {
+    margin-top: 16px;
+  }
+
+  &__content {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  &__label-color {
+    width: 25px;
+    height: 25px;
+    margin-left: 16px;
+  }
+}

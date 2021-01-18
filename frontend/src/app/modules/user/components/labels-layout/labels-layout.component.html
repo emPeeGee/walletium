@@ -1,0 +1,31 @@
+<wal-loader *ngIf="isPending$ | async as loading" [isLoading]="loading"></wal-loader>
+<section class="labels">
+  <div class="labels__header">
+    <h1 class="labels__title">Labels</h1>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="labels__actions">
+    <button mat-raised-button color="accent">Add Label</button>
+  </div>
+
+  <div class="labels__content">
+    <mat-accordion *ngIf="labels$ | async as labels" multi>
+      <mat-expansion-panel *ngFor="let label of labels">
+        <mat-expansion-panel-header class="labels__label-header">
+          <mat-panel-title>
+            {{ label.name }}
+            <div class="labels__label-color" [style.backgroundColor]="label.color"></div>
+          </mat-panel-title>
+
+          <mat-panel-description>Expand for details</mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="onEdit(label)">Edit</button>
+          <button mat-button color="warn" (click)="onDelete(label.id)">Delete</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</section>
