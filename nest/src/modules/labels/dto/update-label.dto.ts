@@ -11,4 +11,7 @@ export class UpdateLabelDto {
 
   @IsHexColor()
   color: string;
+
+  @IsNotEmpty()
+  userId: string;
 }

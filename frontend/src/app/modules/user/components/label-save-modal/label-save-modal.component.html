@@ -1,0 +1,24 @@
+<section class="label-modal">
+  <h2 mat-dialog-title>New Label</h2>
+
+  <form [formGroup]="labelForm" (ngSubmit)="saveLabel()">
+    <mat-dialog-content class="label-modal__content">
+      <mat-form-field>
+        <mat-label>Label name</mat-label>
+        <input matInput formControlName="name" placeholder="Ex. Fuel" />
+        <mat-error *ngIf="name?.errors?.required">Label is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Color</mat-label>
+        <input type="color" matInput formControlName="color" />
+        <mat-error *ngIf="color?.errors?.required">Color is required</mat-error>
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" (click)="cancelDialog()">Cancel</button>
+      <button type="submit" color="accent" mat-raised-button [disabled]="labelForm.invalid">Save</button>
+    </mat-dialog-actions>
+  </form>
+</section>

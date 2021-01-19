@@ -1,0 +1,14 @@
+<mat-expansion-panel class="label" *ngIf="label">
+  <mat-expansion-panel-header class="label__header">
+    <mat-panel-title>
+      {{ label.name }}
+      <div class="label__color" [style.backgroundColor]="label.color"></div>
+    </mat-panel-title>
+
+    <mat-panel-description>Expand for details</mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-action-row>
+    <button mat-button color="primary" (click)="onEdit()">Edit</button>
+    <button mat-button color="warn" (click)="onDelete()">Delete</button>
+  </mat-action-row>
+</mat-expansion-panel>

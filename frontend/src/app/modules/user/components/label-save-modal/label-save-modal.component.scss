@@ -1,0 +1,12 @@
+.label-modal {
+  width: 800px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+      margin: 8px 0;
+    }
+  }
+}

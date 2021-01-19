@@ -1,17 +1,17 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { use } from 'passport';
 import { Repository } from 'typeorm';
 import { UsersService } from '../users/users.service';
 import { CreateLabelDto } from './dto/create-label.dto';
 import { UpdateLabelDto } from './dto/update-label.dto';
+import { SaveLabel } from './interfaces/save-label.interface';
 import { Label } from './labels.entity';
 
 @Injectable()
 export class LabelsService {
   constructor(@InjectRepository(Label) private repository: Repository<Label>, private usersService: UsersService) {}
 
-  async findAll(userId: string): Promise<Label[]> {
+  async findAllByUserId(userId: string): Promise<Label[]> {
     const user = await this.usersService.findById(userId);
     if (!user) {
       throw new BadRequestException('Such user does not exists!');
@@ -41,7 +41,7 @@ export class LabelsService {
       throw new BadRequestException('Such label already exists!');
     }
 
-    const labelToSave = {
+    const labelToSave: SaveLabel = {
       ...createLabel,
       user,
     };
@@ -52,7 +52,22 @@ export class LabelsService {
     return sendedLabel;
   }
 
-  async update(id: string, updateLabel: UpdateLabelDto): Promise<Label> {
+  async update(updateLabel: UpdateLabelDto): Promise<Label> {
+    const user = await this.usersService.findById(updateLabel.userId);
+
+    if (!user) {
+      throw new BadRequestException('Such user does not exists!');
+    }
+
+    const suchLabel = await this.repository.findOne({
+      name: updateLabel.name,
+      user: user,
+    });
+
+    if (suchLabel) {
+      throw new BadRequestException('Such label already exists!');
+    }
+
     const updatedLabel = await this.repository.save(updateLabel);
     return updatedLabel;
   }

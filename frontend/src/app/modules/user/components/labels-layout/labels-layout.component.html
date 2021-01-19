@@ -7,25 +7,12 @@
   <mat-divider></mat-divider>
 
   <div class="labels__actions">
-    <button mat-raised-button color="accent">Add Label</button>
+    <button mat-raised-button color="accent" (click)="addLabel()">Add Label</button>
   </div>
 
   <div class="labels__content">
     <mat-accordion *ngIf="labels$ | async as labels" multi>
-      <mat-expansion-panel *ngFor="let label of labels">
-        <mat-expansion-panel-header class="labels__label-header">
-          <mat-panel-title>
-            {{ label.name }}
-            <div class="labels__label-color" [style.backgroundColor]="label.color"></div>
-          </mat-panel-title>
-
-          <mat-panel-description>Expand for details</mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-action-row>
-          <button mat-button color="primary" (click)="onEdit(label)">Edit</button>
-          <button mat-button color="warn" (click)="onDelete(label.id)">Delete</button>
-        </mat-action-row>
-      </mat-expansion-panel>
+      <wal-label-card *ngFor="let label of labels" [label]="label" [userId]="currentUser.id"></wal-label-card>
     </mat-accordion>
   </div>
 </section>

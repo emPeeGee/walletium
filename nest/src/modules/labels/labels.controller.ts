@@ -12,7 +12,7 @@ export class LabelsController {
   @Get('getByUser/:userId')
   @UseGuards(AuthGuard('jwt'))
   async getAll(@Param('userId') userId: string): Promise<Label[]> {
-    return this.labelsService.findAll(userId);
+    return this.labelsService.findAllByUserId(userId);
   }
 
   @Get(':id')
@@ -26,9 +26,9 @@ export class LabelsController {
     return this.labelsService.create(createLabel);
   }
 
-  @Put('update/:id')
-  update(@Param('id') id: string, @Body() updateLabel: UpdateLabelDto): Promise<Label> {
-    return this.labelsService.update(id, updateLabel);
+  @Put('update')
+  update(@Body() updateLabel: UpdateLabelDto): Promise<Label> {
+    return this.labelsService.update(updateLabel);
   }
 
   @Delete('delete/:id')

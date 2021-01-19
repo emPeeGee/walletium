@@ -12,6 +12,8 @@ import { AccountsLayoutComponent } from './components/accounts-layout/accounts-l
 import { AccountAddCardComponent } from './components/account-add-card/account-add-card.component';
 import { AccountDetailComponent } from './components/account-detail/account-detail.component';
 import { LabelsLayoutComponent } from './components/labels-layout/labels-layout.component';
+import { LabelCardComponent } from './components/label-card/label-card.component';
+import { LabelSaveModalComponent } from './components/label-save-modal/label-save-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { LabelsLayoutComponent } from './components/labels-layout/labels-layout.
     AccountsLayoutComponent,
     AccountAddCardComponent,
     AccountDetailComponent,
-    LabelsLayoutComponent
+    LabelsLayoutComponent,
+    LabelCardComponent,
+    LabelSaveModalComponent
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, switchMap, map, tap } from 'rxjs/operators';
+import { catchError, switchMap, map, tap, exhaustMap } from 'rxjs/operators';
 import { LabelsService } from 'src/app/core/services/api/labels.service';
+import { NavigationService } from 'src/app/core/services/others/navigation.service';
 import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
 import { NestError } from 'src/app/shared/models/nest-error.model';
 import { Label } from '../../models/label.model';
@@ -13,7 +14,8 @@ export class LabelsEffects {
   constructor(
     private actions$: Actions,
     private labelsService: LabelsService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private navigation: NavigationService
   ) {}
 
   loadAllLabelsByUser$ = createEffect(() =>
@@ -29,6 +31,58 @@ export class LabelsEffects {
           )
         )
       )
+    )
+  );
+
+  createLabel$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(labelsActions.createLabel),
+      exhaustMap(action =>
+        this.labelsService.create(action.label).pipe(
+          map(() => labelsActions.createLabelSuccess({ message: 'Label created with success', userId: action.userId })),
+          catchError(({ error }: { error: NestError }) =>
+            of(labelsActions.loadAllUserLabelsFail({ message: error.message }))
+          )
+        )
+      )
+    )
+  );
+
+  editLabel$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(labelsActions.editLabel),
+      exhaustMap(action =>
+        this.labelsService.update(action.label).pipe(
+          map(() => labelsActions.editLabelSuccess({ message: 'Label updated with success', userId: action.userId })),
+          catchError(({ error }: { error: NestError }) =>
+            of(labelsActions.loadAllUserLabelsFail({ message: error.message }))
+          )
+        )
+      )
+    )
+  );
+
+  deleteLabel$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(labelsActions.deleteLabel),
+      switchMap(action =>
+        this.labelsService.delete(action.id).pipe(
+          map(() =>
+            labelsActions.deleteLabelSuccess({ message: 'Label was successful deleted', userId: action.userId })
+          ),
+          catchError(({ error }: { error: NestError }) => of(labelsActions.deleteLabelFail({ message: error.message })))
+        )
+      )
+    )
+  );
+
+  saveLabelSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(labelsActions.createLabelSuccess, labelsActions.editLabelSuccess, labelsActions.deleteLabelSuccess),
+      tap(({ message }) => {
+        this.snackBarService.showSnackBarNotification(message);
+      }),
+      map(action => labelsActions.loadAllUserLabels({ userId: action.userId }))
     )
   );
 

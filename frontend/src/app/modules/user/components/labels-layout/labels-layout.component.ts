@@ -1,12 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { User } from 'src/app/shared/models/user.model';
 import { selectUser } from 'src/app/store/authentication/authentication.selectors';
-import { Label } from '../../models/label.model';
+import { Label, LabelDialog } from '../../models/label.model';
 import { RootState } from '../../store';
 import * as labelsActions from '../../store/labels/labels.actions';
 import { selectAllLabels, selectLabelsPending } from '../../store/labels/labels.selectors';
+import { LabelSaveModalComponent } from '../label-save-modal/label-save-modal.component';
 
 @Component({
   selector: 'wal-labels-layout',
@@ -20,7 +23,7 @@ export class LabelsLayoutComponent implements OnInit, OnDestroy {
   private currentUser: User | null = null;
   private currentUserSubscription: Subscription | null = null;
 
-  constructor(private store: Store<RootState>) {}
+  constructor(private store: Store<RootState>, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.currentUserSubscription = this.store.select(selectUser).subscribe(user => {
@@ -36,11 +39,10 @@ export class LabelsLayoutComponent implements OnInit, OnDestroy {
     this.currentUserSubscription?.unsubscribe();
   }
 
-  public onEdit(label: Label): void {
-    console.log(label);
-  }
-
-  public onDelete(labelId: string): void {
-    console.log(labelId);
+  addLabel(): void {
+    const labelDialog: LabelDialog = { type: OpenType.ADD, label: null };
+    this.dialog.open(LabelSaveModalComponent, {
+      data: labelDialog
+    });
   }
 }
