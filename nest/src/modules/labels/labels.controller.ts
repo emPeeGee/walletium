@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from '../authentication/passport/jwt-auth.guard';
 import { CreateLabelDto } from './dto/create-label.dto';
 import { UpdateLabelDto } from './dto/update-label.dto';
 import { Label } from './labels.entity';
@@ -16,22 +17,25 @@ export class LabelsController {
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   getOne(@Param('id') id: string): Promise<Label> {
     return this.labelsService.findOne(id);
   }
 
   @Post('create')
+  @UseGuards(JwtAuthGuard)
   create(@Body() createLabel: CreateLabelDto): Promise<Label> {
     return this.labelsService.create(createLabel);
   }
 
   @Put('update')
+  @UseGuards(JwtAuthGuard)
   update(@Body() updateLabel: UpdateLabelDto): Promise<Label> {
     return this.labelsService.update(updateLabel);
   }
 
   @Delete('delete/:id')
+  @UseGuards(JwtAuthGuard)
   delete(@Param('id') id: string): Promise<Label> {
     return this.labelsService.delete(id);
   }
