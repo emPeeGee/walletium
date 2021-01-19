@@ -37,7 +37,7 @@ export class AuthenticationService {
       success: true,
       user: cuttedUser,
       token: {
-        expiresIn: 3600,
+        expiresIn: 60,
         access_token:
           'Bearer ' +
           this.jwtService.sign({

@@ -14,7 +14,7 @@ import { LocalStrategy } from './passport/local.strategy';
       useFactory: () => ({
         secret: 'secret_super_password_to_change_in_future',
         signOptions: {
-          expiresIn: '1h',
+          expiresIn: '10s',
         },
       }),
     }),
