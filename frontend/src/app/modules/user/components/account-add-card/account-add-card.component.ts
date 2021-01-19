@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
-import { AccountDialog } from '../../models/account-dialog.model';
+import { AccountDialog } from '../../models/account.model';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
 
 @Component({

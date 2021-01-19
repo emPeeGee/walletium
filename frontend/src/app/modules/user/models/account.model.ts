@@ -1,3 +1,4 @@
+import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { User } from 'src/app/shared/models/user.model';
 
 export interface Account {
@@ -20,4 +21,9 @@ export interface AccountWithUser {
   createdDate: string;
   updatedDate: string;
   user: User;
+}
+
+export interface AccountDialog {
+  type: OpenType;
+  account: Account | null;
 }

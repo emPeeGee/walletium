@@ -2,8 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
-import { AccountDialog } from '../../models/account-dialog.model';
-import { Account } from '../../models/account.model';
+import { Account, AccountDialog } from '../../models/account.model';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
 
 @Component({

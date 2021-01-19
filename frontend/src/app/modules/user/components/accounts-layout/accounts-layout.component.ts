@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { Account } from '../../models/account.model';
+import { Account, AccountDialog } from '../../models/account.model';
 import { RootState } from 'src/app/store';
 import { selectUser } from 'src/app/store/authentication/authentication.selectors';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
@@ -14,7 +14,6 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { User } from 'src/app/shared/models/user.model';
-import { AccountDialog } from '../../models/account-dialog.model';
 
 @Component({
   selector: 'wal-accounts-layout',

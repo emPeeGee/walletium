@@ -4,14 +4,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { Account } from '../../models/account.model';
+import { Account, AccountDialog } from '../../models/account.model';
 import { RootState } from '../../store';
 import * as accountDetailsActions from '../../store/account-details/account-details.actions';
 import * as accountsActions from '../../store/accounts/accounts.actions';
 import { tap } from 'rxjs/operators';
 import { TokenStorageService } from 'src/app/core/services/others/token-storage.service';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
-import { AccountDialog } from '../../models/account-dialog.model';
 
 @Component({
   selector: 'wal-account-save-modal',
