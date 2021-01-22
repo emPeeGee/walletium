@@ -9,17 +9,21 @@ import { selectTokenData } from 'src/app/store/authentication/authentication.sel
 })
 export class UserActiveService {
   private userExpireDate: Date | null = null;
+  private userLoginDate: Date | null = null;
 
   constructor(private store: Store<RootState>) {
     localStorage.removeItem('userExpireDate');
   }
 
   run(): void {
+    this.userLoginDate = new Date();
+    localStorage.setItem('userLoginDate', String(this.userLoginDate.getTime()));
+
     this.store.select(selectTokenData).subscribe(token => {
       this.userExpireDate = new Date();
       this.userExpireDate?.setSeconds(this.userExpireDate.getSeconds() + Number(30));
 
-      localStorage.setItem('userExpireDate', this.userExpireDate.toDateString());
+      localStorage.setItem('userExpireDate', String(this.userExpireDate.getTime()));
 
       console.log(this.userExpireDate);
     });
@@ -48,9 +52,11 @@ export class UserActiveService {
   checkExpiredSesion(): void {
     console.log('Active');
     const currentDate = Date.now();
-    const expireDate = Date.parse(localStorage.getItem('userExpireDate')!);
-    console.log(currentDate);
-    console.log(expireDate);
+    const expireDate = localStorage.getItem('userExpireDate');
+
+    if (!expireDate) {
+      return;
+    }
 
     if (currentDate > expireDate) {
       this.store.dispatch(logout());
