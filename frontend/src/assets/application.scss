@@ -2,14 +2,18 @@
 @import './themes/default.scss';
 
 // 2. Configuration and helpers
-@import './abstracts/variables', './abstracts/colors';
+@import './abstracts/variables';
 
 // 3. Vendors
+@import './vendors/normalize';
 
 // 4. Base stuff
-@import './base/base', './base/helpers';
+@import './base/base';
+@import './base/helpers';
 
 // 5. Layout-related sections
+@import './layout/header';
+@import './layout/footer';
 
 // 6. Components
 @import './components/snackbar';
