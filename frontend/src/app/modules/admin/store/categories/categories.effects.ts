@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { CategoriesService } from 'src/app/core/services/api/categories.service';
-import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
+import { NofiticationService } from 'src/app/core/services/others/notification.service';
 import { NestError } from 'src/app/shared/models/nest-error.model';
 import * as categoriesActions from './categories.actions';
 
@@ -12,7 +12,7 @@ export class CategoriesEffects {
   constructor(
     private actions$: Actions,
     private categoriesService: CategoriesService,
-    private snackBarService: SnackBarService
+    private notificationService: NofiticationService
   ) {}
 
   loadAllCategories$ = createEffect(() =>
@@ -91,7 +91,7 @@ export class CategoriesEffects {
           categoriesActions.deleteCategoryFail,
           categoriesActions.editCategoryFail
         ),
-        tap(({ message }) => this.snackBarService.showSnackBarNotification(message))
+        tap(({ message }) => this.notificationService.error(message))
       ),
     { dispatch: false }
   );

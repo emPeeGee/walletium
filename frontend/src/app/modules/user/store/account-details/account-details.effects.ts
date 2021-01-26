@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/api/accounts.service';
 import { NavigationService } from 'src/app/core/services/others/navigation.service';
-import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
+import { NofiticationService } from 'src/app/core/services/others/notification.service';
 import { NestError } from 'src/app/shared/models/nest-error.model';
 import * as accountDetailsActions from './account-details.actions';
 
@@ -13,7 +13,7 @@ export class AccountDetailsEffects {
   constructor(
     private actions$: Actions,
     private navigation: NavigationService,
-    private snackBarService: SnackBarService,
+    private notificationService: NofiticationService,
     private accountsService: AccountsService
   ) {}
 
@@ -79,7 +79,7 @@ export class AccountDetailsEffects {
       this.actions$.pipe(
         ofType(accountDetailsActions.deleteAccountSuccess),
         tap(({ message }) => {
-          this.snackBarService.showSnackBarNotification(message);
+          this.notificationService.success(message);
           this.navigation.back();
         })
       ),
@@ -91,7 +91,7 @@ export class AccountDetailsEffects {
       this.actions$.pipe(
         ofType(accountDetailsActions.loadAccountFail, accountDetailsActions.deleteAccountFail),
         tap(({ message }) => {
-          this.snackBarService.showSnackBarNotification(message);
+          this.notificationService.error(message);
         })
       ),
     { dispatch: false }

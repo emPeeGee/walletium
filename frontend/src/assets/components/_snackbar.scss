@@ -1,0 +1,39 @@
+.notification {
+  font-weight: 500;
+
+  .mat-simple-snackbar-action {
+    font-weight: 500;
+  }
+}
+
+.info-notification {
+  color: $blue;
+
+  .mat-simple-snackbar-action {
+    color: $blue;
+  }
+}
+
+.success-notification {
+  color: $green;
+
+  .mat-simple-snackbar-action {
+    color: $green;
+  }
+}
+
+.warning-notification {
+  color: $orange;
+
+  .mat-simple-snackbar-action {
+    color: $orange;
+  }
+}
+
+.error-notification {
+  color: $red;
+
+  .mat-simple-snackbar-action {
+    color: $red;
+  }
+}

@@ -3,8 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, switchMap, map, tap, exhaustMap } from 'rxjs/operators';
 import { LabelsService } from 'src/app/core/services/api/labels.service';
-import { NavigationService } from 'src/app/core/services/others/navigation.service';
-import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
+import { NofiticationService } from 'src/app/core/services/others/notification.service';
 import { NestError } from 'src/app/shared/models/nest-error.model';
 import { Label } from '../../models/label.model';
 import * as labelsActions from './labels.actions';
@@ -14,8 +13,7 @@ export class LabelsEffects {
   constructor(
     private actions$: Actions,
     private labelsService: LabelsService,
-    private snackBarService: SnackBarService,
-    private navigation: NavigationService
+    private notificationService: NofiticationService
   ) {}
 
   loadAllLabelsByUser$ = createEffect(() =>
@@ -80,7 +78,7 @@ export class LabelsEffects {
     this.actions$.pipe(
       ofType(labelsActions.createLabelSuccess, labelsActions.editLabelSuccess, labelsActions.deleteLabelSuccess),
       tap(({ message }) => {
-        this.snackBarService.showSnackBarNotification(message);
+        this.notificationService.success(message);
       }),
       map(action => labelsActions.loadAllUserLabels({ userId: action.userId }))
     )
@@ -97,7 +95,7 @@ export class LabelsEffects {
           labelsActions.deleteLabelFail
         ),
         tap(({ message }) => {
-          this.snackBarService.showSnackBarNotification(message);
+          this.notificationService.error(message);
         })
       ),
     { dispatch: false }

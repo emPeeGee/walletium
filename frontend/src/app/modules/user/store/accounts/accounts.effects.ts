@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/api/accounts.service';
-import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
+import { NofiticationService } from 'src/app/core/services/others/notification.service';
 import { NestError } from 'src/app/shared/models/nest-error.model';
 import * as accountsActions from './accounts.actions';
 import { Account, AccountWithUser } from '../../models/account.model';
@@ -13,7 +13,7 @@ export class AccountsEffects {
   constructor(
     private actions$: Actions,
     private accountsService: AccountsService,
-    private snackBarService: SnackBarService
+    private notificationService: NofiticationService
   ) {}
 
   loadAllAccountsByUser$ = createEffect(() =>
@@ -91,7 +91,7 @@ export class AccountsEffects {
     () =>
       this.actions$.pipe(
         ofType(accountsActions.loadAllAccountsFail, accountsActions.createAccountFail, accountsActions.editAccountFail),
-        tap(({ message }) => this.snackBarService.showSnackBarNotification(message))
+        tap(({ message }) => this.notificationService.error(message))
       ),
     { dispatch: false }
   );

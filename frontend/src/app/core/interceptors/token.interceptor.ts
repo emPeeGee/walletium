@@ -23,7 +23,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(authReq).pipe(
       catchError((response: HttpErrorResponse) => {
-        console.log(response);
         if (response.status === 401) {
           this.store.dispatch(logout({ expired: true }));
           return EMPTY;
