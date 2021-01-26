@@ -23,6 +23,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(): void {
-    this.store.dispatch(logout());
+    this.store.dispatch(logout({ expired: false }));
   }
 }

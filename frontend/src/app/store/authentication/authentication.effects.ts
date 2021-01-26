@@ -7,7 +7,6 @@ import { map, catchError, tap, exhaustMap } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/core/services/api/authentication.service';
 import { SnackBarService } from 'src/app/core/services/others/snack-bar.service';
 import { TokenStorageService } from 'src/app/core/services/others/token-storage.service';
-import { UserActiveService } from 'src/app/core/services/others/user-active.service';
 import { NestError } from 'src/app/shared/models/nest-error.model';
 import * as authenticationActions from './authentication.actions';
 
@@ -18,8 +17,7 @@ export class AuthenticationEffects {
     private authenticationService: AuthenticationService,
     private tokenStorageService: TokenStorageService,
     private router: Router,
-    private snackBarService: SnackBarService,
-    private userActiveService: UserActiveService
+    private snackBarService: SnackBarService
   ) {}
 
   signup$ = createEffect(() =>
@@ -66,7 +64,6 @@ export class AuthenticationEffects {
       this.actions$.pipe(
         ofType(authenticationActions.loginSuccess),
         tap(({ payload }) => {
-          this.userActiveService.run();
           this.tokenStorageService.setToken(payload.token);
           this.tokenStorageService.setUser(payload.user);
           void this.router.navigate(['']);
@@ -81,7 +78,10 @@ export class AuthenticationEffects {
     () =>
       this.actions$.pipe(
         ofType(authenticationActions.logout),
-        tap(() => {
+        tap(action => {
+          if (action.expired) {
+            this.snackBarService.showSnackBarNotification('Session is expired. You are logged out.');
+          }
           this.tokenStorageService.logout();
           void this.router.navigate(['guest', 'login']);
         })

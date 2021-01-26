@@ -11,9 +11,8 @@ export const login = createAction('[LOGIN PAGE] Login', props<{ payload: Credent
 export const loginSuccess = createAction('[LOGIN PAGE] Login Succes', props<{ payload: Auth }>());
 export const loginFail = createAction('[LOGIN PAGE] Login Fail', props<{ message: string }>());
 
-export const logout = createAction('[LOGOUT PAGE] Logout');
+export const logout = createAction('[LOGOUT PAGE] Logout', props<{ expired: boolean }>());
 
-// token
 export const refreshToken = createAction('[Authentication] Refresh token');
 export const refreshTokenSuccess = createAction('[Authentication] Refresh token success', props<Auth>());
 export const refreshTokenFail = createAction('[Authentication] Refresh token fail', props<{ message: string }>());
