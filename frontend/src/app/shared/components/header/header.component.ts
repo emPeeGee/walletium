@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { RootState } from 'src/app/store';
 import { logout } from 'src/app/store/authentication/authentication.actions';
 import { selectUser } from 'src/app/store/authentication/authentication.selectors';
@@ -12,17 +12,26 @@ import { Roles } from '../../../core/enums/roles.enum';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  isUserAuthenticated$!: Observable<User | null>;
-  roles = Roles;
+export class HeaderComponent implements OnInit, OnDestroy {
+  public roles = Roles;
+  public isSnowEnabled = false;
+  public user: User | null = null;
+
+  private userSubscription: Subscription = new Subscription();
 
   constructor(private store: Store<RootState>) {}
 
   ngOnInit(): void {
-    this.isUserAuthenticated$ = this.store.select(selectUser);
+    this.userSubscription = this.store.select(selectUser).subscribe(user => {
+      this.user = user;
+    });
   }
 
-  onLogout(): void {
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+  }
+
+  public onLogout(): void {
     this.store.dispatch(logout({ expired: false }));
   }
 }

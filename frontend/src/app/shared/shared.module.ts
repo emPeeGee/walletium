@@ -10,6 +10,8 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
 import { BackActionDirective } from './directives/back-action.directive';
 import { SidenavTogglerComponent } from './components/sidenav-toggler/sidenav-toggler.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
+import { SnowComponent } from './components/snow/snow.component';
+import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
     ConfirmModalComponent,
     BackActionDirective,
     SidenavTogglerComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    SnowComponent,
+    NumberToArrayPipe
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, RouterModule],
   exports: [
@@ -31,7 +35,8 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
     LoaderComponent,
     ConfirmModalComponent,
     BackActionDirective,
-    SidenavTogglerComponent
+    SidenavTogglerComponent,
+    SnowComponent
   ]
 })
 export class SharedModule {}
