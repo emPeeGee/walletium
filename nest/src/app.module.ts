@@ -16,6 +16,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { HttpLoggerMiddleware } from './common/middleware/http-logger.middleware';
 import { CommonModule } from './common/common.module';
+import { RecordsModule } from './modules/records/records.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { CommonModule } from './common/common.module';
     AccountsModule,
     CategoriesModule,
     CommonModule,
+    RecordsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

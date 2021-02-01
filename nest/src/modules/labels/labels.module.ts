@@ -9,5 +9,6 @@ import { LabelsService } from './labels.service';
   imports: [TypeOrmModule.forFeature([Label]), UsersModule],
   controllers: [LabelsController],
   providers: [LabelsService],
+  exports: [LabelsService],
 })
 export class LabelsModule {}

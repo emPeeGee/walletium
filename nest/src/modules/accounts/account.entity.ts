@@ -1,4 +1,13 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Record } from '../records/record.entity';
 import { User } from '../users/user.entity';
 
 export type CurrencyType = 'MDL' | 'EUR' | 'USD' | 'RUB' | 'RON';
@@ -33,4 +42,7 @@ export class Account {
     eager: true,
   })
   user: User;
+
+  @OneToMany(() => Record, (record: Record) => record.account)
+  records: Record[];
 }
