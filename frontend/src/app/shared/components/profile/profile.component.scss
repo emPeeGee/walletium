@@ -1,0 +1,66 @@
+.profile {
+  background-color: #dbe9f3;
+  height: 100vh;
+  position: relative;
+
+  &__background {
+    height: 250px;
+    background-color: #3f51b5;
+  }
+
+  &__content {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+  }
+
+  &__card {
+    box-sizing: border-box;
+    max-width: 900px;
+    height: 550px;
+    margin: 0 auto;
+    padding: 32px;
+
+    mat-card-title {
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    &-photo {
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 150px;
+      }
+    }
+
+    &-info {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+
+      & > * {
+        flex: 1 1 50%;
+        text-align: center;
+        margin: 16px 0;
+      }
+
+      &__column > :first-child {
+        color: #6e6e6e;
+      }
+    }
+
+    &-actions {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      &__setting {
+        box-sizing: border-box;
+        padding: 8px 32px;
+        border-radius: 30px;
+      }
+    }
+  }
+}

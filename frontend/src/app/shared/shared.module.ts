@@ -12,6 +12,7 @@ import { SidenavTogglerComponent } from './components/sidenav-toggler/sidenav-to
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 import { SnowComponent } from './components/snow/snow.component';
 import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
     SidenavTogglerComponent,
     ImageViewerComponent,
     SnowComponent,
-    NumberToArrayPipe
+    NumberToArrayPipe,
+    ProfileComponent
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, RouterModule],
   exports: [

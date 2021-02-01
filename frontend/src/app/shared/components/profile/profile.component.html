@@ -1,0 +1,39 @@
+<div class="profile">
+  <div class="profile__background"></div>
+  <div class="profile__content" *ngIf="user$ | async as user">
+    <mat-card class="profile__card">
+      <div class="profile__card-photo">
+        <img src="../../../../assets/images/default-profile.png" alt="Profile" />
+      </div>
+      <mat-card-title> {{ user.username }} </mat-card-title>
+
+      <mat-card-content>
+        <div class="profile__card-info">
+          <div class="profile__card-info__column">
+            <p>Email</p>
+            <p>{{ user.email }}</p>
+          </div>
+          <div class="profile__card-info__column">
+            <p>Phone number</p>
+            <p>{{ user.phoneNumber }}</p>
+          </div>
+          <div class="profile__card-info__column">
+            <p>Date of register</p>
+            <p>{{ user.createdDate | date: 'medium' }}</p>
+          </div>
+          <div class="profile__card-info__column">
+            <p>Last account update</p>
+            <p>{{ user.updatedDate | date: 'medium' }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <div class="profile__card-actions">
+        <button mat-flat-button color="accent" class="profile__card-actions__setting">
+          <mat-icon>settings</mat-icon>
+          Settings
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>
