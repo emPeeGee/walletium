@@ -1,0 +1,93 @@
+.record {
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #727272;
+
+    & > div {
+      flex: 1;
+
+      & > p {
+        width: max-content;
+      }
+    }
+
+    &__account p {
+      box-sizing: border-box;
+      padding: 3px 8px;
+    }
+
+    &__amount {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+
+  &__category {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &-image {
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+    }
+  }
+
+  &__details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
+
+    img {
+      box-sizing: border-box;
+      width: 200px;
+      height: 200px;
+      padding-bottom: 20px;
+      object-fit: cover;
+    }
+
+    &-info {
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+
+      & > p {
+        flex: 1 1 40%;
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  &__actions {
+    justify-content: center;
+  }
+
+  &__bold {
+    color: #727272;
+  }
+
+  p {
+    margin: 0 0 0 0.5em;
+  }
+}
+
+.mat-expansion-panel {
+  border-radius: 0;
+}
+
+.mat-expanded {
+  background-color: #f1f1f18c;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}

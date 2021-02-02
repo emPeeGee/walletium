@@ -7,9 +7,12 @@ import { CloseType } from 'src/app/core/enums/close-type.enum';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { Account, AccountDialog } from '../../models/account.model';
+import { Record } from '../../models/record.model';
 import { RootState } from '../../store';
 import * as accountDetailsActions from '../../store/account-details/account-details.actions';
 import { selectAccount, selectAccountPending } from '../../store/account-details/account-details.selectors';
+import { loadAllAccountRecords } from '../../store/records/records.actions';
+import { selectAllAccountRecords } from '../../store/records/records.selectors';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
 
 @Component({
@@ -19,6 +22,8 @@ import { AccountSaveModalComponent } from '../account-save-modal/account-save-mo
 })
 export class AccountDetailComponent implements OnInit, OnDestroy {
   isPending$!: Observable<boolean>;
+  accountRecords$: Observable<Record[]> | null = null;
+
   account: Account | null = null;
 
   accountSubscription: Subscription | null = null;
@@ -31,6 +36,8 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
     this.accountSubscription = this.store.select(selectAccount).subscribe(account => {
       this.account = account;
     });
+
+    this.accountRecords$ = this.store.select(selectAllAccountRecords);
   }
 
   ngOnDestroy(): void {
@@ -41,6 +48,7 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe(params => {
       const accountId = params.get('accountId') ?? '';
       this.store.dispatch(accountDetailsActions.loadAccount({ accountId }));
+      this.store.dispatch(loadAllAccountRecords({ accountId }));
     });
   }
 

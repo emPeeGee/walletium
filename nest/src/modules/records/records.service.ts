@@ -110,8 +110,15 @@ export class RecordsService {
     const simpliedRecords: IRecordFrontend[] = records.map((record) => {
       return {
         ...record,
-        account: record.account.name,
-        category: record.category.name,
+        account: {
+          name: record.account.name,
+          currency: record.account.currency,
+          color: record.account.color,
+        },
+        category: {
+          name: record.category.name,
+          image: record.category.imagePath,
+        },
       };
     });
 
@@ -121,8 +128,15 @@ export class RecordsService {
   private simplifyRecord(record: Record): IRecordFrontend {
     return {
       ...record,
-      account: record.account.name,
-      category: record.category.name,
+      account: {
+        name: record.account.name,
+        currency: record.account.currency,
+        color: record.account.color,
+      },
+      category: {
+        name: record.category.name,
+        image: record.category.imagePath,
+      },
     };
   }
 }

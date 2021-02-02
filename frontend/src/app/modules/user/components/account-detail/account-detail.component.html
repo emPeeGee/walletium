@@ -53,8 +53,12 @@
 
     <div class="account-detail__card-footer">
       <mat-tab-group>
+        <mat-tab label="Records">
+          <mat-accordiaon *ngIf="accountRecords$ | async as records" multi>
+            <wal-record-card *ngFor="let record of records" [record]="record"></wal-record-card>
+          </mat-accordiaon>
+        </mat-tab>
         <mat-tab label="Balance"></mat-tab>
-        <mat-tab label="Records"></mat-tab>
       </mat-tab-group>
     </div>
   </mat-card>

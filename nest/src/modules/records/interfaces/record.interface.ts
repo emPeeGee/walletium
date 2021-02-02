@@ -21,8 +21,15 @@ export interface IRecordFrontend {
   type: RecordType;
   amount: number;
   userChosenDate: Date;
-  account: string;
-  category: string;
+  account: {
+    name: string;
+    currency: string;
+    color: string;
+  };
+  category: {
+    name: string;
+    image: string;
+  };
   createdDate: Date;
   updatedDate: Date;
   payee?: string;

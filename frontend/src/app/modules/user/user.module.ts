@@ -14,6 +14,7 @@ import { AccountDetailComponent } from './components/account-detail/account-deta
 import { LabelsLayoutComponent } from './components/labels-layout/labels-layout.component';
 import { LabelCardComponent } from './components/label-card/label-card.component';
 import { LabelSaveModalComponent } from './components/label-save-modal/label-save-modal.component';
+import { RecordCardComponent } from './components/record-card/record-card.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LabelSaveModalComponent } from './components/label-save-modal/label-sav
     AccountDetailComponent,
     LabelsLayoutComponent,
     LabelCardComponent,
-    LabelSaveModalComponent
+    LabelSaveModalComponent,
+    RecordCardComponent
   ],
   imports: [
     CommonModule,
