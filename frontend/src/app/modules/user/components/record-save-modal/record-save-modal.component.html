@@ -1,0 +1,43 @@
+<section class="record-modal">
+  <h2 mat-dialog-title>New Record</h2>
+  <form [formGroup]="recordForm" (ngSubmit)="saveRecord()">
+    <mat-dialog-content class="record-modal__content">
+      <mat-button-toggle-group matInput class="record-modal__content__type" formControlName="type" (click)="log()">
+        <mat-button-toggle value="left">
+          <div class="record-modal__content__type-box">
+            <mat-icon>monetization_on</mat-icon>
+            <p>Expense</p>
+          </div>
+        </mat-button-toggle>
+        <mat-button-toggle value="center">
+          <div class="record-modal__content__type-box">
+            <mat-icon>card_giftcard</mat-icon>
+            <p>Income</p>
+          </div>
+        </mat-button-toggle>
+        <mat-button-toggle value="right">
+          <div class="record-modal__content__type-box">
+            <mat-icon>change_circle</mat-icon>
+            <p>Transfer</p>
+          </div>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <mat-form-field class="">
+        <mat-label>Amount</mat-label>
+        <input type="number" matInput formControlName="amount" placeholder="Ex. 100" />
+        <!-- <mat-error *ngIf="color?.errors?.required">Amount is required</mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker> </ngx-mat-datetime-picker>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" (click)="cancelDialog()">Cancel</button>
+      <button type="submit" color="accent" mat-raised-button [disabled]="recordForm.invalid">Save</button>
+    </mat-dialog-actions>
+  </form>
+</section>

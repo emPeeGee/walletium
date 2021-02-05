@@ -13,6 +13,7 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
 import { SnowComponent } from './components/snow/snow.component';
 import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
+import { DatetimepickerComponent } from './components/datetimepicker/datetimepicker.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     ImageViewerComponent,
     SnowComponent,
     NumberToArrayPipe,
-    ProfileComponent
+    ProfileComponent,
+    DatetimepickerComponent
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, RouterModule],
   exports: [

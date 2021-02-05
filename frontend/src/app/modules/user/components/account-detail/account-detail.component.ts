@@ -7,13 +7,14 @@ import { CloseType } from 'src/app/core/enums/close-type.enum';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { Account, AccountDialog } from '../../models/account.model';
-import { Record } from '../../models/record.model';
+import { Record, RecordDialog } from '../../models/record.model';
 import { RootState } from '../../store';
 import * as accountDetailsActions from '../../store/account-details/account-details.actions';
 import { selectAccount, selectAccountPending } from '../../store/account-details/account-details.selectors';
 import { loadAllAccountRecords } from '../../store/records/records.actions';
 import { selectAllAccountRecords } from '../../store/records/records.selectors';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
+import { RecordSaveModalComponent } from '../record-save-modal/record-save-modal.component';
 
 @Component({
   selector: 'wal-account-detail',
@@ -65,6 +66,13 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
       if (CLOSE_FLAG === CloseType.CONFIRM) {
         this.store.dispatch(accountDetailsActions.deleteAccount({ accountId: this.account?.id ?? '' }));
       }
+    });
+  }
+
+  public addRecord(): void {
+    const dataRecordDialog: RecordDialog = { type: OpenType.ADD, record: null };
+    const recordDialog = this.dialog.open(RecordSaveModalComponent, {
+      data: dataRecordDialog
     });
   }
 }

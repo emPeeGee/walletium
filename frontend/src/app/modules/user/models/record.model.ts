@@ -1,3 +1,5 @@
+import { OpenType } from 'src/app/core/enums/open-type.enum';
+
 export enum RecordType {
   EXPENSE = 'EXPENSE',
   INCOME = 'INCOME',
@@ -24,4 +26,9 @@ export interface Record {
     image: string;
   };
   labels: [];
+}
+
+export interface RecordDialog {
+  type: OpenType;
+  record: Record | null;
 }
