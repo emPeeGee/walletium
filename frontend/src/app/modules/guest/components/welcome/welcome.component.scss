@@ -19,16 +19,65 @@
   &__logo {
     width: 120px;
     height: 120px;
+    transform: rotate(0);
+
+    animation: anim-logo 2s cubic-bezier(1, 0.48, 0.53, 1.31);
+  }
+
+  &__app-name {
+    animation: anim-title 1s ease forwards;
+    transform: translate(100%);
   }
 
   &__title {
+    transform: translate(-100%);
     font-size: 52px;
     line-height: 60px;
+    animation: anim-title 1s ease forwards;
   }
 
   &__info {
+    opacity: 0;
     font-size: 24px;
     line-height: 30px;
+    animation: anim-fade 1s ease 0.5s forwards;
+  }
+
+  &__button {
+    opacity: 0;
+    transform: scale(1.5);
+
+    background-color: #ff8100;
+    animation: anim-fade 0.8s ease 0.5s forwards, anim-button 0.8s ease 0.5s forwards;
+
+    &:hover {
+      transform: scale(1) skew(10deg);
+    }
+  }
+}
+
+@keyframes anim-logo {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes anim-fade {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes anim-button {
+  100% {
+    transform: scale(1);
+    background-color: #ffeb3b;
+  }
+}
+
+@keyframes anim-title {
+  100% {
+    transform: translate(0%);
   }
 }
 
