@@ -26,13 +26,11 @@
       <mat-form-field class="">
         <mat-label>Amount</mat-label>
         <input type="number" matInput formControlName="amount" placeholder="Ex. 100" />
-        <!-- <mat-error *ngIf="color?.errors?.required">Amount is required</mat-error> -->
+        <!-- <mat-error *ngIf="amount?.errors?.required">Amount is required</mat-error> -->
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <ngx-mat-datetime-picker #picker> </ngx-mat-datetime-picker>
+        <input matInput placeholder="Choose a date" />
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
