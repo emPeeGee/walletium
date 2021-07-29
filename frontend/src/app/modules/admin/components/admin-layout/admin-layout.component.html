@@ -21,10 +21,7 @@
     </mat-nav-list>
   </mat-drawer>
 
-  <wal-sidenav-toggler
-    [state]="isSidenavOpened"
-    (click)="drawer.toggle(); isSidenavOpened = !isSidenavOpened"
-  ></wal-sidenav-toggler>
+  <wal-sidenav-toggler [state]="isSidenavOpened" (click)="toggleSidenav()"></wal-sidenav-toggler>
 
   <div class="admin-layout__content">
     <div class="admin-layout__header">
