@@ -1,19 +1,30 @@
+@import 'variables';
+
 .welcome {
-  width: 90%;
-  margin: 0 auto;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  background-color: $cream-color;
+  margin: 0;
+  padding: 0;
+
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  & > * {
-    margin: 16px 0;
+  &__container {
+    max-width: 1200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     text-align: center;
   }
 
   &__app-name {
     font-size: 40px;
-    margin: 8px 0 16px 0;
+    margin: 8px 0 40px 0;
   }
 
   &__logo {
@@ -22,13 +33,24 @@
   }
 
   &__title {
+    margin-bottom: 40px;
     font-size: 52px;
     line-height: 60px;
+    font-family: 'DM Serif Display', serif;
   }
 
   &__info {
+    margin-bottom: 40px;
+
     font-size: 24px;
-    line-height: 30px;
+    line-height: 40px;
+  }
+
+  &__button {
+    padding: 16px 30px;
+
+    line-height: 18px;
+    font-size: 18px;
   }
 }
 

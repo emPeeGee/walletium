@@ -2,8 +2,75 @@
 @import '~@angular/material/theming';
 @include mat.core();
 
-$app-primary: mat.define-palette(mat.$indigo-palette);
-$app-accent: mat.define-palette(mat.$yellow-palette);
-$app-theme: mat.define-light-theme($app-primary, $app-accent);
+$app-primary: (
+  50: #e3e8ed,
+  100: #b8c5d2,
+  200: #899eb4,
+  300: #597796,
+  400: #365980,
+  500: #123c69,
+  600: #103661,
+  700: #0d2e56,
+  800: #0a274c,
+  900: #051a3b,
+  A100: #729dff,
+  A200: #3f7aff,
+  A400: #0c57ff,
+  A700: #004af2,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+
+$app-accent: (
+  50: #f5e7ec,
+  100: #e6c4d0,
+  200: #d69db0,
+  300: #c57690,
+  400: #b85879,
+  500: #ac3b61,
+  600: #a53559,
+  700: #9b2d4f,
+  800: #922645,
+  900: #821933,
+  A100: #ffbaca,
+  A200: #ff87a2,
+  A400: #ff547a,
+  A700: #ff3b66,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #ffffff
+  )
+);
+
+$primary: mat-palette($app-primary);
+$accent: mat-palette($app-accent);
+
+$app-theme: mat.define-light-theme($primary, $accent);
 
 @include mat.all-component-themes($app-theme);

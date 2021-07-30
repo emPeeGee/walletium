@@ -11,18 +11,18 @@
 
     <ng-container *ngIf="user">
       <li>
-        <a mat-button routerLink="/dashboard" routerLinkActive="mat-accent">Dashboard</a>
+        <a mat-button routerLink="/dashboard" routerLinkActive="header__menu-active-item">Dashboard</a>
       </li>
       <li>
-        <a mat-button routerLink="/accounts" routerLinkActive="mat-accent">Accounts</a>
+        <a mat-button routerLink="/accounts" routerLinkActive="header__menu-active-item">Accounts</a>
       </li>
       <li>
-        <a mat-button routerLink="/labels" routerLinkActive="mat-accent">Labels</a>
+        <a mat-button routerLink="/labels" routerLinkActive="header__menu-active-item">Labels</a>
       </li>
 
       <ng-container *ngIf="user.role.name === roles.ADMIN">
         <li>
-          <a mat-button routerLink="/admin/categories" routerLinkActive="mat-accent">Admin Panel</a>
+          <a mat-button routerLink="/admin/categories" routerLinkActive="header__menu-active-item">Admin Panel</a>
         </li>
       </ng-container>
     </ng-container>
@@ -38,7 +38,7 @@
 
     <ng-container *ngIf="user">
       <li>
-        <a mat-button routerLink="profile" routerLinkActive="mat-accent">{{ user.username }}</a>
+        <a mat-button routerLink="profile" routerLinkActive="header__menu-active-item">{{ user.username }}</a>
       </li>
       <li>
         <button mat-button (click)="onLogout()">Log out</button>
@@ -47,10 +47,10 @@
 
     <ng-container *ngIf="!user">
       <li>
-        <a mat-button routerLink="/guest/login" routerLinkActive="mat-accent">Log in</a>
+        <a mat-button routerLink="/guest/login" routerLinkActive="header__menu-active-item">Log in</a>
       </li>
       <li>
-        <a mat-button routerLink="/guest/signup" routerLinkActive="mat-accent">Sign Up</a>
+        <a mat-button routerLink="/guest/signup" routerLinkActive="header__menu-active-item">Sign Up</a>
       </li>
     </ng-container>
   </ul>
