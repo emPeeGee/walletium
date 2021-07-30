@@ -1,3 +1,5 @@
+@import 'variables';
+
 .category-modal {
   width: 800px;
 
@@ -24,13 +26,13 @@
       }
     }
   }
+
+  &__invalid {
+    border-color: $red-color;
+    color: $red-color;
+  }
 }
 
 input[type='file'] {
   visibility: hidden;
-}
-
-.invalid {
-  border-color: #eb1f1f;
-  color: #eb1f1f;
 }

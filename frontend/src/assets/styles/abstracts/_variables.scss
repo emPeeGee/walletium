@@ -1,7 +1,7 @@
 $text-font-stack: 'Roboto', 'Helvetica Neue', 'sans-serif' !default;
 
-$black: #000000;
-$white: #ffffff;
+$black-color: #000000;
+$white-color: #ffffff;
 $gray: #474747;
 
 $red: #ff2222;
@@ -11,8 +11,17 @@ $blue: #1976d2;
 
 $primary-color: #123c69;
 $accent-color: #ac3b61;
+$green-color: #00ab8c;
+$red-color: #e80000;
+
 $sand-color: #edc7b7;
 $sand-color-alpha: #edc7b726;
+
 $cream-color: #eee2dc;
-$browny-gray-color: #bab2b5;
-$content-color: #222222;
+$cream-color-alpha: #eee2dc26;
+
+$browny-gray-color: #bab2b588;
+
+$main-content-color: #222222;
+$second-content-color: #737d81;
+$second-content-color-alpha: #607f8b77;

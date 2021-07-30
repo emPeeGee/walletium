@@ -14,7 +14,7 @@
           mat-stroked-button
           color="primary"
           type="button"
-          [class.invalid]="image?.errors && isImageInputTouched"
+          [ngClass]="{ 'category-modal__invalid': image?.errors && isImageInputTouched }"
           (click)="onFilePickerClick(filePicker)"
         >
           Pick Image

@@ -30,10 +30,10 @@
         </div>
         <div class="account-detail__card-content-info-content">
           <p class="account-detail__card-content-info-content-title">
-            <span class="black">Creation date:</span> {{ account.createdDate | date: 'medium' }}
+            <span>Creation date:</span> {{ account.createdDate | date: 'medium' }}
           </p>
           <p class="account-detail__card-content-info-content-title">
-            <span class="black">Last update date:</span> {{ account.updatedDate | date: 'medium' }}
+            <span>Last update date:</span> {{ account.updatedDate | date: 'medium' }}
           </p>
         </div>
       </div>
@@ -42,7 +42,7 @@
         <p class="account-detail__card-content-amount-title">Amount</p>
         <p
           class="account-detail__card-content-amount-subtitle"
-          [ngClass]="{ red: account.amount < 0, green: account.amount > 0 }"
+          [ngClass]="{ 'wal--red': account.amount < 0, 'wal--green': account.amount > 0 }"
         >
           {{ account.amount }} {{ account.currency }}
         </p>
@@ -52,7 +52,7 @@
     <mat-divider></mat-divider>
 
     <div class="account-detail__card__actions">
-      <button mat-raised-button color="accent" (click)="addRecord()">Add Account</button>
+      <button mat-raised-button color="accent" (click)="addRecord()">Add Record</button>
     </div>
 
     <mat-divider></mat-divider>

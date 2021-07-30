@@ -1,9 +1,11 @@
+@import 'variables';
+
 .record {
   &__title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #727272;
+    color: $second-content-color;
 
     & > div {
       flex: 1;
@@ -68,7 +70,7 @@
   }
 
   &__bold {
-    color: #727272;
+    color: $second-content-color;
   }
 
   p {

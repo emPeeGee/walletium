@@ -1,0 +1,11 @@
+@import 'variables';
+
+.wal {
+  &--red {
+    color: $red-color;
+  }
+
+  &--green {
+    color: $green-color;
+  }
+}
