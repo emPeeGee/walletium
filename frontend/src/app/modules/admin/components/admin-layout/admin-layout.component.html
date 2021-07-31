@@ -1,24 +1,21 @@
 <mat-drawer-container class="admin-layout" autosize>
   <mat-drawer #drawer class="admin-layout__sidenav" mode="side" opened>
-    <mat-nav-list>
-      <mat-list-item routerLinkActive="admin-layout__active">
-        <a mat-line class="admin-layout__sidenav-link" routerLink="categories">
-          <p>Categories</p>
-          <button mat-icon-button>
+    <nav class="admin-layout__navigation">
+      <ul>
+        <li routerLinkActive="admin-layout__active">
+          <a class="admin-layout__navigation-link" routerLink="categories">
             <mat-icon>category</mat-icon>
-          </button>
-        </a>
-      </mat-list-item>
-
-      <mat-list-item routerLinkActive="admin-layout__active">
-        <a mat-line class="admin-layout__sidenav-link" routerLink="mock">
-          <p>Mock</p>
-          <button mat-icon-button>
+            <p>Categories</p>
+          </a>
+        </li>
+        <li routerLinkActive="admin-layout__active">
+          <a class="admin-layout__navigation-link" routerLink="mock">
             <mat-icon>loyalty</mat-icon>
-          </button>
-        </a>
-      </mat-list-item>
-    </mat-nav-list>
+            <p>Mock</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </mat-drawer>
 
   <button
@@ -30,8 +27,6 @@
   >
     <mat-icon>keyboard_arrow_right</mat-icon>
   </button>
-
-  <!-- <wal-sidenav-toggler [state]=""></wal-sidenav-toggler> -->
 
   <div class="admin-layout__content">
     <div class="admin-layout__header">

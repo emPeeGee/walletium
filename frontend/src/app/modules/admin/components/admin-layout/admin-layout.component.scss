@@ -6,26 +6,38 @@
   background-color: $white-color;
 
   &__sidenav {
-    width: 260px;
+    width: 240px;
     min-height: calc(100vh - 64px);
 
-    padding: 20px;
-    background-color: #0c4c7d;
+    padding: 0 1rem;
+    background-color: $primary-color-v2;
+  }
+
+  &__navigation {
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 0.25rem 1rem;
+      border-radius: 4px;
+    }
 
     &-link {
-      display: flex !important;
+      width: 100%;
+      height: 40px;
+
+      display: flex;
       align-items: center;
-      justify-content: space-between;
 
-      p {
-        margin: 0;
-
-        color: $white-color;
-      }
+      font-size: 14px;
+      color: $white-color;
     }
 
     mat-icon {
       color: $white-color;
+      margin-right: 1rem;
     }
   }
 
@@ -55,18 +67,18 @@
 
     width: 100%;
     min-height: calc(100vh - 64px);
-    padding: 32px;
+    padding: 2rem;
   }
 
   &__header {
     &-title {
-      font-size: 32px;
-      margin: 16px 0;
+      font-size: 2rem;
+      margin: 1rem 0;
     }
   }
 
   &__outlet {
-    margin: 16px 0;
+    margin: 1rem 0;
   }
 
   &__active {

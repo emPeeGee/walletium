@@ -15,6 +15,14 @@ body {
   color: $main-content-color;
 }
 
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
 ::selection {
   background: $sand-color;
 }
