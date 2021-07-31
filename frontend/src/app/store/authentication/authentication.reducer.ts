@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { User } from 'src/app/shared/models/user.model';
-import { Token } from 'src/app/shared/models/token.model';
+import { User } from 'src/app/core/models/user.model';
+import { Token } from 'src/app/core/models/token.model';
 import * as authActions from './authentication.actions';
 
 export interface AuthenticationState {

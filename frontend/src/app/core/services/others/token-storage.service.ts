@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Token } from 'src/app/shared/models/token.model';
-import { User } from 'src/app/shared/models/user.model';
+import { Token } from 'src/app/core/models/token.model';
+import { User } from 'src/app/core/models/user.model';
 
 @Injectable({
   providedIn: 'root'

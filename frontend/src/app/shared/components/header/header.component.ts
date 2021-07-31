@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { RootState } from 'src/app/store';
 import { logout } from 'src/app/store/authentication/authentication.actions';
 import { selectUser } from 'src/app/store/authentication/authentication.selectors';
-import { User } from '../../models/user.model';
+import { User } from '../../../core/models/user.model';
 import { Roles } from '../../../core/enums/roles.enum';
 
 @Component({

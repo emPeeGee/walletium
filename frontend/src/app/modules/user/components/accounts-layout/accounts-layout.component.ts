@@ -13,7 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
-import { User } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'wal-accounts-layout',

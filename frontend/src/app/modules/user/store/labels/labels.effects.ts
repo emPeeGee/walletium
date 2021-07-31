@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, switchMap, map, tap, exhaustMap } from 'rxjs/operators';
 import { LabelsService } from 'src/app/core/services/api/labels.service';
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
-import { NestError } from 'src/app/shared/models/nest-error.model';
+import { NestError } from 'src/app/core/models/nest-error.model';
 import { Label } from '../../models/label.model';
 import * as labelsActions from './labels.actions';
 

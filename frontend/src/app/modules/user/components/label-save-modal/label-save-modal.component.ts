@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
-import { User } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/core/models/user.model';
 import { selectUser } from 'src/app/store/authentication/authentication.selectors';
 import { Label, SaveLabel, LabelDialog } from '../../models/label.model';
 import { RootState } from '../../store';

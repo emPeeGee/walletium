@@ -1,5 +1,5 @@
 import { OpenType } from 'src/app/core/enums/open-type.enum';
-import { User } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/core/models/user.model';
 
 export interface Account {
   id: string;

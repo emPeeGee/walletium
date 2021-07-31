@@ -14,7 +14,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Roles } from 'src/app/core/enums/roles.enum';
-import { TokenStorageService } from '../../core/services/others/token-storage.service';
+import { TokenStorageService } from '../services/others/token-storage.service';
 
 @Injectable({
   providedIn: 'root'

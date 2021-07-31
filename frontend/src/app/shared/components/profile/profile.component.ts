@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { RootState } from 'src/app/store';
 import { selectUser } from 'src/app/store/authentication/authentication.selectors';
-import { User } from '../../models/user.model';
+import { User } from '../../../core/models/user.model';
 
 @Component({
   selector: 'wal-profile',

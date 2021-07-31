@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Auth } from 'src/app/shared/models/auth.model';
-import { Credentials } from 'src/app/shared/models/credentials.model';
-import { Signup } from 'src/app/shared/models/signup.model';
+import { Auth } from 'src/app/core/models/auth.model';
+import { Credentials } from 'src/app/core/models/credentials.model';
+import { Signup } from 'src/app/core/models/signup.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

@@ -7,7 +7,7 @@ import { map, catchError, tap, exhaustMap } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/core/services/api/authentication.service';
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
 import { TokenStorageService } from 'src/app/core/services/others/token-storage.service';
-import { NestError } from 'src/app/shared/models/nest-error.model';
+import { NestError } from 'src/app/core/models/nest-error.model';
 import * as authenticationActions from './authentication.actions';
 
 @Injectable()

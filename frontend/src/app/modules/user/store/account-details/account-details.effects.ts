@@ -5,7 +5,7 @@ import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/api/accounts.service';
 import { NavigationService } from 'src/app/core/services/others/navigation.service';
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
-import { NestError } from 'src/app/shared/models/nest-error.model';
+import { NestError } from 'src/app/core/models/nest-error.model';
 import * as accountDetailsActions from './account-details.actions';
 
 @Injectable()

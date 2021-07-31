@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
-import { mimeTypeValidator } from 'src/app/core/validators/mime-type.validator';
+import { mimeTypeValidator } from 'src/app/shared/validators/mime-type.validator';
 import { CategoryDialog } from '../../models/category-dialog.model';
 import { Category } from '../../models/category.model';
 import { RootState } from '../../store';

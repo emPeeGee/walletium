@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { RecordsService } from 'src/app/core/services/api/records.service';
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
-import { NestError } from 'src/app/shared/models/nest-error.model';
+import { NestError } from 'src/app/core/models/nest-error.model';
 import { Record } from '../../models/record.model';
 import * as recordsActions from './records.actions';
 

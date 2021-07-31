@@ -4,10 +4,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { RootState } from 'src/app/store';
-import { matchPasswords } from 'src/app/shared/utils/validators.util';
+import { matchPasswords } from 'src/app/shared/validators/match-password.validator';
 import { signup } from 'src/app/store/authentication/authentication.actions';
 import { selectAuthPending } from 'src/app/store/authentication/authentication.selectors';
-import { Signup } from 'src/app/shared/models/signup.model';
+import { Signup } from 'src/app/core/models/signup.model';
 
 @Component({
   selector: 'wal-signup',

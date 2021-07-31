@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { Auth } from 'src/app/shared/models/auth.model';
-import { Credentials } from 'src/app/shared/models/credentials.model';
-import { Signup } from 'src/app/shared/models/signup.model';
+import { Auth } from 'src/app/core/models/auth.model';
+import { Credentials } from 'src/app/core/models/credentials.model';
+import { Signup } from 'src/app/core/models/signup.model';
 
 export const signup = createAction('[SIGN UP PAGE] Signup', props<{ payload: Signup }>());
 export const signupSucces = createAction('[SIGN UP PAGE] Signup Success', props<{ payload: Signup }>());

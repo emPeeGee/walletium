@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AccountsService } from 'src/app/core/services/api/accounts.service';
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
-import { NestError } from 'src/app/shared/models/nest-error.model';
+import { NestError } from 'src/app/core/models/nest-error.model';
 import * as accountsActions from './accounts.actions';
 import { Account, AccountWithUser } from '../../models/account.model';
 

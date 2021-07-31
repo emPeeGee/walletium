@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Credentials } from 'src/app/shared/models/credentials.model';
+import { Credentials } from 'src/app/core/models/credentials.model';
 import { RootState } from 'src/app/store';
 import { login } from 'src/app/store/authentication/authentication.actions';
 import { selectAuthPending } from 'src/app/store/authentication/authentication.selectors';
