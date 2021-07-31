@@ -4,7 +4,9 @@
     <h1 class="dashboard__title">Dashboard</h1>
   </div>
 
-  <mat-divider></mat-divider>
+  <div class="dashboard__divider">
+    <mat-divider></mat-divider>
+  </div>
 
   <div class="dashboard__actions">
     <button mat-raised-button color="accent" (click)="addAccount()">Add Account</button>
@@ -13,7 +15,6 @@
   <ng-container *ngIf="allAccounts$ | async as accounts">
     <div class="dashboard__accounts">
       <wal-account-card *ngFor="let account of accounts" [account]="account"></wal-account-card>
-      <wal-account-add-card></wal-account-add-card>
     </div>
   </ng-container>
 </section>

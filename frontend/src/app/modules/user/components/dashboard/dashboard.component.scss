@@ -1,13 +1,21 @@
 .dashboard {
   width: 95%;
-  margin: 32px auto;
+  margin: 2rem auto;
+
+  &__header {
+    margin-bottom: 1rem;
+  }
 
   &__title {
-    font-size: 32px;
+    font-size: 2rem;
+  }
+
+  &__divider {
+    margin-bottom: 1rem;
   }
 
   &__actions {
-    margin-top: 16px;
+    margin-bottom: 2rem;
   }
 
   &__accounts {
@@ -15,7 +23,7 @@
     justify-content: flex-start;
 
     & > * {
-      margin-right: 32px;
+      margin-right: 2rem;
     }
   }
 }

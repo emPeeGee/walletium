@@ -25,7 +25,7 @@
         }
 
         p {
-          margin: 0px;
+          margin: 0;
         }
       }
 
@@ -52,6 +52,10 @@
       width: 100%;
       display: flex;
       align-items: center;
+
+      p {
+        margin: 0 0 0.75rem;
+      }
 
       &-avatar {
         flex: 1;
