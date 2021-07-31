@@ -4,6 +4,7 @@ import { AccountDetailComponent } from './components/account-detail/account-deta
 import { AccountsLayoutComponent } from './components/accounts-layout/accounts-layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LabelsLayoutComponent } from './components/labels-layout/labels-layout.component';
+import { RecordsComponent } from './containers/records/records.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'accounts/details/:accountId',
     component: AccountDetailComponent
+  },
+  {
+    path: 'records',
+    component: RecordsComponent
   },
   {
     path: 'labels',

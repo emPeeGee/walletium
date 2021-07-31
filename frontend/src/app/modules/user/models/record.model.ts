@@ -13,9 +13,9 @@ export interface Record {
   userChosenDate: string;
   createdDate: string;
   updatedDate: string;
-  payee: string;
-  note: string;
-  place: string;
+  payee?: string;
+  note?: string;
+  place?: string;
   account: {
     name: string;
     currency: string;
@@ -25,7 +25,7 @@ export interface Record {
     name: string;
     image: string;
   };
-  labels: [];
+  labels?: [];
 }
 
 export interface RecordDialog {

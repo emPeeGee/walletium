@@ -1,0 +1,18 @@
+<!-- <wal-loader *ngIf="isPending$ | async as loading" [isLoading]="loading"></wal-loader> -->
+<section class="records">
+  <div class="records__header">
+    <h1 class="records__title">All Records</h1>
+  </div>
+
+  <div class="records__divider">
+    <mat-divider></mat-divider>
+  </div>
+
+  <div class="records__actions">
+    <button mat-raised-button color="accent">Add Account</button>
+  </div>
+
+  <div *ngIf="true" class="records__records">
+    <wal-record-card *ngFor="let record of records" [record]="record"></wal-record-card>
+  </div>
+</section>

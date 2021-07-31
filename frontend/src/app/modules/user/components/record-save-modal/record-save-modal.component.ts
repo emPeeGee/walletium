@@ -40,7 +40,7 @@ export class RecordSaveModalComponent implements OnInit {
   private initializeForm(): void {
     this.recordForm = new FormGroup({
       type: new FormControl('', Validators.required),
-      amount: new FormControl('', Validators.required), 
+      amount: new FormControl('', Validators.required),
       userChosenDate: new FormControl('', Validators.required),
       payee: new FormControl(''),
       note: new FormControl(''),

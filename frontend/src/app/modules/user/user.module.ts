@@ -15,6 +15,7 @@ import { LabelCardComponent } from './components/label-card/label-card.component
 import { LabelSaveModalComponent } from './components/label-save-modal/label-save-modal.component';
 import { RecordCardComponent } from './components/record-card/record-card.component';
 import { RecordSaveModalComponent } from './components/record-save-modal/record-save-modal.component';
+import { RecordsComponent } from './containers/records/records.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RecordSaveModalComponent } from './components/record-save-modal/record-
     LabelCardComponent,
     LabelSaveModalComponent,
     RecordCardComponent,
-    RecordSaveModalComponent
+    RecordSaveModalComponent,
+    RecordsComponent
   ],
   imports: [
     UserRoutingModule,
