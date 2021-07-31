@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserRoutingModule } from './user-routing.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -32,7 +32,6 @@ import { RecordSaveModalComponent } from './components/record-save-modal/record-
     RecordSaveModalComponent
   ],
   imports: [
-    CommonModule,
     UserRoutingModule,
     SharedModule,
     StoreModule.forFeature('user', reducers),

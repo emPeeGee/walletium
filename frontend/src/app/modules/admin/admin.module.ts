@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MockComponent } from './mock/mock.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
@@ -13,7 +12,6 @@ import { CategorySaveModalComponent } from './components/category-save-modal/cat
 @NgModule({
   declarations: [MockComponent, AdminLayoutComponent, CategoriesLayoutComponent, CategorySaveModalComponent],
   imports: [
-    CommonModule,
     AdminRoutingModule,
     SharedModule,
     StoreModule.forFeature('admin', reducers),
