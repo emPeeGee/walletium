@@ -21,7 +21,17 @@
     </mat-nav-list>
   </mat-drawer>
 
-  <wal-sidenav-toggler [state]="isSidenavOpened" (click)="toggleSidenav()"></wal-sidenav-toggler>
+  <button
+    mat-mini-fab
+    color="basic"
+    class="admin-layout__sidenav-toggler"
+    [ngClass]="{ 'admin-layout__sidenav-toggler--closed': isSidenavOpened }"
+    (click)="toggleSidenav()"
+  >
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+
+  <!-- <wal-sidenav-toggler [state]=""></wal-sidenav-toggler> -->
 
   <div class="admin-layout__content">
     <div class="admin-layout__header">

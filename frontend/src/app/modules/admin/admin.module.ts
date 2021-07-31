@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MockComponent } from './mock/mock.component';
+import { MockComponent } from './components/mock/mock.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { SharedModule } from '../../shared/shared.module';

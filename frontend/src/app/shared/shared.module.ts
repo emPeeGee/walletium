@@ -10,7 +10,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { SidenavTogglerComponent } from './components/sidenav-toggler/sidenav-toggler.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 import { SnowComponent } from './components/snow/snow.component';
 import { BackActionDirective } from './directives/back-action.directive';
@@ -23,7 +22,6 @@ import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
     LoaderComponent,
     ConfirmModalComponent,
     BackActionDirective,
-    SidenavTogglerComponent,
     ImageViewerComponent,
     SnowComponent,
     NumberToArrayPipe,
@@ -41,7 +39,6 @@ import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
     LoaderComponent,
     ConfirmModalComponent,
     BackActionDirective,
-    SidenavTogglerComponent,
     SnowComponent
   ]
 })

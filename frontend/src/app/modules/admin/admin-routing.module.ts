@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { CategoriesLayoutComponent } from './components/categories-layout/categories-layout.component';
-import { MockComponent } from './mock/mock.component';
+import { MockComponent } from './components/mock/mock.component';
 
 const routes: Routes = [
   {

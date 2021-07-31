@@ -1,10 +1,14 @@
 @import 'variables';
 
 .header {
+  position: relative;
+  z-index: 10;
+
   &__menu {
-    list-style: none;
     padding: 0;
     margin: 0;
+    list-style: none;
+
     display: flex;
     align-items: center;
     justify-content: center;
