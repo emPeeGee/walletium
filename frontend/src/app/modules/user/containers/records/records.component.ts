@@ -27,7 +27,7 @@ export class RecordsComponent implements OnInit {
       }
     },
     {
-      id: 'aaa',
+      id: 'bbb',
       type: RecordType.EXPENSE,
       amount: 100,
       userChosenDate: new Date().toISOString(),
@@ -45,7 +45,7 @@ export class RecordsComponent implements OnInit {
       }
     },
     {
-      id: 'aaa',
+      id: 'bbcc',
       type: RecordType.INCOME,
       amount: 100,
       userChosenDate: new Date().toISOString(),

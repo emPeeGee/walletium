@@ -4,26 +4,26 @@ import { AccountDetailComponent } from './components/account-detail/account-deta
 import { AccountsLayoutComponent } from './components/accounts-layout/accounts-layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LabelsLayoutComponent } from './components/labels-layout/labels-layout.component';
+import { RecordComponent } from './components/record/record.component';
 import { RecordsComponent } from './containers/records/records.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'labels', component: LabelsLayoutComponent },
   {
     path: 'accounts',
-    component: AccountsLayoutComponent
-  },
-  {
-    path: 'accounts/details/:accountId',
-    component: AccountDetailComponent
+    children: [
+      { path: '', component: AccountsLayoutComponent },
+      { path: 'details/:accountId', component: AccountDetailComponent }
+    ]
   },
   {
     path: 'records',
-    component: RecordsComponent
-  },
-  {
-    path: 'labels',
-    component: LabelsLayoutComponent
+    children: [
+      { path: '', component: RecordsComponent },
+      { path: ':id', component: RecordComponent }
+    ]
   }
 ];
 
