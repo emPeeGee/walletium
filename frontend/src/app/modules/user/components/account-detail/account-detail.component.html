@@ -1,15 +1,15 @@
 <wal-loader *ngIf="isPending$ | async as loading" [isLoading]="loading"></wal-loader>
 <section class="account-detail" *ngIf="account">
   <mat-card class="account-detail__card">
-    <div class="account-detail__card-header">
+    <div class="account-detail__header">
       <button walBackAction mat-raised-button>
-        <div class="account-detail__card-header-back">
+        <div class="account-detail__header-back">
           <mat-icon>keyboard_backspace</mat-icon>
           <p>Back</p>
         </div>
       </button>
       <h2>Account Detail</h2>
-      <div class="account-detail__card-header-actions">
+      <div class="account-detail__header-actions">
         <button mat-button color="primary" (click)="editAccount()">Edit</button>
         <button mat-button color="warn" (click)="deleteAccount()">Delete</button>
       </div>
@@ -17,31 +17,31 @@
 
     <mat-divider></mat-divider>
 
-    <div class="account-detail__card-content">
-      <div class="account-detail__card-content-avatar">
-        <div class="account-detail__card-content-avatar-content" [style.background-color]="account?.color">
+    <div class="account-detail__content">
+      <div class="account-detail__avatar">
+        <div class="account-detail__avatar-icon" [style.background-color]="account?.color">
           {{ account?.name[0] }}
         </div>
       </div>
-      <div class="account-detail__card-content-info">
-        <div class="account-detail__card-content-info-content">
-          <p class="account-detail__card-content-info-content-title">Name</p>
-          <p class="account-detail__card-content-info-content-subtitle">{{ account.name }}</p>
+      <div class="account-detail__info">
+        <div class="account-detail__info">
+          <p class="account-detail__info-title">Name</p>
+          <p class="account-detail__info-subtitle">{{ account.name }}</p>
         </div>
-        <div class="account-detail__card-content-info-content">
-          <p class="account-detail__card-content-info-content-title">
+        <div class="account-detail__info">
+          <p class="account-detail__info-title">
             <span>Creation date:</span> {{ account.createdDate | date: 'medium' }}
           </p>
-          <p class="account-detail__card-content-info-content-title">
+          <p class="account-detail__info-title">
             <span>Last update date:</span> {{ account.updatedDate | date: 'medium' }}
           </p>
         </div>
       </div>
 
-      <div class="account-detail__card-content-amount">
-        <p class="account-detail__card-content-amount-title">Amount</p>
+      <div class="account-detail__amount">
+        <p class="account-detail__amount-title">Amount</p>
         <p
-          class="account-detail__card-content-amount-subtitle"
+          class="account-detail__amount-subtitle"
           [ngClass]="{ 'wal--red': account.amount < 0, 'wal--green': account.amount > 0 }"
         >
           {{ account.amount }} {{ account.currency }}
@@ -51,18 +51,18 @@
 
     <mat-divider></mat-divider>
 
-    <div class="account-detail__card__actions">
+    <div class="account-detail__actions">
       <button mat-raised-button color="accent" (click)="addRecord()">Add Record</button>
     </div>
 
     <mat-divider></mat-divider>
 
-    <div class="account-detail__card-footer">
+    <div class="account-detail__footer">
       <mat-tab-group>
         <mat-tab label="Records">
-          <mat-accordiaon *ngIf="accountRecords$ | async as records" multi>
+          <div *ngIf="accountRecords$ | async as records" class="account-detail__records">
             <wal-record-card *ngFor="let record of records" [record]="record"></wal-record-card>
-          </mat-accordiaon>
+          </div>
         </mat-tab>
         <mat-tab label="Balance"></mat-tab>
       </mat-tab-group>

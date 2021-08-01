@@ -1,114 +1,98 @@
 @import 'variables';
 
 .account-detail {
-  width: 90%;
-  height: 100%;
-  margin: 32px auto;
+  margin: 2rem auto;
+  padding: 0 2rem;
 
-  &__card {
-    width: 100%;
+  &__header {
+    display: flex;
+    align-items: center;
 
-    &-header {
-      width: 100%;
-      height: auto;
-
+    &-back {
       display: flex;
       align-items: center;
 
-      &-back {
-        display: flex;
-        align-items: center;
-
-        mat-icon {
-          font-size: 22px;
-          height: 100%;
-        }
-
-        p {
-          margin: 0;
-        }
-      }
-
-      &-actions {
-        display: flex;
-        justify-content: space-around;
-        margin-left: auto;
-
-        & > *:first-child {
-          margin-right: 16px;
-        }
-      }
-
-      h2 {
-        margin: 0;
-      }
-
-      button {
-        margin-right: 32px;
+      mat-icon {
+        margin-right: 0.5rem;
       }
     }
+
+    &-actions {
+      display: flex;
+      justify-content: space-around;
+      margin-left: auto;
+
+      & > *:first-child {
+        margin-right: 1rem;
+      }
+    }
+
+    button {
+      margin-right: 2rem;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0 0 0.75rem;
+    }
+  }
+
+  &__avatar {
+    flex: 1;
+
+    &-icon {
+      width: 90px;
+      height: 90px;
+      font-size: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__info {
+    flex: 5;
 
     &-content {
-      width: 100%;
-      display: flex;
-      align-items: center;
+      line-height: 10px;
+    }
 
-      p {
-        margin: 0 0 0.75rem;
-      }
+    &-title {
+      font-size: 14px;
+      color: $second-content-color;
 
-      &-avatar {
-        flex: 1;
-
-        &-content {
-          width: 90px;
-          height: 90px;
-          font-size: 40px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      }
-
-      &-info {
-        flex: 5;
-
-        &-content {
-          line-height: 10px;
-
-          &-title {
-            font-size: 14px;
-            color: $second-content-color;
-
-            span {
-              color: $main-content-color;
-            }
-          }
-
-          &-subtitle {
-            font-size: 14px;
-            font-weight: 500;
-          }
-        }
-      }
-
-      &-amount {
-        flex: 3;
-
-        &-title {
-          font-size: 16px;
-          color: $second-content-color;
-        }
-
-        &-subtitle {
-          font-size: 30px;
-        }
+      span {
+        color: $main-content-color;
       }
     }
 
-    &-footer {
-      width: 100%;
+    &-subtitle {
+      font-size: 14px;
+      font-weight: 500;
     }
+  }
+
+  &__amount {
+    flex: 3;
+
+    &-title {
+      font-size: 1rem;
+      color: $second-content-color;
+    }
+
+    &-subtitle {
+      font-size: 2rem;
+      font-family: 'DM Serif Display', serif;
+    }
+  }
+
+  &__records {
+    margin-top: 1rem;
   }
 }
 
