@@ -1,18 +1,18 @@
 import { createAction, props } from '@ngrx/store';
 import { Record } from '../../models/record.model';
 
-export const loadAllAccountRecords = createAction(
-  '[USER -> RECORDS API] Load all user account records',
-  props<{ accountId: string }>()
-);
-export const loadAllAccountRecordsSuccess = createAction(
-  '[USER -> RECORDS API] Load all user account records success',
-  props<{ message: string; records: Record[] }>()
-);
-export const loadAllAccountRecordsFail = createAction(
-  '[USER -> RECORDS API] Load all user account records fail',
-  props<{ message: string }>()
-);
+// export const loadAllAccountRecords = createAction(
+//   '[USER -> RECORDS API] Load all user account records',
+//   props<{ accountId: string }>()
+// );
+// export const loadAllAccountRecordsSuccess = createAction(
+//   '[USER -> RECORDS API] Load all user account records success',
+//   props<{ message: string; records: Record[] }>()
+// );
+// export const loadAllAccountRecordsFail = createAction(
+//   '[USER -> RECORDS API] Load all user account records fail',
+//   props<{ message: string }>()
+// );
 
 export const loadRecord = createAction('[USER -> RECORDS API] Load record', props<{ id: string }>());
 export const loadRecordSuccess = createAction(

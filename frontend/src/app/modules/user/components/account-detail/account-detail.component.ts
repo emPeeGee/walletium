@@ -10,9 +10,11 @@ import { Account, AccountDialog } from '../../models/account.model';
 import { Record, RecordDialog } from '../../models/record.model';
 import { RootState } from '../../store';
 import * as accountDetailsActions from '../../store/account-details/account-details.actions';
-import { selectAccount, selectAccountPending } from '../../store/account-details/account-details.selectors';
-import { loadAllAccountRecords } from '../../store/records/records.actions';
-import { selectAllAccountRecords } from '../../store/records/records.selectors';
+import {
+  selectAccount,
+  selectAccountPending,
+  selectAllAccountRecords
+} from '../../store/account-details/account-details.selectors';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
 import { RecordSaveModalComponent } from '../record-save-modal/record-save-modal.component';
 
@@ -49,7 +51,7 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe(params => {
       const accountId = params.get('accountId') ?? '';
       this.store.dispatch(accountDetailsActions.loadAccount({ accountId }));
-      this.store.dispatch(loadAllAccountRecords({ accountId }));
+      this.store.dispatch(accountDetailsActions.loadAllAccountRecords({ accountId }));
     });
   }
 

@@ -5,33 +5,33 @@ import * as recordsActions from './records.actions';
 export interface RecordsState {
   pending: boolean;
   message: string;
-  accountRecords: Record[];
+  records: Record[];
 }
 
 const initialState: RecordsState = {
   pending: false,
   message: '',
-  accountRecords: []
+  records: []
 };
 
 const recordsReducer = createReducer(
-  initialState,
-  on(recordsActions.loadAllAccountRecordsFail, (state, { message }) => ({
-    ...state,
-    pending: false,
-    message
-  })),
+  initialState
+  // on(recordsActions.loadAllAccountRecordsFail, (state, { message }) => ({
+  //   ...state,
+  //   pending: false,
+  //   message
+  // })),
 
-  on(recordsActions.loadAllAccountRecords, state => ({
-    ...state,
-    pending: true
-  })),
-  on(recordsActions.loadAllAccountRecordsSuccess, (state, { message, records }) => ({
-    ...state,
-    pending: false,
-    accountRecords: records,
-    message
-  }))
+  // on(recordsActions.loadAllAccountRecords, state => ({
+  //   ...state,
+  //   pending: true
+  // })),
+  // on(recordsActions.loadAllAccountRecordsSuccess, (state, { message, records }) => ({
+  //   ...state,
+  //   pending: false,
+  //   accountRecords: records,
+  //   message
+  // }))
 );
 
 export function reducer(state: RecordsState | undefined, action: Action): RecordsState {

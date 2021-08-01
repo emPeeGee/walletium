@@ -7,14 +7,16 @@ import { NavigationService } from 'src/app/core/services/others/navigation.servi
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
 import { NestError } from 'src/app/core/models/nest-error.model';
 import * as accountDetailsActions from './account-details.actions';
-
+import { RecordsService } from 'src/app/core/services/api/records.service';
+import { Record } from '../../models/record.model';
 @Injectable()
 export class AccountDetailsEffects {
   constructor(
     private actions$: Actions,
     private navigation: NavigationService,
     private notificationService: NofiticationService,
-    private accountsService: AccountsService
+    private accountsService: AccountsService,
+    private recordsService: RecordsService
   ) {}
 
   loadAccount$ = createEffect(() =>
@@ -27,6 +29,25 @@ export class AccountDetailsEffects {
           ),
           catchError(({ error }: { error: NestError }) =>
             of(accountDetailsActions.loadAccountFail({ message: error.message }))
+          )
+        )
+      )
+    )
+  );
+
+  loadAllAccountRecords$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(accountDetailsActions.loadAllAccountRecords),
+      switchMap(action =>
+        this.recordsService.getAllByAccount(action.accountId).pipe(
+          map((records: Record[]) =>
+            accountDetailsActions.loadAllAccountRecordsSuccess({
+              message: 'All Account Records were loaded with success',
+              records
+            })
+          ),
+          catchError(({ error }: { error: NestError }) =>
+            of(accountDetailsActions.loadAllAccountRecordsFail({ message: error.message }))
           )
         )
       )

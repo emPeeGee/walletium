@@ -7,3 +7,6 @@ const selectAccountDetailsState = createSelector(selectUserState, state => state
 export const selectAccount = createSelector(selectAccountDetailsState, state => state.account);
 export const selectAccountPending = createSelector(selectAccountDetailsState, state => state.pending);
 export const selectError = createSelector(selectAccountDetailsState, state => state.error);
+
+export const selectAllAccountRecords = createSelector(selectAccountDetailsState, state => state.accountRecords);
+export const selectRecordsPending = createSelector(selectAccountDetailsState, state => state.pending);
