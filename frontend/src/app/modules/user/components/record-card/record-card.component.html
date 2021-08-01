@@ -1,8 +1,8 @@
-<mat-expansion-panel class="record" *ngIf="record">
-  <mat-expansion-panel-header class="record__header">
-    <mat-panel-title class="record__title">
+<section class="record" *ngIf="record">
+  <div class="record__header" (click)="toggleExpand()">
+    <div class="record__title">
       <div class="record__category">
-        <img class="record__category-image" [src]="record.category.image" alt="Image" />
+        <img [src]="record.category.image" alt="Image" />
         <p>{{ record.category.name }}</p>
       </div>
       <div class="record__date">
@@ -15,39 +15,40 @@
           {{ record.note }}
         </p>
       </div>
-      <div class="record__title__account">
+      <div class="record__account">
         <p [style.backgroundColor]="record.account.color">
           {{ record.account.name }}
         </p>
       </div>
-      <div
-        class="record__title__amount"
-        [ngClass]="{ yellow: record.type === 'INCOME', red: record.type === 'EXPENSE' }"
-      >
+      <div class="record__amount">
         <p>{{ record.account.currency }}</p>
-        <p>{{ record.amount }}</p>
+        <p [ngClass]="{ 'wal--green': record.type === 'INCOME', 'wal--red': record.type === 'EXPENSE' }">
+          {{ record.amount }}
+        </p>
       </div>
-    </mat-panel-title>
-  </mat-expansion-panel-header>
-
-  <div class="record__details">
-    <img [src]="record.category.image" alt="" />
-    <div class="record__details-info">
-      <p><span class="record__bold">Type:</span> {{ record.type }}</p>
-      <p><span class="record__bold"> Amount:</span> {{ record.amount }}</p>
-      <p><span class="record__bold"> Date:</span> {{ record.userChosenDate | date: 'MMMM d, y h:mm a' }}</p>
-      <p><span class="record__bold"> Creation Date:</span> {{ record.createdDate | date: 'MMMM d, y h:mm a' }}</p>
-      <p><span class="record__bold"> Last Update Date:</span> {{ record.createdDate | date: 'MMMM d, y h:mm a' }}</p>
-      <p><span class="record__bold"> Payee:</span> {{ record.payee }}</p>
-      <p><span class="record__bold"> Note:</span> {{ record.note }}</p>
-      <p><span class="record__bold"> Place:</span> {{ record.place }}</p>
-      <p><span class="record__bold"> Currency:</span> {{ record.account.currency }}</p>
-      <p><span class="record__bold"> Account name: </span> {{ record.account.name }}</p>
-      <p><span class="record__bold"> Category:</span> {{ record.category.name }}</p>
     </div>
   </div>
 
-  <mat-action-row class="record__actions">
-    <button mat-button color="primary" (click)="onEdit()">Edit</button>
-  </mat-action-row>
-</mat-expansion-panel>
+  <div class="record__details" [@expand]="isExpanded ? 'expanded' : 'initial'">
+    <div class="record__details-content">
+      <img [src]="record.category.image" alt="" />
+      <div class="record__details-info">
+        <p><span>Type:</span> {{ record.type }}</p>
+        <p><span>Amount:</span> {{ record.amount }}</p>
+        <p><span>Date:</span> {{ record.userChosenDate | date: 'MMMM d, y h:mm a' }}</p>
+        <p><span>Creation Date:</span> {{ record.createdDate | date: 'MMMM d, y h:mm a' }}</p>
+        <p><span>Last Update Date:</span> {{ record.createdDate | date: 'MMMM d, y h:mm a' }}</p>
+        <p><span>Payee:</span> {{ record.payee }}</p>
+        <p><span>Note:</span> {{ record.note }}</p>
+        <p><span>Place:</span> {{ record.place }}</p>
+        <p><span>Currency:</span> {{ record.account.currency }}</p>
+        <p><span>Account name: </span> {{ record.account.name }}</p>
+        <p><span>Category:</span> {{ record.category.name }}</p>
+      </div>
+
+      <div class="record__actions">
+        <button mat-button color="primary" (click)="onEdit()">Edit</button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -22,7 +22,8 @@ export class RecordsComponent implements OnInit {
       },
       category: {
         name: 'Category',
-        image: 'img'
+        image:
+          'https://images.unsplash.com/photo-1627773327674-309942d1552f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60'
       }
     },
     {
@@ -39,12 +40,13 @@ export class RecordsComponent implements OnInit {
       },
       category: {
         name: 'Category',
-        image: 'img'
+        image:
+          'https://images.unsplash.com/photo-1627773327674-309942d1552f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60'
       }
     },
     {
       id: 'aaa',
-      type: RecordType.EXPENSE,
+      type: RecordType.INCOME,
       amount: 100,
       userChosenDate: new Date().toISOString(),
       createdDate: new Date().toISOString(),
@@ -56,7 +58,8 @@ export class RecordsComponent implements OnInit {
       },
       category: {
         name: 'Category',
-        image: 'img'
+        image:
+          'https://images.unsplash.com/photo-1627773327674-309942d1552f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60'
       }
     }
   ];
