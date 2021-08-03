@@ -61,7 +61,7 @@
       <mat-tab-group>
         <mat-tab label="Records">
           <div *ngIf="accountRecords$ | async as records" class="account-detail__records">
-            <wal-record-card *ngFor="let record of records" [record]="record"></wal-record-card>
+            <wal-record-row *ngFor="let record of records" [record]="record"></wal-record-row>
           </div>
         </mat-tab>
         <mat-tab label="Balance"></mat-tab>
