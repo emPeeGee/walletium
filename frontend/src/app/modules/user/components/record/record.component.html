@@ -1,1 +1,107 @@
-<p>record works!</p>
+<!-- <wal-loader *ngIf="isPending$ | async as loading" [isLoading]="loading"></wal-loader> -->
+<section class="record" *ngIf="record">
+  <mat-card class="record__card">
+    <div class="record__header">
+      <button walBackAction mat-raised-button>
+        <div class="record__header-back">
+          <mat-icon>keyboard_backspace</mat-icon>
+          <p>Back</p>
+        </div>
+      </button>
+      <h2>Record {{ record.id }}</h2>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="record__general-info">
+      <p>
+        Account: <span>{{ record.account.name }}</span>
+      </p>
+      <p>
+        Creation date of record: <span>{{ record.createdDate | date: 'MMM d, y, HH:mm:ss' }}</span>
+      </p>
+      <p>
+        Last updated date of record: <span>{{ record.updatedDate | date: 'MMM d, y, HH:mm:ss' }}</span>
+      </p>
+    </div>
+
+    <div class="record__content">
+      <form class="record__form" [formGroup]="recordForm">
+        <div class="record__type-wrapper">
+          <mat-button-toggle-group matInput class="record__type" formControlName="type">
+            <mat-button-toggle value="EXPENSE">
+              <p>Expense</p>
+            </mat-button-toggle>
+            <mat-button-toggle value="INCOME">
+              <p>Income</p>
+            </mat-button-toggle>
+            <mat-button-toggle value="TRANSFER">
+              <p>Transfer</p>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+        <div class="record__controls">
+          <div class="record__controls-left">
+            <div class="record__field record__amount">
+              <mat-form-field>
+                <mat-label>Amount</mat-label>
+                <input matInput type="number" formControlName="amount" />
+              </mat-form-field>
+            </div>
+
+            <div class="record__field">
+              <mat-form-field>
+                <mat-label>Category</mat-label>
+                <input matInput formControlName="category" />
+              </mat-form-field>
+            </div>
+
+            <div class="record__field">
+              <mat-form-field>
+                <mat-label>Labels</mat-label>
+                <input matInput formControlName="labels" />
+              </mat-form-field>
+            </div>
+
+            <div class="record__field">
+              <mat-form-field>
+                <mat-label>Record date</mat-label>
+                <input matInput formControlName="updatedDate" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="record__controls-right">
+            <div class="record__field record__note">
+              <mat-form-field floatLabel="always">
+                <mat-label>Note</mat-label>
+                <textarea matInput placeholder="Ex. Kaufland"></textarea>
+              </mat-form-field>
+            </div>
+
+            <div class="record__field">
+              <mat-form-field floatLabel="always">
+                <mat-label>Payee</mat-label>
+                <input matInput formControlName="payee" />
+              </mat-form-field>
+            </div>
+
+            <div class="record__field">
+              <mat-form-field>
+                <mat-label>Place</mat-label>
+                <input matInput formControlName="place" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="record__actions">
+      <button mat-raised-button color="accent" (click)="addRecord()">Edit</button>
+    </div>
+  </mat-card>
+</section>
