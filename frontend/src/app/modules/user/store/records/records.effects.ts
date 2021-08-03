@@ -16,33 +16,34 @@ export class RecordsEffects {
     private notificationService: NofiticationService
   ) {}
 
-  // public loadAllAccountRecords$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(recordsActions.loadAllAccountRecords),
-  //     switchMap(action =>
-  //       this.recordsService.getAllByAccount(action.accountId).pipe(
-  //         map((records: Record[]) =>
-  //           recordsActions.loadAllAccountRecordsSuccess({
-  //             message: 'All Account Records were loaded with success',
-  //             records
-  //           })
-  //         ),
-  //         catchError(({ error }: { error: NestError }) =>
-  //           of(recordsActions.loadAllAccountRecordsFail({ message: error.message }))
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
+  public loadUserRecords$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(recordsActions.loadUserRecords),
+      switchMap(() =>
+        this.recordsService.getAllUserRecords().pipe(
+          map((records: Record[]) =>
+            recordsActions.loadUserRecordsSuccess({
+              message: 'All user records were loaded with success',
+              records
+            })
+          ),
+          catchError(({ error }: { error: NestError }) =>
+            of(recordsActions.loadUserRecordsFail({ message: error.message }))
+          )
+        )
+      )
+    )
+  );
 
-  // failAction$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(recordsActions.loadAllAccountRecordsFail),
-  //       tap(({ message }) => {
-  //         this.notificationService.error(message);
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
+  // FIXME: NOTIF is not working!
+  failAction$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(recordsActions.loadUserRecordsFail),
+        tap(({ message }) => {
+          this.notificationService.error(message);
+        })
+      ),
+    { dispatch: false }
+  );
 }

@@ -13,6 +13,6 @@
   </div>
 
   <div *ngIf="true" class="records__records">
-    <wal-record-row *ngFor="let record of records" [record]="record" [isExpandable]="false"></wal-record-row>
+    <wal-record-row *ngFor="let record of records$ | async" [record]="record" [isExpandable]="false"></wal-record-row>
   </div>
 </section>

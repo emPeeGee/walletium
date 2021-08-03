@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { RecordsService } from 'src/app/core/services/api/records.service';
 import { Record, RecordType } from '../../models/record.model';
+import { RootState } from '../../store';
+
+import * as recordsSelectors from '../../store/records/records.selectors';
+import * as recordsActions from '../../store/records/records.actions';
 
 @Component({
   selector: 'wal-records',
@@ -7,64 +14,19 @@ import { Record, RecordType } from '../../models/record.model';
   styleUrls: ['./records.component.scss']
 })
 export class RecordsComponent implements OnInit {
-  public records: Record[] = [
-    {
-      id: 'aaa',
-      type: RecordType.EXPENSE,
-      amount: 100,
-      userChosenDate: new Date().toISOString(),
-      createdDate: new Date().toISOString(),
-      updatedDate: new Date().toISOString(),
-      account: {
-        name: 'aaa',
-        currency: 'aaa',
-        color: 'aaa'
-      },
-      category: {
-        name: 'Category',
-        image:
-          'https://images.unsplash.com/photo-1627773327674-309942d1552f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60'
-      }
-    },
-    {
-      id: 'bbb',
-      type: RecordType.EXPENSE,
-      amount: 100,
-      userChosenDate: new Date().toISOString(),
-      createdDate: new Date().toISOString(),
-      updatedDate: new Date().toISOString(),
-      account: {
-        name: 'aaa',
-        currency: 'aaa',
-        color: 'aaa'
-      },
-      category: {
-        name: 'Category',
-        image:
-          'https://images.unsplash.com/photo-1627773327674-309942d1552f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60'
-      }
-    },
-    {
-      id: 'bbcc',
-      type: RecordType.INCOME,
-      amount: 100,
-      userChosenDate: new Date().toISOString(),
-      createdDate: new Date().toISOString(),
-      updatedDate: new Date().toISOString(),
-      account: {
-        name: 'aaa',
-        currency: 'aaa',
-        color: 'aaa'
-      },
-      category: {
-        name: 'Category',
-        image:
-          'https://images.unsplash.com/photo-1627773327674-309942d1552f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60'
-      }
-    }
-  ];
+  public pending$!: Observable<boolean>; // FIXME: TO use
+  public records$!: Observable<Record[]>;
 
-  constructor() {}
+  constructor(private store: Store<RootState>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.pending$ = this.store.select(recordsSelectors.selectRecordsPending);
+    this.records$ = this.store.select(recordsSelectors.selectRecords);
+
+    this.fetchRecords();
+  }
+
+  private fetchRecords(): void {
+    this.store.dispatch(recordsActions.loadUserRecords());
+  }
 }

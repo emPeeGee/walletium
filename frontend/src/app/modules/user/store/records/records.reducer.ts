@@ -15,23 +15,23 @@ const initialState: RecordsState = {
 };
 
 const recordsReducer = createReducer(
-  initialState
-  // on(recordsActions.loadAllAccountRecordsFail, (state, { message }) => ({
-  //   ...state,
-  //   pending: false,
-  //   message
-  // })),
+  initialState,
+  on(recordsActions.loadUserRecords, state => ({
+    ...state,
+    pending: true
+  })),
 
-  // on(recordsActions.loadAllAccountRecords, state => ({
-  //   ...state,
-  //   pending: true
-  // })),
-  // on(recordsActions.loadAllAccountRecordsSuccess, (state, { message, records }) => ({
-  //   ...state,
-  //   pending: false,
-  //   accountRecords: records,
-  //   message
-  // }))
+  on(recordsActions.loadUserRecordsSuccess, (state, { message, records }) => ({
+    ...state,
+    message,
+    records
+  })),
+
+  on(recordsActions.loadUserRecordsFail, (state, { message }) => ({
+    ...state,
+    pending: false,
+    message
+  }))
 );
 
 export function reducer(state: RecordsState | undefined, action: Action): RecordsState {
