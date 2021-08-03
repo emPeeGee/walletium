@@ -10,6 +10,8 @@
   }
 
   &__header {
+    position: relative;
+
     padding: 0.75rem 1rem;
     cursor: pointer;
 
@@ -56,6 +58,25 @@
 
     text-transform: uppercase;
     font-size: 20px;
+  }
+
+  &__arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--expandable {
+      transition: transform 0.4s ease;
+    }
+
+    &--expanded {
+      transform: translateY(-50%) rotate(90deg);
+    }
   }
 
   &__details {

@@ -26,6 +26,13 @@
           {{ record.amount }}
         </p>
       </div>
+
+      <div
+        class="record__arrow"
+        [ngClass]="{ 'record__arrow--expandable': isExpandable, 'record__arrow--expanded': isExpanded }"
+      >
+        <mat-icon>navigate_next</mat-icon>
+      </div>
     </div>
   </div>
 
