@@ -24,7 +24,11 @@ export class RecordsService {
   }
 
   public async findOne(id: string): Promise<IRecordFrontend> {
-    return this.simplifyRecord(await this.repository.findOne({ id }));
+    try {
+      return this.simplifyRecord(await this.repository.findOne({ id }));
+    } catch (error) {
+      throw new BadRequestException('Something went wrong!');
+    }
   }
 
   public async findByAccount(accountId: string): Promise<IRecordFrontend[]> {

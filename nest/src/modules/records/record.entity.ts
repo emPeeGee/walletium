@@ -65,7 +65,7 @@ export class Record {
     eager: true,
   })
   @JoinColumn({
-    name: 'category_id',
+    name: 'category',
   })
   category: Category;
 
