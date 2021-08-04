@@ -67,22 +67,10 @@
     mat-button-toggle {
       padding: 0 2rem;
       border: none;
+      background-color: $second-content-color-alpha;
 
       &.mat-button-toggle-checked {
-        // FIXME: !!!
-        background-color: gold !important;
-      }
-
-      &:first-child {
-        background-color: $red-color;
-      }
-
-      &:nth-child(2) {
-        background-color: $green-color;
-      }
-
-      &:nth-child(3) {
-        background-color: $browny-gray-color;
+        background-color: $primary-color !important;
       }
     }
 

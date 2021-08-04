@@ -13,6 +13,9 @@ import { Record } from '../../models/record.model';
 export class RecordComponent implements OnInit, OnDestroy {
   public record: Record | null = null;
   public recordForm: FormGroup | null = null;
+  public pending = true;
+
+  public isEditable = false;
 
   private recordSubscription: Subscription | null = null;
 
@@ -30,21 +33,33 @@ export class RecordComponent implements OnInit, OnDestroy {
         this.record = record;
 
         this.recordForm = this.formBuilder.group({
-          id: [record.id],
-          type: [record.type],
-          amount: [record.amount],
-          updatedDate: [record.updatedDate],
-          payee: [record.payee],
-          note: [record.note],
-          place: [record.place],
+          id: [{ value: record.id, disabled: !this.isEditable }],
+          type: [{ value: record.type, disabled: !this.isEditable }],
+          amount: [{ value: record.amount, disabled: !this.isEditable }],
+          updatedDate: [{ value: record.updatedDate, disabled: !this.isEditable }],
+          payee: [{ value: record.payee, disabled: !this.isEditable }],
+          note: [{ value: record.note, disabled: !this.isEditable }],
+          place: [{ value: record.place, disabled: !this.isEditable }],
           category: [''],
           labels: ['']
         });
+
+        this.pending = false;
       });
     });
   }
 
   ngOnDestroy(): void {
     this.recordSubscription?.unsubscribe();
+  }
+
+  public toggleEditable(): void {
+    this.isEditable = !this.isEditable;
+
+    if (this.isEditable) {
+      this.recordForm?.enable();
+    } else {
+      this.recordForm?.disable();
+    }
   }
 }

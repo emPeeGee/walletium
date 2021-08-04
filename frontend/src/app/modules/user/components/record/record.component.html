@@ -1,4 +1,4 @@
-<!-- <wal-loader *ngIf="isPending$ | async as loading" [isLoading]="loading"></wal-loader> -->
+<wal-loader *ngIf="pending as loading" [isLoading]="loading"></wal-loader>
 <section class="record" *ngIf="record">
   <mat-card class="record__card">
     <div class="record__header">
@@ -59,13 +59,6 @@
 
             <div class="record__field">
               <mat-form-field>
-                <mat-label>Labels</mat-label>
-                <input matInput formControlName="labels" />
-              </mat-form-field>
-            </div>
-
-            <div class="record__field">
-              <mat-form-field>
                 <mat-label>Record date</mat-label>
                 <input matInput formControlName="updatedDate" />
               </mat-form-field>
@@ -76,7 +69,7 @@
             <div class="record__field record__note">
               <mat-form-field floatLabel="always">
                 <mat-label>Note</mat-label>
-                <textarea matInput placeholder="Ex. Kaufland"></textarea>
+                <textarea matInput placeholder="Ex. Kaufland" formControlName="note"></textarea>
               </mat-form-field>
             </div>
 
@@ -95,13 +88,20 @@
             </div>
           </div>
         </div>
+
+        <div class="record__field">
+          <mat-form-field>
+            <mat-label>Labels</mat-label>
+            <input matInput formControlName="labels" />
+          </mat-form-field>
+        </div>
       </form>
     </div>
 
     <mat-divider></mat-divider>
 
     <div class="record__actions">
-      <button mat-raised-button color="accent" (click)="addRecord()">Edit</button>
+      <button mat-raised-button color="accent" (click)="toggleEditable()">Edit</button>
     </div>
   </mat-card>
 </section>
