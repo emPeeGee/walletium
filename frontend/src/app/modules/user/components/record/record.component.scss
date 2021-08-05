@@ -8,17 +8,24 @@
     display: flex;
     align-items: center;
 
-    button {
-      margin-right: 2rem;
-    }
-
     &-back {
-      display: flex;
-      align-items: center;
+      margin-right: 2rem;
+      div {
+        display: flex;
+        align-items: center;
+      }
 
       mat-icon {
         margin-right: 0.5rem;
       }
+    }
+  }
+
+  &__actions {
+    margin-left: auto;
+
+    button {
+      margin-left: 0.5rem;
     }
   }
 

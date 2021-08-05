@@ -2,13 +2,20 @@
 <section class="record" *ngIf="record">
   <mat-card class="record__card">
     <div class="record__header">
-      <button walBackAction mat-raised-button>
-        <div class="record__header-back">
+      <button walBackAction mat-raised-button class="record__header-back">
+        <div>
           <mat-icon>keyboard_backspace</mat-icon>
           <p>Back</p>
         </div>
       </button>
       <h2>Record {{ record.id }}</h2>
+
+      <div class="record__actions">
+        <button *ngIf="isEdited" mat-stroked-button color="accent" (click)="discardChanges()">Discard</button>
+        <button *ngIf="isEditable" mat-stroked-button color="accent" (click)="toggleEditable()">Save</button>
+        <button *ngIf="!isEditable" mat-stroked-button color="accent" (click)="toggleEditable()">Edit</button>
+        <button mat-stroked-button color="warn">Delete</button>
+      </div>
     </div>
 
     <mat-divider></mat-divider>
@@ -96,12 +103,6 @@
           </mat-form-field>
         </div>
       </form>
-    </div>
-
-    <mat-divider></mat-divider>
-
-    <div class="record__actions">
-      <button mat-raised-button color="accent" (click)="toggleEditable()">Edit</button>
     </div>
   </mat-card>
 </section>

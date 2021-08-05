@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { RecordsService } from 'src/app/core/services/api/records.service';
 import { Record } from '../../models/record.model';
 
@@ -15,8 +16,11 @@ export class RecordComponent implements OnInit, OnDestroy {
   public recordForm: FormGroup | null = null;
   public pending = true;
 
+  public isEdited = false;
   public isEditable = false;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private initialRecordForm: any | null = null;
   private recordSubscription: Subscription | null = null;
 
   constructor(
@@ -40,9 +44,20 @@ export class RecordComponent implements OnInit, OnDestroy {
           payee: [{ value: record.payee, disabled: !this.isEditable }],
           note: [{ value: record.note, disabled: !this.isEditable }],
           place: [{ value: record.place, disabled: !this.isEditable }],
-          category: [''],
-          labels: ['']
+          category: [{ value: '', disabled: !this.isEditable }],
+          labels: [{ value: '', disabled: !this.isEditable }]
         });
+
+        this.recordForm.valueChanges
+          .pipe(
+            // FIXME: Is run on every form changes, maybe to fix
+            filter(() => this.isEdited === false)
+          )
+          .subscribe(changes => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            this.initialRecordForm = changes;
+            this.isEdited = true;
+          });
 
         this.pending = false;
       });
@@ -61,5 +76,11 @@ export class RecordComponent implements OnInit, OnDestroy {
     } else {
       this.recordForm?.disable();
     }
+  }
+
+  public discardChanges(): void {
+    this.recordForm?.patchValue({ ...this.initialRecordForm });
+    this.isEdited = false;
+    this.isEditable = false;
   }
 }
