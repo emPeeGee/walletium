@@ -22,7 +22,8 @@ const routes: Routes = [
     path: 'records',
     children: [
       { path: '', component: RecordsComponent },
-      { path: ':id', component: RecordComponent }
+      { path: ':id', component: RecordComponent },
+      { path: 'new', component: RecordComponent }
     ]
   }
 ];

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -31,36 +31,55 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const id: string = params.get('id') ?? '';
+      const id = params.get('id');
 
-      this.recordSubscription = this.recordsService.getRecordById(id).subscribe(record => {
-        this.record = record;
+      if (id && id !== 'new') {
+        console.log('here', id);
 
+        this.recordSubscription = this.recordsService.getRecordById(id).subscribe(record => {
+          this.record = record;
+
+          this.recordForm = this.formBuilder.group({
+            id: [{ value: record.id, disabled: !this.isEditable }],
+            type: [{ value: record.type, disabled: !this.isEditable }],
+            amount: [{ value: record.amount, disabled: !this.isEditable }],
+            updatedDate: [{ value: record.updatedDate, disabled: !this.isEditable }],
+            payee: [{ value: record.payee, disabled: !this.isEditable }],
+            note: [{ value: record.note, disabled: !this.isEditable }],
+            place: [{ value: record.place, disabled: !this.isEditable }],
+            category: [{ value: '', disabled: !this.isEditable }],
+            labels: [{ value: '', disabled: !this.isEditable }]
+          });
+
+          this.recordForm.valueChanges
+            .pipe(
+              // FIXME: Is run on every form changes, maybe to fix
+              filter(() => this.isEdited === false)
+            )
+            .subscribe(changes => {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              this.initialRecordForm = changes;
+              this.isEdited = true;
+            });
+
+          this.pending = false;
+        });
+      } else {
+        this.isEditable = true;
         this.recordForm = this.formBuilder.group({
-          id: [{ value: record.id, disabled: !this.isEditable }],
-          type: [{ value: record.type, disabled: !this.isEditable }],
-          amount: [{ value: record.amount, disabled: !this.isEditable }],
-          updatedDate: [{ value: record.updatedDate, disabled: !this.isEditable }],
-          payee: [{ value: record.payee, disabled: !this.isEditable }],
-          note: [{ value: record.note, disabled: !this.isEditable }],
-          place: [{ value: record.place, disabled: !this.isEditable }],
+          type: [{ value: '', disabled: !this.isEditable }, Validators.required],
+          amount: [{ value: 0, disabled: !this.isEditable }, Validators.required],
+          updatedDate: [{ value: new Date().toISOString(), disabled: !this.isEditable }, Validators.required],
+          payee: [{ value: '', disabled: !this.isEditable }],
+          note: [{ value: '', disabled: !this.isEditable }],
+          place: [{ value: '', disabled: !this.isEditable }],
           category: [{ value: '', disabled: !this.isEditable }],
           labels: [{ value: '', disabled: !this.isEditable }]
         });
 
-        this.recordForm.valueChanges
-          .pipe(
-            // FIXME: Is run on every form changes, maybe to fix
-            filter(() => this.isEdited === false)
-          )
-          .subscribe(changes => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            this.initialRecordForm = changes;
-            this.isEdited = true;
-          });
-
+        console.log('is new');
         this.pending = false;
-      });
+      }
     });
   }
 
@@ -82,5 +101,10 @@ export class RecordComponent implements OnInit, OnDestroy {
     this.recordForm?.patchValue({ ...this.initialRecordForm });
     this.isEdited = false;
     this.isEditable = false;
+  }
+
+  public submitForm(): void {
+    console.log('Form Submitted with value: ', this.recordForm?.value);
+    this.toggleEditable();
   }
 }
