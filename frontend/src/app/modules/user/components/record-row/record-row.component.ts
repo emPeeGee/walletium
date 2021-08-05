@@ -19,11 +19,15 @@ export class RecordRowComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  toggleExpand(): void {
+  public toggleExpand(): void {
     if (this.isExpandable) {
       this.isExpanded = !this.isExpanded;
     } else {
-      void this.router.navigate(['records', this.record?.id]);
+      this.navigateToRecord();
     }
+  }
+
+  public navigateToRecord(): void {
+    void this.router.navigate(['records', this.record?.id]);
   }
 }
