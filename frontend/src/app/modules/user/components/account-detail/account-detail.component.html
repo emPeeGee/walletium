@@ -52,12 +52,14 @@
     <mat-divider></mat-divider>
 
     <div class="account-detail__actions">
-      <button mat-raised-button color="accent" (click)="addRecord()">Add Record</button>
+      <a mat-raised-button color="accent" routerLink="/records/new" [queryParams]="{ account: account.id }"
+        >Add Record
+      </a>
     </div>
 
     <mat-divider></mat-divider>
 
-    <div class="account-detail__footer">
+    <div class="account-detail__tabs">
       <mat-tab-group>
         <mat-tab label="Records">
           <div *ngIf="accountRecords$ | async as records" class="account-detail__records">

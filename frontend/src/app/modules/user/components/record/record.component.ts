@@ -124,6 +124,11 @@ export class RecordComponent implements OnInit, OnDestroy {
       labels: [{ value: '', disabled: !this.isEditable }]
     });
 
+    const accountId = this.route.snapshot.queryParamMap.get('account');
+    if (accountId) {
+      this.recordForm.patchValue({ accountId });
+    }
+
     this.isPending = false;
   }
 }

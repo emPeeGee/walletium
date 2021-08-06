@@ -7,7 +7,7 @@ import { CloseType } from 'src/app/core/enums/close-type.enum';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { Account, AccountDialog } from '../../models/account.model';
-import { Record, RecordDialog } from '../../models/record.model';
+import { Record } from '../../models/record.model';
 import { RootState } from '../../store';
 import * as accountDetailsActions from '../../store/account-details/account-details.actions';
 import {
@@ -16,7 +16,6 @@ import {
   selectAllAccountRecords
 } from '../../store/account-details/account-details.selectors';
 import { AccountSaveModalComponent } from '../account-save-modal/account-save-modal.component';
-import { RecordSaveModalComponent } from '../record-save-modal/record-save-modal.component';
 
 @Component({
   selector: 'wal-account-detail',
@@ -24,12 +23,12 @@ import { RecordSaveModalComponent } from '../record-save-modal/record-save-modal
   styleUrls: ['./account-detail.component.scss']
 })
 export class AccountDetailComponent implements OnInit, OnDestroy {
-  isPending$!: Observable<boolean>;
-  accountRecords$: Observable<Record[]> | null = null;
+  public account: Account | null = null;
 
-  account: Account | null = null;
+  public isPending$!: Observable<boolean>;
+  public accountRecords$: Observable<Record[]> | null = null;
 
-  accountSubscription: Subscription | null = null;
+  private accountSubscription: Subscription | null = null;
 
   constructor(private store: Store<RootState>, private route: ActivatedRoute, private dialog: MatDialog) {}
 
@@ -68,13 +67,6 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
       if (CLOSE_FLAG === CloseType.CONFIRM) {
         this.store.dispatch(accountDetailsActions.deleteAccount({ accountId: this.account?.id ?? '' }));
       }
-    });
-  }
-
-  public addRecord(): void {
-    const dataRecordDialog: RecordDialog = { type: OpenType.ADD, record: null };
-    const recordDialog = this.dialog.open(RecordSaveModalComponent, {
-      data: dataRecordDialog
     });
   }
 }
