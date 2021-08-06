@@ -9,7 +9,8 @@
   </div>
 
   <div class="dashboard__actions">
-    <button mat-raised-button color="accent" (click)="addAccount()">Add Account</button>
+    <a mat-raised-button color="accent" class="dashboard__action" routerLink="/records/new">Add Record</a>
+    <button mat-raised-button color="accent" class="dashboard__action" (click)="addAccount()">Add Account</button>
   </div>
 
   <ng-container *ngIf="allAccounts$ | async as accounts">
