@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Category } from '../../models/category.model';
+import { Category } from '../../../../core/models/category.model';
 
 export const loadAllCategories = createAction('[ADMIN PANEL -> Categories] Load all categories');
 export const loadAllCategoriesSuccess = createAction(

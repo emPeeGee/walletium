@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
-import { Category } from '../../models/category.model';
+import { Category } from '../../../../core/models/category.model';
 import { RootState } from '../../store';
 import { loadAllCategories } from '../../store/categories/categories.actions';
 import { selectAllCategories, selectCategoriesPending } from '../../store/categories/categories.selectors';

@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 import { OpenType } from 'src/app/core/enums/open-type.enum';
 import { mimeTypeValidator } from 'src/app/shared/validators/mime-type.validator';
 import { CategoryDialog } from '../../models/category-dialog.model';
-import { Category } from '../../models/category.model';
+import { Category } from '../../../../core/models/category.model';
 import { RootState } from '../../store';
 import * as categoriesActions from '../../store/categories/categories.actions';
 

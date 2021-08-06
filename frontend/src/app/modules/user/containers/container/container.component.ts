@@ -7,7 +7,7 @@ import { RootState } from '../../store';
 
 import * as accountsActions from '../../store/accounts/accounts.actions';
 import * as labelsActions from '../../store/labels/labels.actions';
-// import * as categoryActions from '../../store/accounts/accounts.actions';
+import * as categoriesActions from '../../store/categories/categories.actions';
 
 @Component({
   selector: 'wal-container',
@@ -35,5 +35,6 @@ export class ContainerComponent implements OnInit, OnDestroy {
   private fetchNecessaryData(): void {
     this.store.dispatch(accountsActions.loadAllAccounts({ id: this.currentUser?.id }));
     this.store.dispatch(labelsActions.loadAllUserLabels({ userId: this.currentUser?.id ?? '' }));
+    this.store.dispatch(categoriesActions.loadAllCategories());
   }
 }
