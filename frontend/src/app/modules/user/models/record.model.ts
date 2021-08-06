@@ -28,6 +28,18 @@ export interface Record {
   labels?: [];
 }
 
+export interface RecordPost {
+  type: string;
+  amount: number;
+  userChosenDate: string;
+  accountId: string;
+  categoryId: string;
+  payee?: string;
+  note?: string;
+  place?: string;
+  labels?: string[];
+}
+
 export interface RecordDialog {
   type: OpenType;
   record: Record | null;

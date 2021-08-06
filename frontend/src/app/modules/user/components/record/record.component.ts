@@ -1,10 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { RecordsService } from 'src/app/core/services/api/records.service';
+import { RootState } from 'src/app/store';
+import { Account } from '../../models/account.model';
 import { Record } from '../../models/record.model';
+
+import * as accountsSelectors from '../../store/accounts/accounts.selector';
 
 @Component({
   selector: 'wal-record',
@@ -19,6 +24,8 @@ export class RecordComponent implements OnInit, OnDestroy {
   public isEdited = false;
   public isEditable = false;
 
+  public accounts$: Observable<Account[]> | null = null;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private initialRecordForm: any | null = null;
   private recordSubscription: Subscription | null = null;
@@ -26,7 +33,8 @@ export class RecordComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private recordsService: RecordsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store: Store<RootState>
   ) {}
 
   ngOnInit(): void {
@@ -43,11 +51,12 @@ export class RecordComponent implements OnInit, OnDestroy {
             id: [{ value: record.id, disabled: !this.isEditable }],
             type: [{ value: record.type, disabled: !this.isEditable }],
             amount: [{ value: record.amount, disabled: !this.isEditable }],
-            updatedDate: [{ value: record.updatedDate, disabled: !this.isEditable }],
+            userChosenDate: [{ value: record.updatedDate, disabled: !this.isEditable }],
+            account: [{ value: record.account.name, disabled: !this.isEditable }, Validators.required],
             payee: [{ value: record.payee, disabled: !this.isEditable }],
             note: [{ value: record.note, disabled: !this.isEditable }],
             place: [{ value: record.place, disabled: !this.isEditable }],
-            category: [{ value: '', disabled: !this.isEditable }],
+            category: [{ value: '', disabled: !this.isEditable }, Validators.required],
             labels: [{ value: '', disabled: !this.isEditable }]
           });
 
@@ -69,17 +78,19 @@ export class RecordComponent implements OnInit, OnDestroy {
         this.recordForm = this.formBuilder.group({
           type: [{ value: '', disabled: !this.isEditable }, Validators.required],
           amount: [{ value: 0, disabled: !this.isEditable }, Validators.required],
-          updatedDate: [{ value: new Date().toISOString(), disabled: !this.isEditable }, Validators.required],
+          userChosenDate: [{ value: new Date().toISOString(), disabled: !this.isEditable }, Validators.required],
+          account: [{ value: '', disabled: !this.isEditable }, Validators.required],
           payee: [{ value: '', disabled: !this.isEditable }],
           note: [{ value: '', disabled: !this.isEditable }],
           place: [{ value: '', disabled: !this.isEditable }],
-          category: [{ value: '', disabled: !this.isEditable }],
+          category: [{ value: '', disabled: !this.isEditable }, Validators.required],
           labels: [{ value: '', disabled: !this.isEditable }]
         });
 
-        console.log('is new');
         this.pending = false;
       }
+
+      this.accounts$ = this.store.select(accountsSelectors.selectAllAccounts);
     });
   }
 
