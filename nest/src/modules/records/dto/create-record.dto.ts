@@ -1,11 +1,11 @@
-import { IsDateString, IsEnum, IsNumberString, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 import { RecordType } from '../record.entity';
 
 export class CreateRecordDto {
   @IsEnum(RecordType)
   type: string;
 
-  @IsNumberString()
+  @IsNumber()
   amount: number;
 
   @IsDateString()

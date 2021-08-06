@@ -22,11 +22,13 @@ export interface IRecordFrontend {
   amount: number;
   userChosenDate: Date;
   account: {
+    id: string;
     name: string;
     currency: string;
     color: string;
   };
   category: {
+    id: string;
     name: string;
     image: string;
   };

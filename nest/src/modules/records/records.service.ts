@@ -115,11 +115,13 @@ export class RecordsService {
       return {
         ...record,
         account: {
+          id: record.account.id,
           name: record.account.name,
           currency: record.account.currency,
           color: record.account.color,
         },
         category: {
+          id: record.category.id,
           name: record.category.name,
           image: record.category.imagePath,
         },
@@ -133,11 +135,13 @@ export class RecordsService {
     return {
       ...record,
       account: {
+        id: record.account.id,
         name: record.account.name,
         currency: record.account.currency,
         color: record.account.color,
       },
       category: {
+        id: record.category.id,
         name: record.category.name,
         image: record.category.imagePath,
       },
