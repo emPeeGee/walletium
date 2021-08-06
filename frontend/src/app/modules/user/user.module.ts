@@ -17,6 +17,7 @@ import { RecordRowComponent } from './components/record-row/record-row.component
 import { RecordSaveModalComponent } from './components/record-save-modal/record-save-modal.component';
 import { RecordsComponent } from './containers/records/records.component';
 import { RecordComponent } from './components/record/record.component';
+import { ContainerComponent } from './containers/container/container.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RecordComponent } from './components/record/record.component';
     RecordRowComponent,
     RecordSaveModalComponent,
     RecordsComponent,
-    RecordComponent
+    RecordComponent,
+    ContainerComponent
   ],
   imports: [
     UserRoutingModule,
