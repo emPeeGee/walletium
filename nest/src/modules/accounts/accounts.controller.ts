@@ -1,9 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../authentication/passport/jwt-auth.guard';
 import { Account } from './account.entity';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
+
+@ApiTags('Accounts')
 @Controller('api/accounts')
 export class AccountsController {
   constructor(private accountsService: AccountsService) {}

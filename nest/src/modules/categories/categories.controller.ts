@@ -9,7 +9,6 @@ import {
   UploadedFile,
   UseInterceptors,
   Request,
-  BadRequestException,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -22,7 +21,9 @@ import { CategoriesService } from './categories.service';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Categories')
 @Controller('api/categories')
 export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}

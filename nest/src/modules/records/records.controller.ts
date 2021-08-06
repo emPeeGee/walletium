@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../authentication/passport/jwt-auth.guard';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
@@ -6,10 +7,12 @@ import { IRecordFrontend } from './interfaces/record.interface';
 import { Record } from './record.entity';
 import { RecordsService } from './records.service';
 
+@ApiTags('Records')
 @Controller('api/records')
 export class RecordsController {
   constructor(private recordsService: RecordsService) {}
 
+  @ApiResponse({ status: 200 })
   @Get()
   @UseGuards(JwtAuthGuard)
   public async findAll(): Promise<IRecordFrontend[]> {

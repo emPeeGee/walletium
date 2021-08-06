@@ -3,7 +3,9 @@ import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { AuthenticationService } from './authentication.service';
 import { LocalAuthGuard } from './passport/local-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Authentication')
 @Controller('api/authentication')
 export class AuthenticationController {
   constructor(private usersService: UsersService, private authenticationService: AuthenticationService) {}

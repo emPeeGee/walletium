@@ -1,11 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../authentication/passport/jwt-auth.guard';
 import { CreateLabelDto } from './dto/create-label.dto';
 import { UpdateLabelDto } from './dto/update-label.dto';
 import { Label } from './labels.entity';
 import { LabelsService } from './labels.service';
 
+@ApiTags('Labels')
 @Controller('api/labels')
 export class LabelsController {
   constructor(private labelsService: LabelsService) {}
