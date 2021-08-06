@@ -9,7 +9,7 @@
         </div>
       </button>
       <h2 *ngIf="record">Record {{ record.id }}</h2>
-      <h2 *ngIf="!record">New Record</h2>
+      <h2 *ngIf="isNew">New Record</h2>
 
       <div class="record__actions">
         <button *ngIf="isEdited" mat-stroked-button color="accent" (click)="discardChanges()">Discard</button>
@@ -22,8 +22,8 @@
         >
           Save
         </button>
-        <button *ngIf="!isEditable" mat-stroked-button color="accent" (click)="toggleEditable()">Edit</button>
-        <button mat-stroked-button color="warn">Delete</button>
+        <button *ngIf="!isNew && !isEditable" mat-stroked-button color="accent" (click)="toggleEditable()">Edit</button>
+        <button *ngIf="!isNew" mat-stroked-button color="warn">Delete</button>
       </div>
     </div>
 
@@ -66,17 +66,24 @@
               </mat-form-field>
             </div>
 
-            <div class="record__field">
+            <div class="record__field record__category">
               <mat-form-field>
                 <mat-label>Category</mat-label>
-                <input matInput formControlName="category" />
+                <mat-select formControlName="categoryId">
+                  <mat-option *ngFor="let category of categories$ | async" [value]="category.id">
+                    <img class="record__category-img" [src]="category.imagePath" alt="icon" />
+                    {{ category.name }}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
+                <!-- <mat-hint>{{ animalControl.value?.sound }}</mat-hint> -->
               </mat-form-field>
             </div>
 
             <div class="record__field">
               <mat-form-field>
                 <mat-label>Account</mat-label>
-                <mat-select>
+                <mat-select formControlName="accountId">
                   <mat-option *ngFor="let account of accounts$ | async" [value]="account.id">
                     {{ account.name }}
                   </mat-option>

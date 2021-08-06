@@ -103,6 +103,18 @@
     }
   }
 
+  &__category {
+    &-img {
+      position: relative;
+      top: 7px;
+      left: 5px;
+      width: 25px;
+      height: 25px;
+      margin-right: 1rem;
+      object-fit: cover;
+    }
+  }
+
   &__amount {
     input {
       font-size: 2rem;

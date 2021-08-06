@@ -1,15 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { Category } from 'src/app/core/models/category.model';
 import { RecordsService } from 'src/app/core/services/api/records.service';
 import { RootState } from 'src/app/store';
 import { Account } from '../../models/account.model';
-import { Record } from '../../models/record.model';
+import { Record, RecordPost } from '../../models/record.model';
+import { NofiticationService } from 'src/app/core/services/others/notification.service';
 
 import * as accountsSelectors from '../../store/accounts/accounts.selector';
+import * as categoriesSelectors from '../../store/categories/categories.selector';
 
 @Component({
   selector: 'wal-record',
@@ -25,13 +28,18 @@ export class RecordComponent implements OnInit, OnDestroy {
   public isEditable = false;
 
   public accounts$: Observable<Account[]> | null = null;
+  public categories$: Observable<Category[]> | null = null;
+
+  public isNew = false;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private initialRecordForm: any | null = null;
   private recordSubscription: Subscription | null = null;
 
   constructor(
+    private notificationService: NofiticationService,
     private route: ActivatedRoute,
+    private router: Router,
     private recordsService: RecordsService,
     private formBuilder: FormBuilder,
     private store: Store<RootState>
@@ -42,8 +50,6 @@ export class RecordComponent implements OnInit, OnDestroy {
       const id = params.get('id');
 
       if (id && id !== 'new') {
-        console.log('here', id);
-
         this.recordSubscription = this.recordsService.getRecordById(id).subscribe(record => {
           this.record = record;
 
@@ -52,11 +58,11 @@ export class RecordComponent implements OnInit, OnDestroy {
             type: [{ value: record.type, disabled: !this.isEditable }],
             amount: [{ value: record.amount, disabled: !this.isEditable }],
             userChosenDate: [{ value: record.updatedDate, disabled: !this.isEditable }],
-            account: [{ value: record.account.name, disabled: !this.isEditable }, Validators.required],
+            accountId: [{ value: record.account.id, disabled: !this.isEditable }, Validators.required],
             payee: [{ value: record.payee, disabled: !this.isEditable }],
             note: [{ value: record.note, disabled: !this.isEditable }],
             place: [{ value: record.place, disabled: !this.isEditable }],
-            category: [{ value: '', disabled: !this.isEditable }, Validators.required],
+            categoryId: [{ value: record.category.id, disabled: !this.isEditable }, Validators.required],
             labels: [{ value: '', disabled: !this.isEditable }]
           });
 
@@ -74,16 +80,17 @@ export class RecordComponent implements OnInit, OnDestroy {
           this.pending = false;
         });
       } else {
+        this.isNew = true;
         this.isEditable = true;
         this.recordForm = this.formBuilder.group({
           type: [{ value: '', disabled: !this.isEditable }, Validators.required],
           amount: [{ value: 0, disabled: !this.isEditable }, Validators.required],
           userChosenDate: [{ value: new Date().toISOString(), disabled: !this.isEditable }, Validators.required],
-          account: [{ value: '', disabled: !this.isEditable }, Validators.required],
+          accountId: [{ value: '', disabled: !this.isEditable }, Validators.required],
           payee: [{ value: '', disabled: !this.isEditable }],
           note: [{ value: '', disabled: !this.isEditable }],
           place: [{ value: '', disabled: !this.isEditable }],
-          category: [{ value: '', disabled: !this.isEditable }, Validators.required],
+          categoryId: [{ value: '', disabled: !this.isEditable }, Validators.required],
           labels: [{ value: '', disabled: !this.isEditable }]
         });
 
@@ -91,6 +98,7 @@ export class RecordComponent implements OnInit, OnDestroy {
       }
 
       this.accounts$ = this.store.select(accountsSelectors.selectAllAccounts);
+      this.categories$ = this.store.select(categoriesSelectors.selectAllCategories);
     });
   }
 
@@ -115,7 +123,18 @@ export class RecordComponent implements OnInit, OnDestroy {
   }
 
   public submitForm(): void {
-    console.log('Form Submitted with value: ', this.recordForm?.value);
+    const newRecord: RecordPost = { ...this.recordForm?.value } as RecordPost;
+
+    this.recordsService.addRecord(newRecord).subscribe({
+      next: () => {
+        void this.router.navigate(['records']);
+      },
+      error: () => {
+        this.notificationService.error('Something went wrong. Please verify your inputs.');
+        this.toggleEditable();
+      }
+    });
+
     this.toggleEditable();
   }
 }

@@ -17,11 +17,13 @@ export interface Record {
   note?: string;
   place?: string;
   account: {
+    id: string;
     name: string;
     currency: string;
     color: string;
   };
   category: {
+    id: string;
     name: string;
     image: string;
   };
