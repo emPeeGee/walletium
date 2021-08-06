@@ -22,51 +22,38 @@ import * as categoriesSelectors from '../../store/categories/categories.selector
 export class RecordComponent implements OnInit, OnDestroy {
   public record: Record | null = null;
   public recordForm: FormGroup | null = null;
-  public pending = true;
-
+  public isPending = true;
   public isEdited = false;
   public isEditable = false;
+  public isNew = false;
 
   public accounts$: Observable<Account[]> | null = null;
   public categories$: Observable<Category[]> | null = null;
-
-  public isNew = false;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private initialRecordForm: any | null = null;
   private recordSubscription: Subscription | null = null;
 
   constructor(
-    private notificationService: NofiticationService,
     private route: ActivatedRoute,
     private router: Router,
-    private recordsService: RecordsService,
     private formBuilder: FormBuilder,
-    private store: Store<RootState>
+    private store: Store<RootState>,
+    private notificationService: NofiticationService,
+    private recordsService: RecordsService
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
+      this.isNew = id === 'new';
 
-      if (id && id !== 'new') {
+      if (id && !this.isNew) {
         this.recordSubscription = this.recordsService.getRecordById(id).subscribe(record => {
           this.record = record;
 
-          this.recordForm = this.formBuilder.group({
-            id: [{ value: record.id, disabled: !this.isEditable }],
-            type: [{ value: record.type, disabled: !this.isEditable }],
-            amount: [{ value: record.amount, disabled: !this.isEditable }],
-            userChosenDate: [{ value: record.updatedDate, disabled: !this.isEditable }],
-            accountId: [{ value: record.account.id, disabled: !this.isEditable }, Validators.required],
-            payee: [{ value: record.payee, disabled: !this.isEditable }],
-            note: [{ value: record.note, disabled: !this.isEditable }],
-            place: [{ value: record.place, disabled: !this.isEditable }],
-            categoryId: [{ value: record.category.id, disabled: !this.isEditable }, Validators.required],
-            labels: [{ value: '', disabled: !this.isEditable }]
-          });
-
-          this.recordForm.valueChanges
+          this.initializeRecordForm(record);
+          this.recordForm?.valueChanges
             .pipe(
               // FIXME: Is run on every form changes, maybe to fix
               filter(() => this.isEdited === false)
@@ -76,25 +63,10 @@ export class RecordComponent implements OnInit, OnDestroy {
               this.initialRecordForm = changes;
               this.isEdited = true;
             });
-
-          this.pending = false;
         });
       } else {
-        this.isNew = true;
         this.isEditable = true;
-        this.recordForm = this.formBuilder.group({
-          type: [{ value: '', disabled: !this.isEditable }, Validators.required],
-          amount: [{ value: 0, disabled: !this.isEditable }, Validators.required],
-          userChosenDate: [{ value: new Date().toISOString(), disabled: !this.isEditable }, Validators.required],
-          accountId: [{ value: '', disabled: !this.isEditable }, Validators.required],
-          payee: [{ value: '', disabled: !this.isEditable }],
-          note: [{ value: '', disabled: !this.isEditable }],
-          place: [{ value: '', disabled: !this.isEditable }],
-          categoryId: [{ value: '', disabled: !this.isEditable }, Validators.required],
-          labels: [{ value: '', disabled: !this.isEditable }]
-        });
-
-        this.pending = false;
+        this.initializeRecordForm(null);
       }
 
       this.accounts$ = this.store.select(accountsSelectors.selectAllAccounts);
@@ -136,5 +108,22 @@ export class RecordComponent implements OnInit, OnDestroy {
     });
 
     this.toggleEditable();
+  }
+
+  private initializeRecordForm(record: Record | null): void {
+    this.recordForm = this.formBuilder.group({
+      id: [{ value: record?.id, disabled: !this.isEditable }],
+      type: [{ value: record?.type, disabled: !this.isEditable }],
+      amount: [{ value: record?.amount, disabled: !this.isEditable }],
+      userChosenDate: [{ value: record?.updatedDate ?? new Date().toISOString(), disabled: !this.isEditable }],
+      accountId: [{ value: record?.account.id, disabled: !this.isEditable }, Validators.required],
+      payee: [{ value: record?.payee, disabled: !this.isEditable }],
+      note: [{ value: record?.note, disabled: !this.isEditable }],
+      place: [{ value: record?.place, disabled: !this.isEditable }],
+      categoryId: [{ value: record?.category.id, disabled: !this.isEditable }, Validators.required],
+      labels: [{ value: '', disabled: !this.isEditable }]
+    });
+
+    this.isPending = false;
   }
 }
