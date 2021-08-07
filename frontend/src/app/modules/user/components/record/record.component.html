@@ -15,8 +15,8 @@
         <button *ngIf="isEdited" mat-stroked-button color="accent" (click)="discardChanges()">Discard</button>
         <button
           *ngIf="isEditable"
-          mat-stroked-button
-          color="accent"
+          mat-raised-button
+          class="record__actions-save"
           [disabled]="recordForm.invalid"
           (click)="submitForm()"
         >
@@ -62,7 +62,7 @@
             <div class="record__field record__amount">
               <mat-form-field>
                 <mat-label>Amount</mat-label>
-                <input matInput type="number" formControlName="amount" />
+                <input matInput type="number" [class]="'record__amount--' + type.value" formControlName="amount" />
               </mat-form-field>
             </div>
 

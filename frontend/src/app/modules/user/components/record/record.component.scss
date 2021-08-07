@@ -27,6 +27,11 @@
     button {
       margin-left: 0.5rem;
     }
+
+    &-save {
+      background-color: $green-color;
+      color: $white-color;
+    }
   }
 
   &__content {
@@ -65,21 +70,30 @@
   &__type {
     margin-bottom: 2rem;
 
-    mat-button-toggle {
-      padding: 0 2rem;
-      border: none;
-      background-color: $second-content-color-alpha;
-
-      &.mat-button-toggle-checked {
-        background-color: $primary-color !important;
-      }
-    }
-
     p {
+      padding: 0 2rem;
+
       font-size: 1rem;
       color: white;
       font-weight: 600;
       text-transform: uppercase;
+    }
+
+    mat-button-toggle {
+      border: none;
+      background-color: $second-content-color-alpha;
+
+      &.mat-button-toggle-checked:first-child {
+        background-color: $red-color !important;
+      }
+
+      &.mat-button-toggle-checked:nth-child(2) {
+        background-color: $green-color !important;
+      }
+
+      &.mat-button-toggle-checked:nth-child(3) {
+        background-color: $pistachio-color !important;
+      }
     }
   }
 
@@ -112,6 +126,18 @@
   &__amount {
     input {
       font-size: 2rem;
+    }
+
+    &--EXPENSE {
+      color: $red-color;
+    }
+
+    &--INCOME {
+      color: $green-color;
+    }
+
+    &--TRANSFER {
+      color: $pistachio-color;
     }
   }
 

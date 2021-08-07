@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -8,7 +8,7 @@ import { Category } from 'src/app/core/models/category.model';
 import { RecordsService } from 'src/app/core/services/api/records.service';
 import { RootState } from 'src/app/store';
 import { Account } from '../../models/account.model';
-import { Record, RecordPost } from '../../models/record.model';
+import { Record } from '../../models/record.model';
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
 
 import * as accountsSelectors from '../../store/accounts/accounts.selector';
@@ -113,14 +113,17 @@ export class RecordComponent implements OnInit, OnDestroy {
   private initializeRecordForm(record: Record | null): void {
     this.recordForm = this.formBuilder.group({
       id: [{ value: record?.id, disabled: !this.isEditable }],
-      type: [{ value: record?.type, disabled: !this.isEditable }],
-      amount: [{ value: record?.amount, disabled: !this.isEditable }],
-      userChosenDate: [{ value: record?.updatedDate ?? new Date().toISOString(), disabled: !this.isEditable }],
+      type: [{ value: record?.type, disabled: !this.isEditable }, Validators.required],
+      amount: [{ value: record?.amount, disabled: !this.isEditable }, Validators.required],
+      categoryId: [{ value: record?.category.id, disabled: !this.isEditable }, Validators.required],
+      userChosenDate: [
+        { value: record?.updatedDate ?? new Date().toISOString(), disabled: !this.isEditable },
+        Validators.required
+      ],
       accountId: [{ value: record?.account.id, disabled: !this.isEditable }, Validators.required],
       payee: [{ value: record?.payee, disabled: !this.isEditable }],
       note: [{ value: record?.note, disabled: !this.isEditable }],
       place: [{ value: record?.place, disabled: !this.isEditable }],
-      categoryId: [{ value: record?.category.id, disabled: !this.isEditable }, Validators.required],
       labels: [{ value: '', disabled: !this.isEditable }]
     });
 
@@ -130,5 +133,9 @@ export class RecordComponent implements OnInit, OnDestroy {
     }
 
     this.isPending = false;
+  }
+
+  get type(): AbstractControl | null {
+    return this.recordForm!.get('type');
   }
 }
