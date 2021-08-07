@@ -44,6 +44,9 @@ export class RecordComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.accounts$ = this.store.select(accountsSelectors.selectAllAccounts);
+    this.categories$ = this.store.select(categoriesSelectors.selectAllCategories);
+
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       this.isNew = id === 'new';
@@ -68,9 +71,6 @@ export class RecordComponent implements OnInit, OnDestroy {
         this.isEditable = true;
         this.initializeRecordForm(null);
       }
-
-      this.accounts$ = this.store.select(accountsSelectors.selectAllAccounts);
-      this.categories$ = this.store.select(categoriesSelectors.selectAllCategories);
     });
   }
 

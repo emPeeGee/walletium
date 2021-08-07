@@ -29,9 +29,12 @@
 
     <mat-divider></mat-divider>
 
-    <div *ngIf="record" class="record__general-info">
+    <div *ngIf="record" class="record__info">
       <p>
-        Account: <span>{{ record.account.name }}</span>
+        Account:
+        <span class="record__info-account" [style.background-color]="record.account.color">{{
+          record.account.name
+        }}</span>
       </p>
       <p>
         Creation date of record: <span>{{ record.createdDate | date: 'MMM d, y, HH:mm:ss' }}</span>

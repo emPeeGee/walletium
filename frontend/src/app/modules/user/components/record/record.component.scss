@@ -40,17 +40,29 @@
     padding: 2rem;
   }
 
-  &__general-info {
+  &__info {
     margin-bottom: 2rem;
 
     p {
       font-size: 1rem;
+      line-height: 1.5rem;
       color: $second-content-color;
       font-style: italic;
     }
 
     span {
       color: $main-content-color;
+    }
+
+    &-account {
+      border-radius: 4px;
+      padding: 0.1rem 0.5rem;
+
+      font-family: 'DM Serif Display', serif;
+      color: white !important;
+      font-style: normal;
+      text-shadow: -1px -1px 0px #222, 0px -1px 0px #222, 1px -1px 0px #222, -1px 0px 0px #222, 1px 0px 0px #222,
+        -1px 1px 0px #222, 0px 1px 0px #222, 1px 1px 0px #222;
     }
   }
 
