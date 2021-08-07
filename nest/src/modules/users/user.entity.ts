@@ -1,4 +1,13 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Account } from '../accounts/account.entity';
 import { Label } from '../labels/labels.entity';
 import { Role } from '../roles/role.entity';
@@ -31,7 +40,7 @@ export class User {
   @CreateDateColumn()
   createdDate: Date;
 
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updatedDate: Date;
 
   @OneToOne(() => Role, { eager: true })

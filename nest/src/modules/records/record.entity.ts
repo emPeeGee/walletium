@@ -7,6 +7,7 @@ import {
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Account } from '../accounts/account.entity';
 import { Category } from '../categories/category.entity';
@@ -38,7 +39,7 @@ export class Record {
   @CreateDateColumn()
   createdDate: Date;
 
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updatedDate: Date;
 
   @Column({
