@@ -91,9 +91,13 @@
       text-transform: uppercase;
     }
 
-    mat-button-toggle {
+    .mat-button-toggle {
       border: none;
       background-color: $second-content-color-alpha;
+
+      &-disabled {
+        opacity: 0.5;
+      }
 
       &.mat-button-toggle-checked:first-child {
         background-color: $red-color !important;
@@ -113,12 +117,12 @@
     display: flex;
 
     &-left {
-      padding: 2rem;
+      padding: 2rem 2rem 2rem 0;
       flex: 3;
     }
 
     &-right {
-      padding: 2rem;
+      padding: 2rem 0 2rem 2rem;
       flex: 2;
     }
   }
@@ -155,6 +159,16 @@
 
   &__note {
     min-height: 60px;
+  }
+
+  &__labels {
+    .mat-chip {
+      cursor: pointer;
+
+      &-disabled {
+        cursor: default;
+      }
+    }
   }
 }
 

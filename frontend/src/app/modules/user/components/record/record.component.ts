@@ -9,10 +9,13 @@ import { RecordsService } from 'src/app/core/services/api/records.service';
 import { RootState } from 'src/app/store';
 import { Account } from '../../models/account.model';
 import { Record, RecordPostPut } from '../../models/record.model';
+import { Label } from '../../models/label.model';
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
 
 import * as accountsSelectors from '../../store/accounts/accounts.selector';
 import * as categoriesSelectors from '../../store/categories/categories.selector';
+import * as labelsSelectors from '../../store/labels/labels.selectors';
+import { MatChip } from '@angular/material/chips';
 
 @Component({
   selector: 'wal-record',
@@ -29,6 +32,7 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   public accounts$: Observable<Account[]> | null = null;
   public categories$: Observable<Category[]> | null = null;
+  public labels$: Observable<Label[]> | null = null;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private initialRecordForm: any | null = null;
@@ -46,6 +50,7 @@ export class RecordComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.accounts$ = this.store.select(accountsSelectors.selectAllAccounts);
     this.categories$ = this.store.select(categoriesSelectors.selectAllCategories);
+    this.labels$ = this.store.select(labelsSelectors.selectAllLabels);
 
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -90,12 +95,17 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   public discardChanges(): void {
     this.recordForm?.patchValue({ ...this.initialRecordForm });
+    this.toggleEditable();
     this.isEdited = false;
-    this.isEditable = false;
   }
 
   public submitForm(): void {
     const recordToSend: RecordPostPut = { ...this.recordForm?.value } as RecordPostPut;
+
+    if (JSON.stringify(this.initialRecordForm) === JSON.stringify(recordToSend)) {
+      this.notificationService.info('There is nothing to save.');
+      return;
+    }
 
     if (this.isNew) {
       this.recordsService.create(recordToSend).subscribe({
@@ -136,7 +146,7 @@ export class RecordComponent implements OnInit, OnDestroy {
       payee: [{ value: record?.payee, disabled: !this.isEditable }],
       note: [{ value: record?.note, disabled: !this.isEditable }],
       place: [{ value: record?.place, disabled: !this.isEditable }],
-      labels: [{ value: '', disabled: !this.isEditable }]
+      labels: [{ value: record?.labels?.map(label => label.id) ?? [], disabled: !this.isEditable }]
     });
 
     const accountId = this.route.snapshot.queryParamMap.get('account');
@@ -147,7 +157,32 @@ export class RecordComponent implements OnInit, OnDestroy {
     this.isPending = false;
   }
 
+  public toggleChip(chip: MatChip, labelId: string): void {
+    if (!this.isEditable) {
+      return;
+    }
+
+    chip.toggleSelected();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    const currentLabels = this.labels?.value as Array<string>;
+
+    if (currentLabels.includes(labelId)) {
+      const filteredLabels = currentLabels.filter(label => label !== labelId);
+      this.recordForm?.controls.labels.setValue([...filteredLabels]);
+    } else {
+      this.recordForm?.controls.labels.setValue([...currentLabels, labelId]);
+    }
+  }
+
   get type(): AbstractControl | null {
     return this.recordForm!.get('type');
+  }
+
+  get labels(): AbstractControl | null {
+    return this.recordForm!.get('labels');
+  }
+
+  get labelsJSON(): string {
+    return JSON.stringify(this.recordForm?.value);
   }
 }

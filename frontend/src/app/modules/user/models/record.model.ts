@@ -1,4 +1,5 @@
 import { OpenType } from 'src/app/core/enums/open-type.enum';
+import { Label } from './label.model';
 
 export enum RecordType {
   EXPENSE = 'EXPENSE',
@@ -27,7 +28,7 @@ export interface Record {
     name: string;
     image: string;
   };
-  labels?: [];
+  labels?: Label[];
 }
 
 export interface RecordPostPut {
