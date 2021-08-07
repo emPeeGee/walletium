@@ -197,8 +197,4 @@ export class RecordComponent implements OnInit, OnDestroy {
   get userChosenDate(): AbstractControl | null {
     return this.recordForm!.get('userChosenDate');
   }
-
-  get labelsJSON(): string {
-    return JSON.stringify(this.recordForm?.value);
-  }
 }

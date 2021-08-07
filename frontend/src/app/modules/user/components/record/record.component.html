@@ -12,7 +12,7 @@
       <h2 *ngIf="isNew">New Record</h2>
 
       <div class="record__actions">
-        <button *ngIf="isEdited" mat-stroked-button color="accent" (click)="discardChanges()">Discard</button>
+        <button *ngIf="isEdited" mat-raised-button color="accent" (click)="discardChanges()">Discard</button>
         <button
           *ngIf="isEditable"
           mat-raised-button
@@ -22,8 +22,16 @@
         >
           Save
         </button>
-        <button *ngIf="!isNew && !isEditable" mat-raised-button color="primary" (click)="toggleEditable()">Edit</button>
-        <button *ngIf="!isNew" mat-stroked-button color="warn">Delete</button>
+        <button
+          *ngIf="!isNew && !isEditable"
+          mat-raised-button
+          class="record__actions-edit"
+          color="primary"
+          (click)="toggleEditable()"
+        >
+          Edit
+        </button>
+        <button *ngIf="!isNew" mat-raised-button color="warn">Delete</button>
       </div>
     </div>
 
@@ -146,9 +154,6 @@
           </mat-form-field>
         </div>
       </form>
-    </div>
-    <div class="record__selected-labels">
-      {{ labelsJSON }}
     </div>
   </mat-card>
 </section>
