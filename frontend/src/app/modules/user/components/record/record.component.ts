@@ -8,7 +8,7 @@ import { Category } from 'src/app/core/models/category.model';
 import { RecordsService } from 'src/app/core/services/api/records.service';
 import { RootState } from 'src/app/store';
 import { Account } from '../../models/account.model';
-import { Record, RecordPostPut } from '../../models/record.model';
+import { Record, RecordPostPut, RecordType } from '../../models/record.model';
 import { Label } from '../../models/label.model';
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
 
@@ -135,7 +135,7 @@ export class RecordComponent implements OnInit, OnDestroy {
   private initializeRecordForm(record: Record | null): void {
     this.recordForm = this.formBuilder.group({
       id: [{ value: record?.id, disabled: !this.isEditable }],
-      type: [{ value: record?.type, disabled: !this.isEditable }, Validators.required],
+      type: [{ value: record?.type ?? RecordType.EXPENSE, disabled: !this.isEditable }, Validators.required],
       amount: [{ value: record?.amount, disabled: !this.isEditable }, Validators.required],
       categoryId: [{ value: record?.category.id, disabled: !this.isEditable }, Validators.required],
       userChosenDate: [
@@ -178,8 +178,24 @@ export class RecordComponent implements OnInit, OnDestroy {
     return this.recordForm!.get('type');
   }
 
+  get category(): AbstractControl | null {
+    return this.recordForm!.get('categoryId');
+  }
+
+  get account(): AbstractControl | null {
+    return this.recordForm!.get('accountId');
+  }
+
   get labels(): AbstractControl | null {
     return this.recordForm!.get('labels');
+  }
+
+  get amount(): AbstractControl | null {
+    return this.recordForm!.get('amount');
+  }
+
+  get userChosenDate(): AbstractControl | null {
+    return this.recordForm!.get('userChosenDate');
   }
 
   get labelsJSON(): string {

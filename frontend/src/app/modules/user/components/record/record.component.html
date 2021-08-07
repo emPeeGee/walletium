@@ -66,6 +66,7 @@
               <mat-form-field floatLabel="always">
                 <mat-label>Amount</mat-label>
                 <input matInput type="number" [class]="'record__amount--' + type.value" formControlName="amount" />
+                <mat-error *ngIf="amount.hasError('required')">Please choose a category</mat-error>
               </mat-form-field>
             </div>
 
@@ -78,8 +79,7 @@
                     {{ category.name }}
                   </mat-option>
                 </mat-select>
-                <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
-                <!-- <mat-hint>{{ animalControl.value?.sound }}</mat-hint> -->
+                <mat-error *ngIf="category.hasError('required')">Please choose a category</mat-error>
               </mat-form-field>
             </div>
 
@@ -91,8 +91,7 @@
                     {{ account.name }}
                   </mat-option>
                 </mat-select>
-                <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
-                <!-- <mat-hint>{{ animalControl.value?.sound }}</mat-hint> -->
+                <mat-error *ngIf="account.hasError('required')">Please choose an account</mat-error>
               </mat-form-field>
             </div>
 
@@ -100,6 +99,7 @@
               <mat-form-field floatLabel="always">
                 <mat-label>Record date</mat-label>
                 <input matInput formControlName="userChosenDate" />
+                <mat-error *ngIf="userChosenDate.hasError('required')">Please choose a category</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -142,6 +142,7 @@
                 {{ label.name }}
               </mat-chip>
             </mat-chip-list>
+            <mat-hint>Select as many labels as much it suits your record</mat-hint>
           </mat-form-field>
         </div>
       </form>
