@@ -8,7 +8,7 @@ import { Category } from 'src/app/core/models/category.model';
 import { RecordsService } from 'src/app/core/services/api/records.service';
 import { RootState } from 'src/app/store';
 import { Account } from '../../models/account.model';
-import { Record } from '../../models/record.model';
+import { Record, RecordPostPut } from '../../models/record.model';
 import { NofiticationService } from 'src/app/core/services/others/notification.service';
 
 import * as accountsSelectors from '../../store/accounts/accounts.selector';
@@ -95,21 +95,33 @@ export class RecordComponent implements OnInit, OnDestroy {
   }
 
   public submitForm(): void {
-    const newRecord: RecordPost = { ...this.recordForm?.value } as RecordPost;
+    const recordToSend: RecordPostPut = { ...this.recordForm?.value } as RecordPostPut;
 
-    this.recordsService.addRecord(newRecord).subscribe({
-      next: () => {
-        void this.router.navigate(['records']);
-      },
-      error: () => {
-        this.notificationService.error('Something went wrong. Please verify your inputs.');
-        this.toggleEditable();
-      }
-    });
+    if (this.isNew) {
+      this.recordsService.create(recordToSend).subscribe({
+        next: () => {
+          void this.router.navigate(['records']);
+        },
+        error: () => {
+          this.notificationService.error('Something went wrong. Please verify your inputs.');
+          this.toggleEditable();
+        }
+      });
+    } else {
+      this.recordsService.update(recordToSend).subscribe({
+        next: () => {
+          void this.router.navigate(['records']);
+        },
+        error: error => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          this.notificationService.error(error.error.message);
+          this.toggleEditable();
+        }
+      });
+    }
 
     this.toggleEditable();
   }
-
   private initializeRecordForm(record: Record | null): void {
     this.recordForm = this.formBuilder.group({
       id: [{ value: record?.id, disabled: !this.isEditable }],

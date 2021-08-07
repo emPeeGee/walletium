@@ -30,7 +30,8 @@ export interface Record {
   labels?: [];
 }
 
-export interface RecordPost {
+export interface RecordPostPut {
+  id?: string;
   type: string;
   amount: number;
   userChosenDate: string;

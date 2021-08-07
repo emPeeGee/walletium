@@ -22,7 +22,7 @@
         >
           Save
         </button>
-        <button *ngIf="!isNew && !isEditable" mat-stroked-button color="accent" (click)="toggleEditable()">Edit</button>
+        <button *ngIf="!isNew && !isEditable" mat-raised-button color="primary" (click)="toggleEditable()">Edit</button>
         <button *ngIf="!isNew" mat-stroked-button color="warn">Delete</button>
       </div>
     </div>
