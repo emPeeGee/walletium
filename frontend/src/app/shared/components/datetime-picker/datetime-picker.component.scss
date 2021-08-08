@@ -63,13 +63,15 @@
 }
 
 .datetime-picker {
-  max-width: 300px;
+  width: 300px;
+  height: 310px;
   border-radius: 6px;
   padding: 1rem;
   background-color: $white-color;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 
   &__actions {
+    width: 100%;
     margin-bottom: 1rem;
 
     display: flex;
@@ -153,4 +155,127 @@
       opacity: 1;
     }
   }
+}
+
+.timepicker {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+
+  &__back {
+    position: absolute;
+    top: -5px;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $gray-color;
+    }
+  }
+
+  &__header {
+    position: relative;
+
+    width: 100%;
+
+    font-weight: 500;
+    font-size: 1rem;
+    color: $primary-color;
+    text-align: center;
+  }
+
+  &__controls {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input {
+    width: 80px;
+    font-size: 1.8rem;
+    border: none;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__hour,
+  &__minutes {
+    position: relative;
+  }
+
+  &__arrow {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    cursor: pointer;
+
+    color: $second-content-color;
+
+    &:hover {
+      background-color: $gray-color;
+    }
+
+    &-next {
+      bottom: -30px;
+    }
+
+    &-previous {
+      top: -30px;
+    }
+  }
+
+  &__separator {
+    font-size: 1.8rem;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__choose {
+    border: 1px solid $primary-color;
+    border-radius: 23px;
+    padding: 0.8rem 1.5rem;
+    background-color: transparent;
+    cursor: pointer;
+
+    font-weight: 500;
+    text-transform: uppercase;
+    color: $primary-color;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

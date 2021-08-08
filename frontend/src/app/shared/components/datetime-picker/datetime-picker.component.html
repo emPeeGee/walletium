@@ -23,40 +23,81 @@
 
 <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen">
   <aside class="datetime-picker">
-    <div class="datetime-picker__actions">
-      <button (click)="previuosMonth()"><mat-icon>chevron_left</mat-icon></button>
-      <p class="datetime-picker__current">{{ date | async | moment }}</p>
-      <button (click)="nextMonth()"><mat-icon>chevron_right</mat-icon></button>
+    <div class="wrapper">
+      <ng-container *ngIf="!isDateSelected; else timepicker">
+        <div class="datetime-picker__actions">
+          <button (click)="previuosMonth()"><mat-icon>chevron_left</mat-icon></button>
+          <p class="datetime-picker__current">{{ date | async | moment }}</p>
+          <button (click)="nextMonth()"><mat-icon>chevron_right</mat-icon></button>
+        </div>
+
+        <table class="datetime-picker__calendar">
+          <thead>
+            <tr>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wen</th>
+              <th>Tue</th>
+              <th>Fri</th>
+              <th>Sat</th>
+              <th>Sun</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let week of calendar">
+              <td *ngFor="let day of week.days">
+                <div
+                  class="datetime-picker__day"
+                  [class.datetime-picker__day--disabled]="day.disabled"
+                  [class.datetime-picker__day--active]="day.active"
+                  [class.datetime-picker__day--selected]="day.selected"
+                  (click)="selectDate(day.value)"
+                >
+                  <span>{{ day.value | moment: 'D' }}</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </aside>
+</ng-template>
+
+<ng-template #timepicker>
+  <div class="timepicker">
+    <div class="timepicker__header">
+      <p>{{ date | async | moment: 'D MMMM YYYY, HH:mm' }}</p>
+
+      <button class="timepicker__back" (click)="backToDatepicker()"><mat-icon>chevron_left</mat-icon></button>
     </div>
 
-    <table class="datetime-picker__calendar">
-      <thead>
-        <tr>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wen</th>
-          <th>Tue</th>
-          <th>Fri</th>
-          <th>Sat</th>
-          <th>Sun</th>
-        </tr>
-      </thead>
+    <div class="timepicker__controls">
+      <div class="timepicker__hour">
+        <div class="timepicker__arrow timepicker__arrow-previous" (click)="nextTime(-1, 'hour')">
+          <mat-icon>expand_less</mat-icon>
+        </div>
+        <div class="timepicker__arrow timepicker__arrow-next" (click)="nextTime(1, 'hour')">
+          <mat-icon>expand_more</mat-icon>
+        </div>
+        <input type="text" [value]="date | async | moment: 'HH'" />
+      </div>
+      <p class="timepicker__separator">:</p>
+      <div class="timepicker__minutes">
+        <div class="timepicker__arrow timepicker__arrow-previous" (click)="nextTime(-1, 'minute')">
+          <mat-icon>expand_less</mat-icon>
+        </div>
+        <div class="timepicker__arrow timepicker__arrow-next" (click)="nextTime(1, 'minute')">
+          <mat-icon>expand_more</mat-icon>
+        </div>
 
-      <tbody>
-        <tr *ngFor="let week of calendar">
-          <td *ngFor="let day of week.days">
-            <div
-              class="datetime-picker__day"
-              [class.datetime-picker__day--disabled]="day.disabled"
-              [class.datetime-picker__day--active]="day.active"
-              [class.datetime-picker__day--selected]="day.selected"
-              (click)="selectDate(day.value)"
-            >
-              <span>{{ day.value | moment: 'D' }}</span>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </aside>
+        <input type="text" [value]="date | async | moment: 'mm'" />
+      </div>
+    </div>
+
+    <div class="timepicker__actions">
+      <button class="timepicker__choose" (click)="selectTime()">Choose time</button>
+    </div>
+  </div>
 </ng-template>

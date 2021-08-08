@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
@@ -32,16 +32,21 @@ interface Week {
   ]
 })
 export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
+  @Input() initialDate: string | null = null;
+
   // FORM API
   public touched = false;
   public disabled = false;
 
   public isOpen = false;
+  public isDateSelected = false;
   public calendar: Week[] = [];
   public date: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
 
   ngOnInit(): void {
     this.date.subscribe(this.generate.bind(this));
+
+    this.date.next(moment(this.initialDate ?? undefined));
   }
 
   public toggleDatetimePicker(): void {
@@ -55,6 +60,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
       const value = this.date.value.set({ date: date.date(), month: date.month() });
       this.date.next(value);
       this.onChange(value);
+      this.isDateSelected = true;
     }
   }
 
@@ -72,6 +78,22 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
       this.date.next(value);
       this.onChange(value);
     }
+  }
+
+  public nextTime(unit: number, timeUnit: 'hour' | 'minute'): void {
+    if (!this.disabled) {
+      const value = this.date.value.add(unit, timeUnit);
+      this.date.next(value);
+      this.onChange(value);
+    }
+  }
+
+  public selectTime(): void {
+    this.isOpen = !this.isOpen;
+  }
+
+  public backToDatepicker(): void {
+    this.isDateSelected = false;
   }
 
   private generate(now: moment.Moment): void {
@@ -104,8 +126,10 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
   private onChange = (date: moment.Moment): void => {};
   private onTouched = (): void => {};
 
-  public writeValue(date: moment.Moment): void {
+  public writeValue(date: string): void {
     console.log(date);
+
+    this.date.next(moment(date));
   }
 
   public registerOnTouched(onTouched: any): void {
