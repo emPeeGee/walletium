@@ -139,7 +139,7 @@ export class RecordComponent implements OnInit, OnDestroy {
       amount: [{ value: record?.amount, disabled: !this.isEditable }, Validators.required],
       categoryId: [{ value: record?.category.id, disabled: !this.isEditable }, Validators.required],
       userChosenDate: [
-        { value: record?.updatedDate ?? new Date().toISOString(), disabled: !this.isEditable },
+        { value: record?.userChosenDate ?? new Date().toISOString(), disabled: !this.isEditable },
         Validators.required
       ],
       accountId: [{ value: record?.account.id, disabled: !this.isEditable }, Validators.required],

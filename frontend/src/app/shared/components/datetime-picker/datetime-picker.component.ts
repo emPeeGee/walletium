@@ -32,8 +32,6 @@ interface Week {
   ]
 })
 export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
-  @Input() initialDate: string | null = null;
-
   // FORM API
   public touched = false;
   public disabled = false;
@@ -45,8 +43,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     this.date.subscribe(this.generate.bind(this));
-
-    this.date.next(moment(this.initialDate ?? undefined));
   }
 
   public toggleDatetimePicker(): void {
@@ -97,6 +93,8 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
   }
 
   private generate(now: moment.Moment): void {
+    console.log(now.format('D MMM YYYY hh:mm:ss'));
+
     const startDay = now.clone().startOf('month').startOf('week').isoWeekday(1);
     const endDay = now.clone().endOf('month').endOf('week').isoWeekday(1);
 
@@ -127,8 +125,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
   private onTouched = (): void => {};
 
   public writeValue(date: string): void {
-    console.log(date);
-
     this.date.next(moment(date));
   }
 
@@ -147,7 +143,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  setDisabledState(disabled: boolean): void {
+  public setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
   }
 }
