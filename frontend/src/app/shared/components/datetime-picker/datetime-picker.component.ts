@@ -1,4 +1,10 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Component, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
 
@@ -16,9 +22,20 @@ interface Week {
 @Component({
   selector: 'wal-datetime-picker',
   templateUrl: './datetime-picker.component.html',
-  styleUrls: ['./datetime-picker.component.scss']
+  styleUrls: ['./datetime-picker.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: DatetimePickerComponent
+    }
+  ]
 })
-export class DatetimePickerComponent implements OnInit {
+export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
+  // FORM API
+  public touched = false;
+  public disabled = false;
+
   public isOpen = false;
   public calendar: Week[] = [];
   public date: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
@@ -28,22 +45,33 @@ export class DatetimePickerComponent implements OnInit {
   }
 
   public toggleDatetimePicker(): void {
-    this.isOpen = !this.isOpen;
+    if (!this.disabled) {
+      this.isOpen = !this.isOpen;
+    }
   }
 
   public selectDate(date: moment.Moment): void {
-    const value = this.date.value.set({ date: date.date(), month: date.month() });
-    this.date.next(value);
+    if (!this.disabled) {
+      const value = this.date.value.set({ date: date.date(), month: date.month() });
+      this.date.next(value);
+      this.onChange(value);
+    }
   }
 
   public nextMonth(): void {
-    const value = this.date.value.add(1, 'month');
-    this.date.next(value);
+    if (!this.disabled) {
+      const value = this.date.value.add(1, 'month');
+      this.date.next(value);
+      this.onChange(value);
+    }
   }
 
   public previuosMonth(): void {
-    const value = this.date.value.subtract(1, 'month');
-    this.date.next(value);
+    if (!this.disabled) {
+      const value = this.date.value.subtract(1, 'month');
+      this.date.next(value);
+      this.onChange(value);
+    }
   }
 
   private generate(now: moment.Moment): void {
@@ -70,5 +98,32 @@ export class DatetimePickerComponent implements OnInit {
     }
 
     this.calendar = calendar;
+  }
+
+  // FORM API
+  private onChange = (date: moment.Moment): void => {};
+  private onTouched = (): void => {};
+
+  public writeValue(date: moment.Moment): void {
+    console.log(date);
+  }
+
+  public registerOnTouched(onTouched: any): void {
+    this.onTouched = onTouched;
+  }
+
+  public registerOnChange(onChange: any): void {
+    this.onChange = onChange;
+  }
+
+  public markAsTouched(): void {
+    if (!this.touched) {
+      this.onTouched();
+      this.touched = true;
+    }
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
   }
 }

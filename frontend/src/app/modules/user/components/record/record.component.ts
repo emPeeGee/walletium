@@ -174,6 +174,10 @@ export class RecordComponent implements OnInit, OnDestroy {
     }
   }
 
+  get formJSON(): string {
+    return JSON.stringify(this.recordForm?.value);
+  }
+
   get type(): AbstractControl | null {
     return this.recordForm!.get('type');
   }

@@ -104,11 +104,13 @@
             </div>
 
             <div class="record__field">
-              <mat-form-field floatLabel="always">
+              <wal-datetime-picker formControlName="userChosenDate"></wal-datetime-picker>
+
+              <!-- <mat-form-field floatLabel="always">
                 <mat-label>Record date</mat-label>
                 <input matInput formControlName="userChosenDate" />
                 <mat-error *ngIf="userChosenDate.hasError('required')">Please choose a category</mat-error>
-              </mat-form-field>
+              </mat-form-field> -->
             </div>
           </div>
 
@@ -155,5 +157,7 @@
         </div>
       </form>
     </div>
+
+    {{ formJSON }}
   </mat-card>
 </section>

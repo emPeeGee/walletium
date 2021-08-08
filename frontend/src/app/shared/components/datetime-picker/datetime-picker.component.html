@@ -1,11 +1,12 @@
-<div class="datetime">
+<div class="datetime" [class.datetime--disabled]="disabled">
   <label class="datetime__label">
     Date
     <input
+      readonly
       class="datetime__input"
       type="text"
       placeholder="Select a date"
-      [value]="date | async | moment: ' D MMMM YYYY, HH:mm:ss'"
+      [value]="date | async | moment: 'D MMMM YYYY, HH:mm:ss'"
     />
   </label>
   <button

@@ -3,6 +3,16 @@
 .datetime {
   position: relative;
 
+  &--disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+
+    input {
+      border-bottom: 1px dashed $primary-color;
+    }
+  }
+
   &__label {
     font-size: 0.7rem;
     color: $second-content-color;
