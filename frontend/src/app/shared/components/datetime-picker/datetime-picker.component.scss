@@ -1,9 +1,62 @@
 @import 'variables';
 
+.datetime {
+  position: relative;
+
+  &__label {
+    font-size: 0.7rem;
+    color: $second-content-color;
+  }
+
+  &__input {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid $primary-color;
+
+    font-size: 0.9rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__toggler {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    color: $second-content-color;
+
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $gray-color;
+    }
+
+    &--active {
+      color: $primary-color;
+    }
+  }
+}
+
 .datetime-picker {
   max-width: 300px;
   border-radius: 6px;
   padding: 1rem;
+  background-color: $white-color;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 
   &__actions {

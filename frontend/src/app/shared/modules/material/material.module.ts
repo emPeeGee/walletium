@@ -21,6 +21,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatChipsModule } from '@angular/material/chips';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [],
@@ -46,7 +47,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatExpansionModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
-    MatChipsModule
+    MatChipsModule,
+    OverlayModule
   ]
 })
 export class MaterialModule {}

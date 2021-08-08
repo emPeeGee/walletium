@@ -19,12 +19,16 @@ interface Week {
   styleUrls: ['./datetime-picker.component.scss']
 })
 export class DatetimePickerComponent implements OnInit {
+  public isOpen = false;
   public calendar: Week[] = [];
-
   public date: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
 
   ngOnInit(): void {
     this.date.subscribe(this.generate.bind(this));
+  }
+
+  public toggleDatetimePicker(): void {
+    this.isOpen = !this.isOpen;
   }
 
   public selectDate(date: moment.Moment): void {
