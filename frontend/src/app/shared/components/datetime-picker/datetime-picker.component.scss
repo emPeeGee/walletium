@@ -206,13 +206,25 @@
   }
 
   input {
-    width: 80px;
+    width: 60px;
     font-size: 1.8rem;
     border: none;
+    border-radius: 6px;
+
     text-align: center;
+
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
 
     &:focus {
       outline: none;
+      border: 1px solid $primary-color;
     }
   }
 
@@ -250,6 +262,7 @@
 
   &__separator {
     font-size: 1.8rem;
+    margin: 0 1rem;
   }
 
   &__actions {

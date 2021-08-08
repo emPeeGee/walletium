@@ -81,7 +81,13 @@
         <div class="timepicker__arrow timepicker__arrow-next" (click)="nextTime(1, 'hour')">
           <mat-icon>expand_more</mat-icon>
         </div>
-        <input type="text" [value]="date | async | moment: 'HH'" />
+        <input
+          type="number"
+          readonly
+          [value]="date | async | moment: 'HH'"
+          (keyup.arrowup)="nextTime(-1, 'hour')"
+          (keyup.arrowdown)="nextTime(1, 'hour')"
+        />
       </div>
       <p class="timepicker__separator">:</p>
       <div class="timepicker__minutes">
@@ -92,7 +98,13 @@
           <mat-icon>expand_more</mat-icon>
         </div>
 
-        <input type="text" [value]="date | async | moment: 'mm'" />
+        <input
+          type="number"
+          readonly
+          [value]="date | async | moment: 'mm'"
+          (keyup.arrowup)="nextTime(-1, 'minute')"
+          (keyup.arrowdown)="nextTime(1, 'minute')"
+        />
       </div>
     </div>
 
