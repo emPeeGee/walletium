@@ -1,0 +1,37 @@
+<aside class="datetime-picker">
+  <div class="datetime-picker__actions">
+    <button (click)="previuosMonth()"><mat-icon>chevron_left</mat-icon></button>
+    <p class="datetime-picker__current">{{ date | async | moment }}</p>
+    <button (click)="nextMonth()"><mat-icon>chevron_right</mat-icon></button>
+  </div>
+
+  <table class="datetime-picker__calendar">
+    <thead>
+      <tr>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wen</th>
+        <th>Tue</th>
+        <th>Fri</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let week of calendar">
+        <td *ngFor="let day of week.days">
+          <div
+            class="datetime-picker__day"
+            [class.datetime-picker__day--disabled]="day.disabled"
+            [class.datetime-picker__day--active]="day.active"
+            [class.datetime-picker__day--selected]="day.selected"
+            (click)="selectDate(day.value)"
+          >
+            <span>{{ day.value | moment: 'D' }}</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</aside>

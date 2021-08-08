@@ -14,6 +14,8 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
 import { SnowComponent } from './components/snow/snow.component';
 import { BackActionDirective } from './directives/back-action.directive';
 import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
+import { DatetimePickerComponent } from './components/datetime-picker/datetime-picker.component';
+import { MomentPipe } from './pipes/moment.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
     ImageViewerComponent,
     SnowComponent,
     NumberToArrayPipe,
-    ProfileComponent
+    ProfileComponent,
+    DatetimePickerComponent,
+    MomentPipe
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, RouterModule, MaterialModule],
   exports: [
@@ -39,7 +43,8 @@ import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
     LoaderComponent,
     ConfirmModalComponent,
     BackActionDirective,
-    SnowComponent
+    SnowComponent,
+    DatetimePickerComponent
   ]
 })
 export class SharedModule {}

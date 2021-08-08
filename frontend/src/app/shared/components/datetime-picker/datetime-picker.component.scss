@@ -1,0 +1,93 @@
+@import 'variables';
+
+.datetime-picker {
+  max-width: 300px;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+
+  &__actions {
+    margin-bottom: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      background-color: white;
+      border-radius: 50px;
+      border: none;
+      padding: 0.2rem;
+      cursor: pointer;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: $second-content-color;
+
+      &:hover {
+        background-color: $gray-color;
+      }
+    }
+  }
+
+  &__current {
+    font-weight: 500;
+    color: $primary-color;
+  }
+
+  &__calendar {
+    width: 100%;
+
+    thead tr th {
+      max-width: 0px;
+      padding-bottom: 0.6rem;
+
+      color: $second-content-color;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+  }
+
+  &__day {
+    margin: 0 auto;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 500;
+
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $primary-color-v2;
+      color: $white-color;
+    }
+
+    &--disabled {
+      opacity: 0.3;
+      font-weight: 400;
+    }
+
+    &--active,
+    &--active:hover {
+      background-color: $red-color;
+      color: $white-color;
+
+      opacity: 0.9;
+    }
+
+    &--selected,
+    &--selected:hover {
+      background-color: $primary-color;
+      color: white;
+      opacity: 1;
+    }
+  }
+}
