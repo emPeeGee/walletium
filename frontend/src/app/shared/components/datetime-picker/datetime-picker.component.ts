@@ -88,8 +88,11 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     this.isOpen = !this.isOpen;
   }
 
-  public backToDatepicker(): void {
+  public toDatepicker(): void {
     this.isDateSelected = false;
+  }
+  public toTimepicker(): void {
+    this.isDateSelected = true;
   }
 
   private generate(now: moment.Moment): void {

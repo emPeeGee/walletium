@@ -1,37 +1,56 @@
-<div class="datetime" [class.datetime--disabled]="disabled">
-  <label class="datetime__label">
-    Date
-    <input
-      readonly
-      class="datetime__input"
-      type="text"
-      placeholder="Select a date"
-      [value]="date | async | moment: 'D MMMM YYYY, HH:mm:ss'"
-    />
-  </label>
-  <button
-    class="datetime__toggler"
-    [class.datetime__toggler--active]="isOpen"
-    type="button"
-    cdkOverlayOrigin
-    #trigger="cdkOverlayOrigin"
-    (click)="toggleDatetimePicker()"
-  >
-    <mat-icon>event</mat-icon>
-  </button>
+<div class="datetime">
+  <div class="datetime__picker" [class.datetime__picker--disabled]="disabled">
+    <label class="datetime__picker-label">
+      Date
+      <input
+        readonly
+        class="datetime__picker-input"
+        type="text"
+        placeholder="Select a date"
+        [value]="date | async | moment: 'D MMMM YYYY, HH:mm:ss'"
+      />
+    </label>
+    <button
+      class="datetime__picker-toggler"
+      [class.datetime__picker-toggler--active]="isOpen"
+      type="button"
+      cdkOverlayOrigin
+      #trigger="cdkOverlayOrigin"
+      (click)="toggleDatetimePicker()"
+    >
+      <mat-icon>event</mat-icon>
+    </button>
+  </div>
 </div>
 
 <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen">
-  <aside class="datetime-picker">
-    <div class="wrapper">
-      <ng-container *ngIf="!isDateSelected; else timepicker">
-        <div class="datetime-picker__actions">
+  <aside class="datetime__content">
+    <nav class="datetime__navigation">
+      <button
+        class="datetime__navigation-item"
+        [class.datetime__navigation-item--active]="!isDateSelected"
+        (click)="toDatepicker()"
+      >
+        Datepicker
+      </button>
+      <button
+        class="datetime__navigation-item"
+        [class.datetime__navigation-item--active]="isDateSelected"
+        (click)="toTimepicker()"
+      >
+        Timepicker
+      </button>
+    </nav>
+
+    <ng-container *ngIf="!isDateSelected; else timepicker">
+      <div class="datetime__date">
+        <div class="datetime__date-actions">
           <button (click)="previuosMonth()"><mat-icon>chevron_left</mat-icon></button>
-          <p class="datetime-picker__current">{{ date | async | moment }}</p>
+          <p class="datetime__date-current">{{ date | async | moment }}</p>
           <button (click)="nextMonth()"><mat-icon>chevron_right</mat-icon></button>
         </div>
 
-        <table class="datetime-picker__calendar">
+        <table class="datetime__date-calendar">
           <thead>
             <tr>
               <th>Mon</th>
@@ -48,10 +67,10 @@
             <tr *ngFor="let week of calendar">
               <td *ngFor="let day of week.days">
                 <div
-                  class="datetime-picker__day"
-                  [class.datetime-picker__day--disabled]="day.disabled"
-                  [class.datetime-picker__day--active]="day.active"
-                  [class.datetime-picker__day--selected]="day.selected"
+                  class="datetime__date-day"
+                  [class.datetime__date-day--disabled]="day.disabled"
+                  [class.datetime__date-day--active]="day.active"
+                  [class.datetime__date-day--selected]="day.selected"
                   (click)="selectDate(day.value)"
                 >
                   <span>{{ day.value | moment: 'D' }}</span>
@@ -60,25 +79,23 @@
             </tr>
           </tbody>
         </table>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
   </aside>
 </ng-template>
 
 <ng-template #timepicker>
-  <div class="timepicker">
-    <div class="timepicker__header">
+  <div class="datetime__time">
+    <div class="datetime__time-header">
       <p>{{ date | async | moment: 'D MMMM YYYY, HH:mm' }}</p>
-
-      <button class="timepicker__back" (click)="backToDatepicker()"><mat-icon>chevron_left</mat-icon></button>
     </div>
 
-    <div class="timepicker__controls">
-      <div class="timepicker__hour">
-        <div class="timepicker__arrow timepicker__arrow-previous" (click)="nextTime(-1, 'hour')">
+    <div class="datetime__time-controls">
+      <div class="datetime__time-hour">
+        <div class="datetime__time-arrow datetime__time-arrow-previous" (click)="nextTime(-1, 'hour')">
           <mat-icon>expand_less</mat-icon>
         </div>
-        <div class="timepicker__arrow timepicker__arrow-next" (click)="nextTime(1, 'hour')">
+        <div class="datetime__time-arrow datetime__time-arrow-next" (click)="nextTime(1, 'hour')">
           <mat-icon>expand_more</mat-icon>
         </div>
         <input
@@ -89,12 +106,12 @@
           (keyup.arrowdown)="nextTime(1, 'hour')"
         />
       </div>
-      <p class="timepicker__separator">:</p>
-      <div class="timepicker__minutes">
-        <div class="timepicker__arrow timepicker__arrow-previous" (click)="nextTime(-1, 'minute')">
+      <p class="datetime__time-separator">:</p>
+      <div class="datetime__time-minutes">
+        <div class="datetime__time-arrow datetime__time-arrow-previous" (click)="nextTime(-1, 'minute')">
           <mat-icon>expand_less</mat-icon>
         </div>
-        <div class="timepicker__arrow timepicker__arrow-next" (click)="nextTime(1, 'minute')">
+        <div class="datetime__time-arrow datetime__time-arrow-next" (click)="nextTime(1, 'minute')">
           <mat-icon>expand_more</mat-icon>
         </div>
 
@@ -108,8 +125,8 @@
       </div>
     </div>
 
-    <div class="timepicker__actions">
-      <button class="timepicker__choose" (click)="selectTime()">Choose time</button>
+    <div class="datetime__time-actions">
+      <button class="datetime__time-choose" (click)="selectTime()">Choose time</button>
     </div>
   </div>
 </ng-template>

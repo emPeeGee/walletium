@@ -11,5 +11,5 @@
 
 ☐ @low To revisit FORM API, to improve
 ✔ @high To fix datepicker, when initial date is current instead of form @done(21-08-08 22:30)
-☐ @low To revisit datepicker
+✔ @low To revisit datepicker @done(21-08-09 20:54)
 ✔ @low Datepicker bug when octomber display a part of next month @done(21-08-09 15:20)

@@ -1,294 +1,325 @@
 @import 'variables';
 
 .datetime {
-  position: relative;
+  &__picker {
+    position: relative;
 
-  &--disabled {
-    opacity: 0.5;
-    cursor: default;
-    pointer-events: none;
+    &--disabled {
+      opacity: 0.5;
+      cursor: default;
+      pointer-events: none;
 
-    input {
-      border-bottom: 1px dashed $primary-color;
+      input {
+        border-bottom: 1px dashed $primary-color;
+      }
+    }
+
+    &-label {
+      font-size: 0.7rem;
+      color: $second-content-color;
+    }
+
+    &-input {
+      width: 100%;
+      height: 30px;
+      border: none;
+      border-bottom: 1px solid $primary-color;
+
+      font-size: 0.9rem;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &-toggler {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 40px;
+      height: 40px;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+
+      color: $second-content-color;
+
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $gray-color;
+      }
+
+      &--active {
+        color: $primary-color;
+      }
     }
   }
 
-  &__label {
-    font-size: 0.7rem;
-    color: $second-content-color;
-  }
+  &__date {
+    &-actions {
+      width: 100%;
+      margin-bottom: 1rem;
 
-  &__input {
-    width: 100%;
-    height: 30px;
-    border: none;
-    border-bottom: 1px solid $primary-color;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    font-size: 0.9rem;
+      button {
+        background-color: white;
+        border-radius: 50px;
+        border: none;
+        padding: 0.2rem;
+        cursor: pointer;
 
-    &:focus {
-      outline: none;
-    }
-  }
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-  &__toggler {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
+        color: $second-content-color;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-
-    color: $second-content-color;
-
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: $gray-color;
+        &:hover {
+          background-color: $gray-color;
+        }
+      }
     }
 
-    &--active {
+    &-current {
+      font-weight: 500;
       color: $primary-color;
     }
-  }
-}
 
-.datetime-picker {
-  width: 300px;
-  height: 310px;
-  border-radius: 6px;
-  padding: 1rem;
-  background-color: $white-color;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    &-calendar {
+      width: 100%;
 
-  &__actions {
-    width: 100%;
-    margin-bottom: 1rem;
+      thead tr th {
+        max-width: 0px;
+        padding-bottom: 0.6rem;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+        color: $second-content-color;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+    }
 
-    button {
-      background-color: white;
-      border-radius: 50px;
-      border: none;
-      padding: 0.2rem;
+    &-day {
+      margin: 0 auto;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 8px;
       cursor: pointer;
 
       display: flex;
       justify-content: center;
       align-items: center;
 
+      font-weight: 500;
+
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $primary-color-v2;
+        color: $white-color;
+      }
+
+      &--disabled {
+        opacity: 0.3;
+        font-weight: 400;
+      }
+
+      &--active,
+      &--active:hover {
+        background-color: $red-color;
+        color: $white-color;
+
+        opacity: 0.9;
+      }
+
+      &--selected,
+      &--selected:hover {
+        background-color: $primary-color;
+        color: white;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__time {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    &-header {
+      position: relative;
+
+      width: 100%;
+      margin-bottom: 1.5rem;
+
+      font-weight: 500;
+      font-size: 1rem;
+      color: $primary-color;
+      text-align: center;
+    }
+
+    &-controls {
+      height: 100px;
+      margin-bottom: 1.5rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    input {
+      width: 60px;
+      font-size: 1.8rem;
+      border: none;
+      border-radius: 6px;
+
+      text-align: center;
+
+      &[type='number'] {
+        -moz-appearance: textfield;
+      }
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
+      &:focus {
+        outline: none;
+        border: 1px solid $primary-color;
+      }
+    }
+
+    &-hour,
+    &-minutes {
+      position: relative;
+    }
+
+    &-arrow {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+      cursor: pointer;
+
       color: $second-content-color;
 
       &:hover {
         background-color: $gray-color;
       }
+
+      &-next {
+        bottom: -30px;
+      }
+
+      &-previous {
+        top: -30px;
+      }
+    }
+
+    &-separator {
+      font-size: 1.8rem;
+      margin: 0 1rem;
+    }
+
+    &-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-choose {
+      border: 1px solid $primary-color;
+      border-radius: 23px;
+      padding: 0.8rem 1.5rem;
+      background-color: transparent;
+      cursor: pointer;
+
+      font-weight: 500;
+      text-transform: uppercase;
+      color: $primary-color;
+
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $primary-color;
+        color: white;
+      }
     }
   }
 
-  &__current {
-    font-weight: 500;
-    color: $primary-color;
+  &__content {
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+    padding: 1rem;
+    background-color: $white-color;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
 
-  &__calendar {
-    width: 100%;
+  &__navigation {
+    margin-bottom: 1rem;
 
-    thead tr th {
-      max-width: 0px;
-      padding-bottom: 0.6rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &-item {
+      position: relative;
+
+      border: none;
+      padding: 0.5rem 1rem;
+      background-color: white;
+      cursor: pointer;
 
       color: $second-content-color;
-      font-size: 0.8rem;
-      font-weight: 500;
+
+      transition: all 0.4s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
+
+      &--active {
+        color: $primary-color;
+
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          transform: translateY(-50%);
+
+          width: 100%;
+          height: 2px;
+          border-radius: 20px 20px 5px 5px;
+          background-color: $primary-color;
+        }
+      }
     }
   }
-
-  &__day {
-    margin: 0 auto;
-    width: 1.8rem;
-    height: 1.8rem;
-    border-radius: 8px;
-    cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-weight: 500;
-
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: $primary-color-v2;
-      color: $white-color;
-    }
-
-    &--disabled {
-      opacity: 0.3;
-      font-weight: 400;
-    }
-
-    &--active,
-    &--active:hover {
-      background-color: $red-color;
-      color: $white-color;
-
-      opacity: 0.9;
-    }
-
-    &--selected,
-    &--selected:hover {
-      background-color: $primary-color;
-      color: white;
-      opacity: 1;
-    }
-  }
-}
-
-.timepicker {
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
-
-  &__back {
-    position: absolute;
-    top: -5px;
-    left: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-
-    &:hover {
-      background-color: $gray-color;
-    }
-  }
-
-  &__header {
-    position: relative;
-
-    width: 100%;
-
-    font-weight: 500;
-    font-size: 1rem;
-    color: $primary-color;
-    text-align: center;
-  }
-
-  &__controls {
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  input {
-    width: 60px;
-    font-size: 1.8rem;
-    border: none;
-    border-radius: 6px;
-
-    text-align: center;
-
-    &[type='number'] {
-      -moz-appearance: textfield;
-    }
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-    }
-
-    &:focus {
-      outline: none;
-      border: 1px solid $primary-color;
-    }
-  }
-
-  &__hour,
-  &__minutes {
-    position: relative;
-  }
-
-  &__arrow {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    cursor: pointer;
-
-    color: $second-content-color;
-
-    &:hover {
-      background-color: $gray-color;
-    }
-
-    &-next {
-      bottom: -30px;
-    }
-
-    &-previous {
-      top: -30px;
-    }
-  }
-
-  &__separator {
-    font-size: 1.8rem;
-    margin: 0 1rem;
-  }
-
-  &__actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__choose {
-    border: 1px solid $primary-color;
-    border-radius: 23px;
-    padding: 0.8rem 1.5rem;
-    background-color: transparent;
-    cursor: pointer;
-
-    font-weight: 500;
-    text-transform: uppercase;
-    color: $primary-color;
-  }
-}
-
-.wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
