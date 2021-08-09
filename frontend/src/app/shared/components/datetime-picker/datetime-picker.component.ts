@@ -93,10 +93,8 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
   }
 
   private generate(now: moment.Moment): void {
-    console.log(now.format('D MMM YYYY hh:mm:ss'));
-
-    const startDay = now.clone().startOf('month').startOf('week').isoWeekday(1);
-    const endDay = now.clone().endOf('month').endOf('week').isoWeekday(1);
+    const startDay = now.clone().startOf('month').startOf('week');
+    const endDay = now.clone().endOf('month').endOf('week');
 
     const date = startDay.clone().subtract(1, 'day');
 
