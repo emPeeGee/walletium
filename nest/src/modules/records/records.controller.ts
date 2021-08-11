@@ -45,7 +45,7 @@ export class RecordsController {
     return record;
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   @UseGuards(JwtAuthGuard)
   public async delete(@Param('id') recordId: string): Promise<any> {
     const record = this.recordsService.delete(recordId);

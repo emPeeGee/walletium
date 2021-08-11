@@ -13,3 +13,6 @@
 ✔ @high To fix datepicker, when initial date is current instead of form @done(21-08-08 22:30)
 ✔ @low To revisit datepicker @done(21-08-09 20:54)
 ✔ @low Datepicker bug when octomber display a part of next month @done(21-08-09 15:20)
+
+☐ Bug when account is deleted but stil displayed in dashboard
+☐ Bug when amount is present but if you type non number strange error appears

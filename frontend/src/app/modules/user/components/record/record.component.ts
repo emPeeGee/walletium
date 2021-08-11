@@ -16,6 +16,9 @@ import * as accountsSelectors from '../../store/accounts/accounts.selector';
 import * as categoriesSelectors from '../../store/categories/categories.selector';
 import * as labelsSelectors from '../../store/labels/labels.selectors';
 import { MatChip } from '@angular/material/chips';
+import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
+import { CloseType } from 'src/app/core/enums/close-type.enum';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'wal-record',
@@ -44,7 +47,8 @@ export class RecordComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private store: Store<RootState>,
     private notificationService: NofiticationService,
-    private recordsService: RecordsService
+    private recordsService: RecordsService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -132,6 +136,42 @@ export class RecordComponent implements OnInit, OnDestroy {
 
     this.toggleEditable();
   }
+
+  public toggleChip(chip: MatChip, labelId: string): void {
+    if (!this.isEditable) {
+      return;
+    }
+
+    chip.toggleSelected();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    const currentLabels = this.labels?.value as Array<string>;
+
+    if (currentLabels.includes(labelId)) {
+      const filteredLabels = currentLabels.filter(label => label !== labelId);
+      this.recordForm?.controls.labels.setValue([...filteredLabels]);
+    } else {
+      this.recordForm?.controls.labels.setValue([...currentLabels, labelId]);
+    }
+  }
+
+  public deleteRecord(): void {
+    const confirmDialog = this.dialog.open(ConfirmModalComponent);
+    confirmDialog.afterClosed().subscribe(CLOSE_FLAG => {
+      if (CLOSE_FLAG === CloseType.CONFIRM) {
+        this.recordsService.delete(this.record?.id ?? '').subscribe({
+          next: () => {
+            void this.router.navigate(['records']);
+            this.notificationService.success('Record was deleted successfully');
+          },
+
+          error: () => {
+            this.notificationService.error('Deletion failed. Something went wrong!');
+          }
+        });
+      }
+    });
+  }
+
   private initializeRecordForm(record: Record | null): void {
     this.recordForm = this.formBuilder.group({
       id: [{ value: record?.id, disabled: !this.isEditable }],
@@ -155,23 +195,6 @@ export class RecordComponent implements OnInit, OnDestroy {
     }
 
     this.isPending = false;
-  }
-
-  public toggleChip(chip: MatChip, labelId: string): void {
-    if (!this.isEditable) {
-      return;
-    }
-
-    chip.toggleSelected();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    const currentLabels = this.labels?.value as Array<string>;
-
-    if (currentLabels.includes(labelId)) {
-      const filteredLabels = currentLabels.filter(label => label !== labelId);
-      this.recordForm?.controls.labels.setValue([...filteredLabels]);
-    } else {
-      this.recordForm?.controls.labels.setValue([...currentLabels, labelId]);
-    }
   }
 
   get formJSON(): string {

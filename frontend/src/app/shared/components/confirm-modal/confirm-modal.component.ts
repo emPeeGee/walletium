@@ -16,7 +16,7 @@ export class ConfirmModalComponent {
     this.dialogRef.close(CloseType.CONFIRM);
   }
 
-  onDeny(): void {
-    this.dialogRef.close(CloseType.DENY);
+  onCancel(): void {
+    this.dialogRef.close(CloseType.CANCEL);
   }
 }

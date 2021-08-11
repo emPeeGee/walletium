@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Record, RecordPostPut } from '../../../modules/user/models/record.model';
+import { DeleteResponse } from '../../models/delete-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class RecordsService {
 
   public update(record: RecordPostPut): Observable<Record> {
     return this.http.put<Record>(`${environment.baseURL}records/update`, record);
+  }
+
+  public delete(recordId: string): Observable<DeleteResponse> {
+    return this.http.delete<DeleteResponse>(`${environment.baseURL}records/delete/${recordId}`);
   }
 }

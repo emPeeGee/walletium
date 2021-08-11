@@ -31,7 +31,7 @@
         >
           Edit
         </button>
-        <button *ngIf="!isNew" mat-raised-button color="warn">Delete</button>
+        <button *ngIf="!isNew" mat-raised-button color="warn" (click)="deleteRecord()">Delete</button>
       </div>
     </div>
 
@@ -74,7 +74,7 @@
               <mat-form-field floatLabel="always">
                 <mat-label>Amount</mat-label>
                 <input matInput type="number" [class]="'record__amount--' + type.value" formControlName="amount" />
-                <mat-error *ngIf="amount.hasError('required')">Please choose a category</mat-error>
+                <mat-error *ngIf="amount.hasError('required')">Please choose a amount</mat-error>
               </mat-form-field>
             </div>
 

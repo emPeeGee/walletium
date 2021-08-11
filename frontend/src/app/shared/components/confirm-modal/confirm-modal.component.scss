@@ -1,4 +1,8 @@
 .confirm-modal {
+  h2 {
+    margin-bottom: 1rem;
+  }
+
   &__actions {
     display: flex;
     justify-content: flex-end;

@@ -119,8 +119,12 @@ export class RecordsService {
 
   public async delete(id: string): Promise<any> {
     const record = await this.repository.findOne(id);
-    const deletedRecord = await this.repository.remove(record);
-    return deletedRecord;
+
+    if (!record) {
+      throw new BadRequestException('Such record does not exists!');
+    }
+
+    return await this.repository.delete(id);
   }
 
   private simplifyRecords(records: Record[]): IRecordFrontend[] {

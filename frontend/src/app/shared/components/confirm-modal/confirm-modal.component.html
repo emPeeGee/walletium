@@ -2,7 +2,7 @@
   <h2 mat-dialog-title>{{ title }}</h2>
   <mat-dialog-content> This action will cannot be reverted </mat-dialog-content>
   <mat-dialog-actions class="confirm-modal__actions">
-    <button mat-button color="primary" (click)="onDeny()">Deny</button>
-    <button mat-button color="warn" (click)="onConfirm()">Confirm</button>
+    <button mat-flat-button color="basic" (click)="onCancel()">Cancel</button>
+    <button mat-flat-button color="warn" (click)="onConfirm()">Confirm</button>
   </mat-dialog-actions>
 </section>

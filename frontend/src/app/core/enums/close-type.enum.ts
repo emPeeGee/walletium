@@ -1,4 +1,4 @@
 export enum CloseType {
   CONFIRM,
-  DENY
+  CANCEL
 }

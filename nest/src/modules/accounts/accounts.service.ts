@@ -84,6 +84,6 @@ export class AccountsService {
       throw new BadRequestException('Such account does not exists!');
     }
 
-    return await this.repository.delete(account);
+    return await this.repository.delete(accountId);
   }
 }
