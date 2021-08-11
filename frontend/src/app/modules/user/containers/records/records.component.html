@@ -12,7 +12,10 @@
     <a mat-raised-button color="accent" routerLink="new">Add Record</a>
   </div>
 
-  <div *ngIf="true" class="records__records">
-    <wal-record-row *ngFor="let record of records$ | async" [record]="record" [isExpandable]="false"></wal-record-row>
+  <div *ngFor="let group of groupedRecords$ | async | keyvalue" class="records__group">
+    <p class="records__group-date">{{ group.key }}</p>
+    <div *ngIf="true" class="records__records">
+      <wal-record-row *ngFor="let record of group.value" [record]="record" [isExpandable]="false"></wal-record-row>
+    </div>
   </div>
 </section>

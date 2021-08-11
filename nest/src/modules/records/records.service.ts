@@ -20,7 +20,13 @@ export class RecordsService {
   ) {}
 
   public async findAll(): Promise<IRecordFrontend[]> {
-    return this.simplifyRecords(await this.repository.find());
+    return this.simplifyRecords(
+      await this.repository.find({
+        order: {
+          userChosenDate: 'DESC',
+        },
+      }),
+    );
   }
 
   public async findOne(id: string): Promise<IRecordFrontend> {
@@ -33,7 +39,14 @@ export class RecordsService {
 
   public async findByAccount(accountId: string): Promise<IRecordFrontend[]> {
     const account = await this.accountsService.findOne(accountId);
-    return this.simplifyRecords(await this.repository.find({ account }));
+    return this.simplifyRecords(
+      await this.repository.find({
+        where: { account },
+        order: {
+          userChosenDate: 'DESC',
+        },
+      }),
+    );
   }
 
   public async create(createRecord: CreateRecordDto): Promise<Record> {

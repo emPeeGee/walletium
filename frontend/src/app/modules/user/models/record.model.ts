@@ -48,3 +48,7 @@ export interface RecordDialog {
   type: OpenType;
   record: Record | null;
 }
+
+export type GroupedRecords = {
+  [key: string]: Record[];
+};

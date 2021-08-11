@@ -1,6 +1,8 @@
+@import 'variables';
+
 .records {
-  width: 95%;
-  margin: 2rem auto;
+  margin: 2rem 0;
+  padding: 0 2rem;
 
   &__header {
     margin-bottom: 1rem;
@@ -19,6 +21,13 @@
     margin-bottom: 2rem;
   }
 
+  &__group-date {
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
   &__records {
+    margin-bottom: 1.5rem;
   }
 }

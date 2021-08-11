@@ -2,8 +2,8 @@
 ☐ @low To change title's font-family of each view
 ☐ @low NofiticationService !!!!
 ☐ @low Loader is using two inputs with same purpose ??
-☐ @high In record, to group record by date, with an label
-☐ @low TO sort records
+✔ @high In record, to group record by date, with an label @done(21-08-11 12:15)
+✔ @low TO sort records @done(21-08-11 12:15)
 ☐ @low In record, select of account to be and color as well
 ☐ @high To make custom color picker with, some predefined colors
 ☐ @high Dark and light theme
