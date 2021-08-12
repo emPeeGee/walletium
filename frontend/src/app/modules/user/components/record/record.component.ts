@@ -19,6 +19,7 @@ import { MatChip } from '@angular/material/chips';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { CloseType } from 'src/app/core/enums/close-type.enum';
 import { MatDialog } from '@angular/material/dialog';
+import { requiredIfValidator } from 'src/app/shared/validators/required-if.validator';
 
 @Component({
   selector: 'wal-record',
@@ -177,17 +178,27 @@ export class RecordComponent implements OnInit, OnDestroy {
       id: [{ value: record?.id, disabled: !this.isEditable }],
       type: [{ value: record?.type ?? RecordType.EXPENSE, disabled: !this.isEditable }, Validators.required],
       amount: [{ value: record?.amount, disabled: !this.isEditable }, Validators.required],
-      categoryId: [{ value: record?.category.id, disabled: !this.isEditable }, Validators.required],
+      categoryId: [
+        { value: record?.category.id, disabled: !this.isEditable },
+        requiredIfValidator(() => this.type?.value !== RecordType.TRANSFER)
+      ],
       userChosenDate: [
         { value: record?.userChosenDate ?? new Date().toISOString(), disabled: !this.isEditable },
         Validators.required
       ],
       accountId: [{ value: record?.account.id, disabled: !this.isEditable }, Validators.required],
+      toAccountId: [
+        { value: '', disabled: !this.isEditable },
+        requiredIfValidator(() => this.type?.value === RecordType.TRANSFER)
+      ],
       payee: [{ value: record?.payee, disabled: !this.isEditable }],
       note: [{ value: record?.note, disabled: !this.isEditable }],
       place: [{ value: record?.place, disabled: !this.isEditable }],
       labels: [{ value: record?.labels?.map(label => label.id) ?? [], disabled: !this.isEditable }]
     });
+
+    this.type?.valueChanges.subscribe(() => this.toAccount?.updateValueAndValidity());
+    this.type?.valueChanges.subscribe(() => this.category?.updateValueAndValidity());
 
     const accountId = this.route.snapshot.queryParamMap.get('account');
     if (accountId) {
@@ -211,6 +222,10 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   get account(): AbstractControl | null {
     return this.recordForm!.get('accountId');
+  }
+
+  get toAccount(): AbstractControl | null {
+    return this.recordForm!.get('toAccountId');
   }
 
   get labels(): AbstractControl | null {

@@ -8,6 +8,7 @@ export const matchPasswords = (fieldOne: string, fieldTwo: string): ValidatorFn 
     if (password?.value !== confirmPassword?.value) {
       return { isDifferent: true };
     }
+
     return null;
   };
 };

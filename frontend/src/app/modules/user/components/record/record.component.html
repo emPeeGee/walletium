@@ -68,17 +68,46 @@
           </mat-button-toggle-group>
         </div>
 
-        <div class="record__controls">
-          <div class="record__controls-left">
-            <div class="record__field record__amount">
+        <div class="record__field record__amount">
+          <mat-form-field floatLabel="always">
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" [class]="'record__amount--' + type.value" formControlName="amount" />
+            <mat-error *ngIf="amount.hasError('required')">Please choose a amount</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="record__basic-transfer">
+          <div class="record__field">
+            <mat-form-field floatLabel="always">
+              <mat-label>Account</mat-label>
+              <mat-select formControlName="accountId">
+                <mat-option *ngFor="let account of accounts$ | async" [value]="account.id">
+                  {{ account.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="account.hasError('required')">Please choose an account</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="type.value === 'TRANSFER'">
+            <mat-icon>east</mat-icon>
+
+            <div class="record__field">
               <mat-form-field floatLabel="always">
-                <mat-label>Amount</mat-label>
-                <input matInput type="number" [class]="'record__amount--' + type.value" formControlName="amount" />
-                <mat-error *ngIf="amount.hasError('required')">Please choose a amount</mat-error>
+                <mat-label>To Account</mat-label>
+                <mat-select formControlName="toAccountId">
+                  <mat-option *ngFor="let account of accounts$ | async" [value]="account.id">
+                    {{ account.name }}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
+          </div>
+        </div>
 
-            <div class="record__field record__category">
+        <div class="record__controls">
+          <div class="record__controls-left">
+            <div *ngIf="type.value !== 'TRANSFER'" class="record__field record__category">
               <mat-form-field floatLabel="always">
                 <mat-label>Category</mat-label>
                 <mat-select formControlName="categoryId">
@@ -92,41 +121,7 @@
             </div>
 
             <div class="record__field">
-              <mat-form-field floatLabel="always">
-                <mat-label>Account</mat-label>
-                <mat-select formControlName="accountId">
-                  <mat-option *ngFor="let account of accounts$ | async" [value]="account.id">
-                    {{ account.name }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="account.hasError('required')">Please choose an account</mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="record__field">
               <wal-datetime-picker formControlName="userChosenDate"></wal-datetime-picker>
-
-              <!-- <mat-form-field floatLabel="always">
-                <mat-label>Record date</mat-label>
-                <input matInput formControlName="userChosenDate" />
-                <mat-error *ngIf="userChosenDate.hasError('required')">Please choose a category</mat-error>
-              </mat-form-field> -->
-            </div>
-          </div>
-
-          <div class="record__controls-right">
-            <div class="record__field record__note">
-              <mat-form-field floatLabel="always">
-                <mat-label>Note</mat-label>
-                <textarea matInput placeholder="Ex. Kaufland" formControlName="note"></textarea>
-              </mat-form-field>
-            </div>
-
-            <div class="record__field">
-              <mat-form-field floatLabel="always">
-                <mat-label>Payee</mat-label>
-                <input matInput formControlName="payee" />
-              </mat-form-field>
             </div>
 
             <div class="record__field">
@@ -134,6 +129,22 @@
                 <mat-label>Place</mat-label>
                 <input matInput formControlName="place" />
               </mat-form-field>
+            </div>
+          </div>
+
+          <div class="record__controls-right">
+            <div class="record__field">
+              <mat-form-field floatLabel="always">
+                <mat-label>Payee</mat-label>
+                <input matInput formControlName="payee" />
+              </mat-form-field>
+
+              <div class="record__field record__note">
+                <mat-form-field floatLabel="always">
+                  <mat-label>Note</mat-label>
+                  <textarea matInput placeholder="Ex. Kaufland" formControlName="note"></textarea>
+                </mat-form-field>
+              </div>
             </div>
           </div>
         </div>

@@ -113,6 +113,37 @@
     }
   }
 
+  &__basic-transfer {
+    display: flex;
+
+    & > div {
+      position: relative;
+      flex: 1;
+
+      padding: 0 30px;
+
+      display: flex;
+      flex-direction: column;
+
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    mat-icon {
+      position: absolute;
+      top: 50%;
+      left: -12px;
+      transform: translateY(-50%);
+
+      font-size: 24px;
+      color: $second-content-color;
+    }
+  }
+
   &__controls {
     display: flex;
 
@@ -141,6 +172,7 @@
 
   &__amount {
     input {
+      text-align: center;
       font-size: 2rem;
     }
 
