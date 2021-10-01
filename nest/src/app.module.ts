@@ -1,22 +1,21 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { databaseConfig } from './config/database.config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { MulterModule } from '@nestjs/platform-express';
+import { join } from 'path';
+
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { LabelsModule } from './modules/labels/labels.module';
 import { UsersModule } from './modules/users/users.module';
 import { RolesModule } from './modules/roles/roles.module';
-import { SeedersModule } from './seeders/seeders.module';
 import { AccountsModule } from './modules/accounts/accounts.module';
 import { CategoriesModule } from './modules/categories/categories.module';
-import { MulterModule } from '@nestjs/platform-express';
-import { ConfigModule } from './config/config.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+import { RecordsModule } from './modules/records/records.module';
 import { HttpLoggerMiddleware } from './common/middleware/http-logger.middleware';
 import { CommonModule } from './common/common.module';
-import { RecordsModule } from './modules/records/records.module';
+import { SeedersModule } from './seeders/seeders.module';
+import { ConfigModule } from './config/config.module';
+import { databaseConfig } from './config/database.config';
 
 @Module({
   imports: [
@@ -37,8 +36,6 @@ import { RecordsModule } from './modules/records/records.module';
     CommonModule,
     RecordsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
