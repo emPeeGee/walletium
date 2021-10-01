@@ -1,4 +1,4 @@
-import { IsDateString, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsNumber, IsOptional, IsString, ValidateIf } from 'class-validator';
 import { RecordType } from '../record.entity';
 
 export class CreateRecordDto {
@@ -27,6 +27,11 @@ export class CreateRecordDto {
   accountId: string;
 
   @IsString()
+  @ValidateIf(record => record.type !== RecordType.TRANSFER)
+  accountIdTo: string;
+
+  @IsString()
+  @ValidateIf(record => record.type !== RecordType.TRANSFER)
   categoryId: string;
 
   @IsOptional()

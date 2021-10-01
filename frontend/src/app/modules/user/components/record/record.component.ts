@@ -187,7 +187,7 @@ export class RecordComponent implements OnInit, OnDestroy {
         Validators.required
       ],
       accountId: [{ value: record?.account.id, disabled: !this.isEditable }, Validators.required],
-      toAccountId: [
+      accountIdTo: [
         { value: '', disabled: !this.isEditable },
         requiredIfValidator(() => this.type?.value === RecordType.TRANSFER)
       ],

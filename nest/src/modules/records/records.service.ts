@@ -16,16 +16,17 @@ export class RecordsService {
     @InjectRepository(Record) private repository: Repository<Record>,
     private accountsService: AccountsService,
     private categoriesService: CategoriesService,
-    private labelsService: LabelsService,
-  ) {}
+    private labelsService: LabelsService
+  ) {
+  }
 
   public async findAll(): Promise<IRecordFrontend[]> {
     return this.simplifyRecords(
       await this.repository.find({
         order: {
-          userChosenDate: 'DESC',
-        },
-      }),
+          userChosenDate: 'DESC'
+        }
+      })
     );
   }
 
@@ -43,45 +44,53 @@ export class RecordsService {
       await this.repository.find({
         where: { account },
         order: {
-          userChosenDate: 'DESC',
-        },
-      }),
+          userChosenDate: 'DESC'
+        }
+      })
     );
   }
 
   public async create(createRecord: CreateRecordDto): Promise<Record> {
-    const suchAccount = await this.accountsService.findOne(createRecord.accountId);
-    if (!suchAccount) {
-      throw new BadRequestException('Such account does not exists!');
+
+
+    if (createRecord.type === RecordType.TRANSFER) {
+      console.log('Transfer type');
+    } else {
+      const suchAccount = await this.accountsService.findOne(createRecord.accountId);
+      if (!suchAccount) {
+        throw new BadRequestException('Such account does not exists!');
+      }
+
+      const suchCategory = await this.categoriesService.findOne(createRecord.categoryId);
+      if (!suchCategory) {
+        throw new BadRequestException('Such category does not exists!');
+      }
+
+      const labels: Label[] = [];
+      if (createRecord.labels) {
+        createRecord.labels.forEach(async labelId => {
+          const label = await this.labelsService.findOne(labelId);
+          if (label) {
+            labels.push(label);
+          }
+        });
+      }
+
+      const recordToSave: IRecord = {
+        ...createRecord,
+        account: suchAccount,
+        category: suchCategory,
+        labels: labels,
+        type: createRecord.type as RecordType
+      };
+
+      const createdRecord = this.repository.save(recordToSave);
+      console.log(createdRecord);
+
+      return createdRecord;
     }
 
-    const suchCategory = await this.categoriesService.findOne(createRecord.categoryId);
-    if (!suchCategory) {
-      throw new BadRequestException('Such category does not exists!');
-    }
 
-    const labels: Label[] = [];
-    if (createRecord.labels) {
-      createRecord.labels.forEach(async (labelId) => {
-        const label = await this.labelsService.findOne(labelId);
-        if (label) {
-          labels.push(label);
-        }
-      });
-    }
-
-    const recordToSave: IRecord = {
-      ...createRecord,
-      account: suchAccount,
-      category: suchCategory,
-      labels: labels,
-      type: createRecord.type as RecordType,
-    };
-
-    const createdRecord = this.repository.save(recordToSave);
-    console.log(createdRecord);
-
-    return createdRecord;
   }
 
   public async update(updateRecord: UpdateRecordDto) {
@@ -110,7 +119,7 @@ export class RecordsService {
       account: suchAccount,
       category: suchCategory,
       labels: labels,
-      type: updateRecord.type as RecordType,
+      type: updateRecord.type as RecordType
     };
 
     const updatedRecord = this.repository.save(recordToSave);
@@ -135,13 +144,13 @@ export class RecordsService {
           id: record.account.id,
           name: record.account.name,
           currency: record.account.currency,
-          color: record.account.color,
+          color: record.account.color
         },
         category: {
           id: record.category.id,
           name: record.category.name,
-          image: record.category.imagePath,
-        },
+          image: record.category.imagePath
+        }
       };
     });
 
@@ -155,13 +164,13 @@ export class RecordsService {
         id: record.account.id,
         name: record.account.name,
         currency: record.account.currency,
-        color: record.account.color,
+        color: record.account.color
       },
       category: {
         id: record.category.id,
         name: record.category.name,
-        image: record.category.imagePath,
-      },
+        image: record.category.imagePath
+      }
     };
   }
 }

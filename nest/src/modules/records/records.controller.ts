@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../authentication/passport/jwt-auth.guard';
 import { CreateRecordDto } from './dto/create-record.dto';
@@ -34,6 +34,8 @@ export class RecordsController {
   @Post('create')
   @UseGuards(JwtAuthGuard)
   public async create(@Body() createRecord: CreateRecordDto): Promise<Record> {
+    console.log(createRecord);
+    throw new HttpException('fds', 454);
     const record = this.recordsService.create(createRecord);
     return record;
   }
